@@ -1,5 +1,5 @@
 LIBS = -lsuinput -ludev `pkg-config --libs libhid`
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I $(HOME)/include
 
 all: gkos
 

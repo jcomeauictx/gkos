@@ -1,4 +1,4 @@
-#include <hid.h>
+#include <linux/hid.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h> /* for getopt() */
