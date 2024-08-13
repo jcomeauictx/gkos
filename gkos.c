@@ -15,9 +15,10 @@ static GKOS_STATE state;
 
 // If both CTRL and SYMB are down, the offset is 6, for the FN column.
 // Otherwise, it's based on the mode and SYMB or SHIFT combination.
-#define KEYMAP_OFFSET(mode, modifiers) (((modifiers & GKOS_FN) == GKOS_FN) ? 6 : \
-                                        (((mode == GKOS_POINT) ? GKOS_ABC : mode) + \
-                                         (modifiers & GKOS_SYMB_SHIFT)))
+#define KEYMAP_OFFSET(mode, modifiers) \
+ (((modifiers & GKOS_FN) == GKOS_FN) ? 6 : \
+  (((mode == GKOS_POINT) ? GKOS_ABC : mode) + \
+   (modifiers & GKOS_SYMB_SHIFT)))
 
 /**
  * Returns a bool indicating whether shift should be sent for this key
