@@ -1,4 +1,5 @@
-LIBS = -lsuinput -ludev `pkg-config --libs libhid`
+SHELL := /bin/bash
+LIBS = -lsuinput -ludev $(pkgconf --libs libhid-libusb)
 CFLAGS = -Wall -g -I $(HOME)/include
 
 all: gkos

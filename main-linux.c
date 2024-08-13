@@ -1,5 +1,6 @@
-#include <linux/hid.h>
+#include <hidapi/hidapi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h> /* for getopt() */
 #include <signal.h>
