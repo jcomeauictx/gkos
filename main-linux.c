@@ -5,7 +5,7 @@
 #include <unistd.h> /* for getopt() */
 #include <signal.h>
 
-#include <suinput.h>
+#include "suinput/suinput.h"
 
 #include "gkos.h"
 
