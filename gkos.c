@@ -40,7 +40,7 @@ bool gkos_is_shifted(char keymap) {
 }
 
 bool gkos_is_ctrled(char keymap) {
-    if (state.mode == GKOS_ABC && (keymap == 23 || keymap == 58)) {
+    if (state.mode == GKOS_ABC && (keymap == 0x17 || keymap == 0x3a)) {
         return true;
     }
     if (state.mod & GKOS_CTRL) {
