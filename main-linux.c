@@ -191,8 +191,7 @@ int main(int argc, char *argv[])
     }
     if (packet) free(packet);
     if (uinput_fd) suinput_close(uinput_fd);
-
-    ret = hid_close(hid);
+    hid_close(hid);
     if (ret != HID_RET_SUCCESS) {
         fprintf(stderr, "hid_close failed with return code %d\n", ret);
         return 1;
