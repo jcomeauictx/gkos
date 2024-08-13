@@ -34,14 +34,19 @@ typedef struct GKOS_STATE_t GKOS_STATE;
  * For +SHIFT modes, this means that shift will be turned OFF, rather than being left on.
  * EACH LIST MUST BE ZERO TERMINATED!
  */
-const char GKOS_ABC_TS[] = { 12, 29, 33, 46, 0 };
-const char GKOS_ABC_SYMB_TS[] = { 3, 5, 6, 10, 11, 12, 17, 21, 22, 33, 34, 35, 37, 38,
-                                40, 42, 44, 48, 49, 50, 52, 53, 0 };
-const char GKOS_ABC_SHIFT_TS[] = { 30, 51, 0 };
-const char GKOS_123_TS[] = { 3, 5, 6, 11, 12, 14, 22, 35, 37, 38, 40, 42, 44, 48, 49, 50, 52, 0 };
-const char GKOS_123_SYMB_TS[] = { 10, 12, 17, 33, 34, 53, 0 };
-const char GKOS_123_SHIFT_TS[] = { 17, 30, 35, 51, 0 };
-const char GKOS_FN_TS[] = { 0 };
+const char GKOS_ABC_TS[] = {0x0c, 0x1d, 0x21, 0x2e, 0};
+const char GKOS_ABC_SYMB_TS[] = {
+    0x03, 0x05, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0x15, 0x16, 0x21, 0x22, 0x23,
+    0x25, 0x26, 0x28, 0x2a, 0x2c, 0x30, 0x31, 0x32, 0x34, 0x35, 0
+};
+const char GKOS_ABC_SHIFT_TS[] = {0x1e, 0x33, 0};
+const char GKOS_123_TS[] = {
+    0x03, 0x05, 0x06, 0x0b, 0x0c, 0x0e, 0x16, 0x23, 0x25, 0x26, 0x28, 0x2a,
+    0x2c, 0x30, 0x31, 0x32, 0x34, 0
+};
+const char GKOS_123_SYMB_TS[] = {0x0a, 0x0c, 0x11, 0x21, 0x22, 0x35, 0};
+const char GKOS_123_SHIFT_TS[] = {0x11, 0x1e, 0x23, 0x33, 0};
+const char GKOS_FN_TS[] = {0};
 const char *GKOS_TS[] = {
     /* ABC */       GKOS_ABC_TS,
     /* ABC+SYMB */  GKOS_ABC_SYMB_TS,
@@ -139,10 +144,10 @@ const uint16_t GKOS_KEY[GKOS_MAX_KEY][7] = {
 };
 
 // TODO: add pointer mode table
-#define GKOS_KEY_SHIFT   18
-#define GKOS_KEY_SYMB    45
-#define GKOS_KEY_123_ABC 63
-#define GKOS_KEY_CTRL    47
-#define GKOS_KEY_ALT     55
+#define GKOS_KEY_SHIFT   0x12
+#define GKOS_KEY_SYMB    0x2d
+#define GKOS_KEY_123_ABC 0x3f
+#define GKOS_KEY_CTRL    0x2f
+#define GKOS_KEY_ALT     0x37
 
 #endif /* GKOS_PRIVATE_H */
