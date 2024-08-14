@@ -5,12 +5,13 @@
 #ifndef GKOS_H
 #define GKOS_H
 
-#define GKOS_A 0x01;
-#define GKOS_B 0x02;
-#define GKOS_C 0x04;
-#define GKOS_D 0x08;
-#define GKOS_E 0x10;
-#define GKOS_F 0x20;
+/* the 6 keys of a GKOS keyboard */
+#define A 0x01;
+#define B 0x02;
+#define C 0x04;
+#define D 0x08;
+#define E 0x10;
+#define F 0x20;
 
 bool gkos_init(void);
 bool gkos_handle_keys(char keymap);
@@ -26,7 +27,3 @@ bool gkos_send_keyup(uint16_t keycode);
 bool gkos_move_mouse();
 //int suinput_move_pointer(int uinput_fd, int32_t x, int32_t y);
 #endif /* GKOS_H */
-        
-        
-        
-        

@@ -31,22 +31,22 @@ char keys_to_keymap(char *keys, int keylength) {
     for(i=0; i< keylength; i++) {
         switch(keys[i]) {
         case 0x2b: 
-            keycode |= GKOS_A;
+            keycode |= A;
             break;
         case 0x4b:
-            keycode |= GKOS_B;
+            keycode |= B;
             break;
         case 0x4e:
-            keycode |= GKOS_C;
+            keycode |= C;
             break;
         case 0x5f:
-            keycode |= GKOS_D;
+            keycode |= D;
             break;
         case 0x60:
-            keycode |= GKOS_E;
+            keycode |= E;
             break;
         case 0x61:
-            keycode |= GKOS_F;
+            keycode |= F;
             break;
         default:
             break;
