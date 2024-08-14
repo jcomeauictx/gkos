@@ -658,7 +658,7 @@ function pickRussianCharacters(){
     gChars[72] = "Х";
     gChars[73] = "И";
     gChars[74] = "Й";
-    gChars[75] = "K";// K
+    gChars[75] = "К";// K
     gChars[76] = "Л";
     gChars[77] = "М";
     gChars[78] = "Н";
@@ -1082,185 +1082,243 @@ function outputChar(){
     }
 
     gRef = 0; // Default (only values 1 to 41 are updated below)
-switch (chord){
-    case 1: character =  gChars[1+gOffset]; //gchar[1,1,1,1]
-    gRef = 1; break;
-    case 2: character =  gChars[2+gOffset];
-    gRef = 2; break;
-    case 4: character =  gChars[3+gOffset];
-    gRef = 3; break;
-    case 8: character =  gChars[4+gOffset];
-    gRef = 4; break;
-    case 16: character = gChars[5+gOffset];
-    gRef = 5; break;
-    case 32: character = gChars[6+gOffset];
-    gRef = 6; break;
-    case 24: character = gChars[7+gOffset];
-    gRef = 7; break;
-    case 25: character = gChars[8+gOffset];
-    gRef = 8; break;
-    case 26: character = gChars[9+gOffset];
-    gRef = 9; break;
-    case 28: character = gChars[10+gOffset];
-    gRef = 10; break;
-    case 48: character = gChars[11+gOffset];
-    gRef = 11; break;
-    case 49: character = gChars[12+gOffset];
-    gRef = 12; break;
-    case 50: character = gChars[13+gOffset];
-    gRef = 13; break;
-    case 52: character = gChars[14+gOffset];
-    gRef = 14; break;
-    case 3: character =  gChars[15+gOffset];
-    gRef = 15; break;
-    case 11: character =  gChars[16+gOffset];
-    gRef = 16; break;
-    case 19: character =  gChars[17+gOffset];
-    gRef = 17; break;
-    case 35: character =  gChars[18+gOffset];
-    gRef = 18; break;
-    case 6: character =  gChars[19+gOffset];
-    gRef = 19; break;
-    case 14: character =  gChars[20+gOffset];
-    gRef = 20; break;
-    case 22: character =  gChars[21+gOffset];
-    gRef = 21; break;
-    case 38: character =  gChars[22+gOffset];
-    gRef = 22; break;
-    case 40: character = gChars[23+gOffset]; // W
+switch (chord) {
+    case 1:
+        character =  gChars[1+gOffset]; //gchar[1,1,1,1]
+        gRef = 1; break;
+    case 2:
+        character =  gChars[2+gOffset];
+        gRef = 2; break;
+    case 4:
+        character =  gChars[3+gOffset];
+        gRef = 3; break;
+    case 8:
+        character =  gChars[4+gOffset];
+        gRef = 4; break;
+    case 16:
+        character = gChars[5+gOffset];
+        gRef = 5; break;
+    case 32:
+        character = gChars[6+gOffset];
+        gRef = 6; break;
+    case 24:
+        character = gChars[7+gOffset];
+        gRef = 7; break;
+    case 25:
+        character = gChars[8+gOffset];
+        gRef = 8; break;
+    case 26:
+        character = gChars[9+gOffset];
+        gRef = 9; break;
+    case 28:
+        character = gChars[10+gOffset];
+        gRef = 10; break;
+    case 48:
+        character = gChars[11+gOffset];
+        gRef = 11; break;
+    case 49:
+        character = gChars[12+gOffset];
+        gRef = 12; break;
+    case 50:
+        character = gChars[13+gOffset];
+        gRef = 13; break;
+    case 52:
+        character = gChars[14+gOffset];
+        gRef = 14; break;
+    case 3:
+        character =  gChars[15+gOffset];
+        gRef = 15; break;
+    case 11:
+        character =  gChars[16+gOffset];
+        gRef = 16; break;
+    case 19:
+        character =  gChars[17+gOffset];
+        gRef = 17; break;
+    case 35:
+        character =  gChars[18+gOffset];
+        gRef = 18; break;
+    case 6:
+        character =  gChars[19+gOffset];
+        gRef = 19; break;
+    case 14:
+        character =  gChars[20+gOffset];
+        gRef = 20; break;
+    case 22:
+        character =  gChars[21+gOffset];
+        gRef = 21; break;
+    case 38:
+        character =  gChars[22+gOffset];
+        gRef = 22; break;
+    case 40:
+        character = gChars[23+gOffset]; // W
         gJamoCounter = 2; //0; // This is Next Syllable key as well
-    gRef = 23; break;
-    case 41: character = gChars[24+gOffset];
-    gRef = 24; break;
-    case 42: character = gChars[25+gOffset];
-    gRef = 25; break;
-    case 44: character = gChars[26+gOffset];
-    gRef = 26; break;
+        gRef = 23; break;
+    case 41:
+        character = gChars[24+gOffset];
+        gRef = 24; break;
+    case 42:
+        character = gChars[25+gOffset];
+        gRef = 25; break;
+    case 44:
+        character = gChars[26+gOffset];
+        gRef = 26; break;
     // native range 1 (3 keys down)
-    case 5: character =  gChars[27+gOffset];  // umlaut or TH
-    gRef = 27; break;
-    case 13: character = gChars[28+gOffset]; // Å or THAT_
-    gRef = 28; break;
-    case 21: character = gChars[29+gOffset];  // Ä or THE_
-    gRef = 29; break;
-    case 37: character = gChars[30+gOffset];  // Ö or OF_
-    gRef = 30; break;    // ----
-    case 34: character = gChars[31+gOffset];
-    gRef = 31; break;
-    case 20: character = gChars[32+gOffset];
-    gRef = 32; break;
-    case 12: character = gChars[33+gOffset];
-    gRef = 33; break;
-    case 33: character = gChars[34+gOffset];
-    gRef = 34; break;
-    case 17: character = gChars[35+gOffset];
-    gRef = 35; break;
-    case 10: character = gChars[36+gOffset];
-    gRef = 36; break;
-    case 51: character = gChars[37+gOffset];
-    gRef = 37; break;
-    case 30: character = gChars[38+gOffset];
-    gRef = 38; break;
+    case 5:
+        character =  gChars[27+gOffset];  // umlaut or TH
+        gRef = 27; break;
+    case 13:
+        character = gChars[28+gOffset]; // Å or THAT_
+        gRef = 28; break;
+    case 21:
+        character = gChars[29+gOffset];  // Ä or THE_
+        gRef = 29; break;
+    case 37:
+        character = gChars[30+gOffset];  // Ö or OF_
+        gRef = 30; break;    // ----
+    case 34:
+        character = gChars[31+gOffset];
+        gRef = 31; break;
+    case 20:
+        character = gChars[32+gOffset];
+        gRef = 32; break;
+    case 12:
+        character = gChars[33+gOffset];
+        gRef = 33; break;
+    case 33:
+        character = gChars[34+gOffset];
+        gRef = 34; break;
+    case 17:
+        character = gChars[35+gOffset];
+        gRef = 35; break;
+    case 10:
+        character = gChars[36+gOffset];
+        gRef = 36; break;
+    case 51:
+        character = gChars[37+gOffset];
+        gRef = 37; break;
+    case 30:
+        character = gChars[38+gOffset];
+        gRef = 38; break;
     // Native range 2 (4 keys down):
-    case 53: character = gChars[39+gOffset]; // low right
-    gRef = 39; break;
-    case 46: character = gChars[40+gOffset]; // low left
-    gRef = 40; break;
-    case 29: character = gChars[41+gOffset]; // upper right
-    gRef = 41; break;
-    case 43: character = gChars[58+gOffset]; // Ins (char for SYMB only)
-    break;
+    case 53:
+        character = gChars[39+gOffset]; // low right
+        gRef = 39; break;
+    case 46:
+        character = gChars[40+gOffset]; // low left
+        gRef = 40; break;
+    case 29:
+        character = gChars[41+gOffset]; // upper right
+        gRef = 41; break;
+    case 43:
+        character = gChars[58+gOffset]; // Ins (char for SYMB only)
+        break;
     // ----
 
 
-    case 56: character = " "; // Space
+    case 56:
+        character = " "; // Space
         gJamoCounter = 2; // means counter will turn to zero
-    break;
+        break;
 
-    case 7: // backspace
-           myString = myString.substring(0, myString.length-1);
-               field2.value = myString;
+    case 7:
+        // backspace
+        myString = myString.substring(0, myString.length-1);
+        field2.value = myString;
         gDecJamoCounter();
         chord = 0; // this is to return without adding any char
-    break;
+        break;
 
-    case 63: character = '';  // abc123
-        if(numbOn){numbOn = false; info2.value = gLanguage; gJamoCounter = 0;}
-        else{numbOn = true;
-            if(altOn){
-                if(gLanguage !== basicLanguage){
-                gLanguage = basicLanguage;
-                pickLatinCharacters(); info2.value = gLanguage;
-                altOn = false; numbOn = false;}
-
-                else{
-                gLanguage = "English";
-                pickLatinCharacters(); info2.value = gLanguage;
-                altOn = false; numbOn = false;}
-            }
+    case 63:
+        character = '';  // abc123
+        if(numbOn) {
+            numbOn = false; info2.value = gLanguage; gJamoCounter = 0;
+        } else {
+            numbOn = true;
+            if (altOn) {
+                if(gLanguage !== basicLanguage) {
+                    gLanguage = basicLanguage;
+                    pickLatinCharacters(); info2.value = gLanguage;
+                    altOn = false; numbOn = false;
+                } else {
+                    gLanguage = "English";
+                    pickLatinCharacters(); info2.value = gLanguage;
+                    altOn = false; numbOn = false;}
+                }
         } // end of else
         chord = 0;
         gJamoCounter = 2; // means counter will turn to zero
-    break;
+        break;
 
     case 18: character = '';  // Shift
-        if(shiftOn){shiftOn = false;}
-        else{shiftOn = true; info2.value = "Shift";}
+        if (shiftOn) {
+            shiftOn = false;
+        } else {
+            shiftOn = true; info2.value = "Shift";
+        }
         chord = 0;
-    break;
+        break;
 
     case 45: character = '';  // Symb
-        if(symbOn){symbOn = false;}
-        else{symbOn = true; info2.value = "SYMB";}
+        if (symbOn) {
+            symbOn = false;
+        } else {
+            symbOn = true; info2.value = "SYMB";
+        }
         chord = 0;
-    break;
+        break;
 
     case 55: character = 'Alt';  //
-        if(altOn){altOn = false;}
-        else{altOn = true; info2.value = "Alt";}
+        if (altOn) {
+            altOn = false;
+        } else {
+            altOn = true; info2.value = "Alt";
+        }
         chord = 0;
-    break;
+        break;
 
     case 47: character = 'Ctrl';  //
-        if(ctrlOn){ctrlOn = false;}
-        else{ctrlOn = true; info2.value = "Ctrl";}
+        if (ctrlOn) {
+            ctrlOn = false;
+        } else {
+            ctrlOn = true; info2.value = "Ctrl";
+        }
         chord = 0;
-    break;
+        break;
 
+    case 29:
+        character = 'TO ';
+        break;
 
-    case 29: character = 'TO ';
-    break;
+    case 53:
+        character = 'AND ';
+        break;
 
-    case 53: character = 'AND ';
-    break;
-
-    case 59: character = String.fromCharCode(13).toLowerCase(); //Enter
-    break;
+    case 59:
+        character = String.fromCharCode(13).toLowerCase(); //Enter
+        break;
 
     case 15: // Left Arrow
         cursorPos = doGetCaretPosition (field2) - 1;
         setCaretPosition(field2, cursorPos);
         chord = 0; // this is to return without adding any char
-    break;
+        break;
     case 57: // Right Arrow
         cursorPos = doGetCaretPosition (field2) + 1;
         setCaretPosition(field2, cursorPos);
         chord = 0; // this is to return without adding any char
-    break;
+        break;
     case 39: // Home
         cursorPos = 0;
         setCaretPosition(field2, cursorPos);
         chord = 0; // this is to return without adding any char
-    break;
+        break;
     case 60: // End
         cursorPos = myString.length;
         setCaretPosition(field2, cursorPos);
         chord = 0; // this is to return without adding any char
-    break;
-
-
+        break;
     default: character = '-';
-       }
+    }
 
     cursorPosAdd = character.length;
 
