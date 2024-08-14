@@ -75,21 +75,23 @@ function gIncJamoCounter() {
     // Check if that was a second/third middle vowel:
     if (gJamoCounter == 3) { // Passing middle of syllable?
         switch (gRef) { // if another vowel, should not have incremented
-            case 1: gJamoCounter = gJamoCounter - 1 ; break; //a-f
-            case 2: gJamoCounter = gJamoCounter - 1 ; break;
-            case 3: gJamoCounter = gJamoCounter - 1 ; break;
-            case 4: gJamoCounter = gJamoCounter - 1 ; break;
-            case 5: gJamoCounter = gJamoCounter - 1 ; break;
-            case 6: gJamoCounter = gJamoCounter - 1 ; break;
-            case 7: gJamoCounter = gJamoCounter - 1 ; break; //g
-            case 11: gJamoCounter = gJamoCounter - 1 ; break; //k
-            case 15: gJamoCounter = gJamoCounter - 1 ; break; //o
-            case 19: gJamoCounter = gJamoCounter - 1 ; break; //s
-        }
-    }
+            case 1: // a
+            case 2: // b
+            case 3: // c
+            case 4: // d
+            case 5: // e
+            case 6: // f
+            case 7: // g
+            case 11: // k
+            case 15: // o
+            case 19: // s
+                gJamoCounter--;
+                break;
+        } // end switch
+    } // end if
     gJamoCounter %= 3;  // reset to zero if at 3
     //info2.value = gJamoCounter; // debug
-}
+} // end gIncJamoCounter()
 
 function gDecJamoCounter() {
     //JamosToHangul
@@ -373,52 +375,46 @@ function pickLatinCharacters() {
     //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü
     //          peseta sign U+20A7
 
-    if (gLanguage == "Icelandic"){
-    gChars[91]="Þ"; //ü
-    //gChars[92]="Ð"; //å
-    gChars[92]="Å";
-    gChars[93]="Æ";  //ä
-    gChars[94]="Ö";   //ö
-    }
-
-    if (gLanguage == "Finnish"){
-    gChars[91]="Ü"; //ü
-    gChars[92]="Å"; //å
-    gChars[93]="Ä";  //ä
-    gChars[94]="Ö";   //ö
-    }
-
-
-    if (gLanguage == "Danish"){
-    gChars[91]="Ü"; //ü
-    gChars[92]="Å"; //å
-    gChars[93]="Æ";  //ä
-    gChars[94]="Ø";   //ö
-    }
-
-    if (gLanguage == "French"){
-    gChars[91]="È"; //ü
-    gChars[92]="À"; //å
-    gChars[93]="É";  //ä
-    gChars[94]="Ê";   //ö
-    }
-
-    if (gLanguage == "German"){
-    gChars[91]="Ü"; //ü
-    gChars[92]="Å"; //å
-    gChars[93]="Ä";  //ä
-    gChars[94]="Ö";   //ö
-    }
-
-    if (gLanguage == "Spanish"){
-    gChars[91]="Ú"; //ü
-    gChars[92]="Á"; //å
-    gChars[93]="É";  //ä
-    gChars[94]="Ó";   //ö
-    }
-
-
-    gChars[95]=":"; // Jan 2010 updated tables: Shift+punctuation = SYMB+punctuation (but not CAPS)
+    switch (gLanguage) {
+        case "Icelandic":
+            gChars[91]="Þ"; //ü
+            //gChars[92]="Ð"; //å
+            gChars[92]="Å";
+            gChars[93]="Æ";  //ä
+            gChars[94]="Ö";   //ö
+            break;
+        case "Finnish":
+            gChars[91]="Ü"; //ü
+            gChars[92]="Å"; //å
+            gChars[93]="Ä";  //ä
+            gChars[94]="Ö";   //ö
+            break;
+        case "Danish":
+            gChars[91]="Ü"; //ü
+            gChars[92]="Å"; //å
+            gChars[93]="Æ";  //ä
+            gChars[94]="Ø";   //ö
+            break;
+        case "French":
+            gChars[91]="È"; //ü
+            gChars[92]="À"; //å
+            gChars[93]="É";  //ä
+            gChars[94]="Ê";   //ö
+            break;
+        case "German":
+            gChars[91]="Ü"; //ü
+            gChars[92]="Å"; //å
+            gChars[93]="Ä";  //ä
+            gChars[94]="Ö";   //ö
+            break;
+        case "Spanish":
+            gChars[91]="Ú"; //ü
+            gChars[92]="Á"; //å
+            gChars[93]="É";  //ä
+            gChars[94]="Ó";   //ö
+            break;
+    } // end switch
+    gChars[95]=":"; // Shift+punctuation = SYMB+punctuation (but not CAPS)
     gChars[96]=";";
     gChars[97]="|";
     gChars[98]="~";
@@ -431,41 +427,36 @@ function pickLatinCharacters() {
     gChars[104]="With ";
     gChars[105]="To ";
 
-
-    if (gLanguage == "Icelandic"){
-    gChars[103]="\u0308"; // combining diaresis U+0308 ( ̈  ) - lower right, tab group
-    //gChars[104]="Å"; //§ lower left ctrl group
-    gChars[104]="Ð";
-    gChars[105]="\u030c"; // combining caron U+030C ( ̌  )- upper right, tab group
-    }
-
-
-    if (gLanguage == "German" || gLanguage == "Finnish" || gLanguage == "Danish"){
-    gChars[103]="\u0308"; // combining diaresis U+0308 ( ̈  ) - lower right, tab group
-    gChars[104]="ẞ"; //§ lower left ctrl group
-    gChars[105]="\u030c"; // combining caron U+030C ( ̌  )- upper right, tab group
-    }
-    // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í/Í  ó  ú  -  ñ/Ñ - ê/Ê
-    if (gLanguage == "French"){
-    gChars[103]="\u0308"; // combining diaresis U+0308 ( ̈  ) - lower right, tab group
-    gChars[104]="Ç"; // cedilla lower left ctrl group
-    gChars[105]="\u0302"; // combining circumflex U+0302 (̂  ) - upper right, tab group
-    gChars[101]="\\"; // combining grave accent => \
-    gChars[102]="/"; // combining acute accent => /
-    }
-
-    if (gLanguage == "Spanish"){
-    gChars[97]="\u00a1"; //reverse !
-    gChars[98]="\u00bf"; //reverse ?
-
-    gChars[103]="Ñ"; //  lower right, tab group
-    gChars[104]="\u00dc"; // ̈  lower left ctrl group Ü
-    gChars[105]="Í"; // upper right, tab group
-    }
-
-
-    //------etc.
-
+    switch (gLanguage) {
+        case "Icelandic":
+            gChars[103]="\u0308"; // combining diaresis
+            //gChars[104]="Å"; //§ lower left ctrl group
+            gChars[104]="Ð";
+            gChars[105]="\u030c"; // combining caron
+            break;
+        case "German":
+        case "Finnish":
+        case "Danish":
+            gChars[103]="\u0308"; // combining diaresis
+            gChars[104]="ẞ"; //§ lower left ctrl group
+            gChars[105]="\u030c"; // combining caron
+            break;
+        // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í/Í  ó  ú  -  ñ/Ñ - ê/Ê
+        case "French":
+            gChars[103]="\u0308"; // combining diaresis
+            gChars[104]="Ç"; // cedilla lower left ctrl group
+            gChars[105]="\u0302"; // combining circumflex
+            gChars[101]="\\"; // combining grave accent => \
+            gChars[102]="/"; // combining acute accent => /
+            break;
+        case "Spanish":
+            gChars[97]="\u00a1"; //reverse !
+            gChars[98]="\u00bf"; //reverse ?
+            gChars[103]="Ñ"; //  lower right, tab group
+            gChars[104]="\u00dc"; // ̈  lower left ctrl group Ü
+            gChars[105]="Í"; // upper right, tab group
+            break;
+    } // end switch
     // Ref + 128 Numbers
     gChars[129]="1";
     gChars[130]="2";
@@ -556,52 +547,42 @@ function pickLatinCharacters() {
 
     gChars[250]="°";  // Upper left, ctrl group (symbed Ins 58+192)
 
-    if (gLanguage == "Finnish" || gLanguage == "Danish"){
-    gChars[231]="μ"; // lower right, tab group
-    gChars[232]="ß"; //§ lower left ctrl group
-    gChars[233]="̂"; // combining circumflex U+0302 ( ̂  ) upper right, tab group
-    }
-
-    if (gLanguage == "Icelandic"){
-    gChars[231]="μ"; // lower right, tab group
-    gChars[232]="§"; //§ lower left ctrl group
-    gChars[233]="\u030c"; // combining caron U+030C ( ̌  )- upper right, tab group
-    }
-
-
-    if (gLanguage == "French"){
-    gChars[231]="œ"; // lower right, tab group
-    gChars[232]="§"; // lower left ctrl group
-    gChars[233]="\u030c"; // combining caron U+030C ( ̌  )- upper right, tab group
-    gChars[229]="\\"; // combining grave accent U+0300 => \
-    gChars[230]="/"; // combining acute accent U+0301 => /
-    }
-
-
-    if (gLanguage == "German"){
-    gChars[231]="μ"; // lower right, tab group
-    gChars[232]="§"; //§ lower left ctrl group
-    gChars[233]="̂"; // combining circumflex U+0302 ( ̂  ) upper right, tab group
-    }
-
-    if (gLanguage == "Spanish"){
-    gChars[231]="\u0302 "; // comb. circumflex lower right, tab group
-    gChars[232]="\u0308 "; // combining diaeresis lower left ctrl group
-    gChars[233]="\u00aa"; // upper right, tab group Feminine Ordinal u+00AA
-    gChars[250]="\u00ba"; //SYMB ins, upper left ctrl group Masculine Ordinal u+00BA
-    }
-
-
-
-
-
-
+    switch (gLanguage) {
+        case "Finnish":
+        case "Danish":
+            gChars[231]="μ"; // lower right, tab group
+            gChars[232]="ß"; //§ lower left ctrl group
+            gChars[233]="̂"; // combining circumflex
+            break;
+        case "Icelandic":
+            gChars[231]="μ"; // lower right, tab group
+            gChars[232]="§"; //§ lower left ctrl group
+            gChars[233]="\u030c"; // combining caron
+            break;
+        case "French":
+            gChars[231]="œ"; // lower right, tab group
+            gChars[232]="§"; // lower left ctrl group
+            gChars[233]="\u030c"; // combining caron
+            gChars[229]="\\"; // combining grave accent U+0300 => \
+            gChars[230]="/"; // combining acute accent U+0301 => /
+            break;
+        case "German":
+            gChars[231]="μ"; // lower right, tab group
+            gChars[232]="§"; //§ lower left ctrl group
+            gChars[233]="̂"; // combining circumflex
+            break;
+        case "Spanish":
+            gChars[231]="\u0302 "; // comb. circumflex lower right, tab group
+            gChars[232]="\u0308 "; // combining diaeresis lower left ctrl group
+            gChars[233]="\u00aa"; // upper right, tab group Feminine Ordinal
+            gChars[250]="\u00ba"; //SYMB ins, upper left ctrl grp Masculine Ord
+            break;
+    } // end switch
     //gChars[223]="";
     //....etc. like CAPS and shifted numbers
+} // end pickLatinCharacters()
 
-}
-
-function pickRussianCharacters(){
+function pickRussianCharacters() {
     gChars[1] = "а";// abc
     gChars[2] = "б";
     gChars[3] = "ц";
@@ -691,119 +672,114 @@ function pickRussianCharacters(){
     gChars[105] = "̈"; //upper
 }
 
-function pickGreekCharacters(){
-//----------------Greek 1-41 (part of 1-64) ----------------------
-  gChars[1] = "α"; //abc
-  gChars[2] = "ο";
-  gChars[3] = "ς";
-  gChars[4] = "δ";
-  gChars[5] = "ε";
-  gChars[6] = "φ";
-  gChars[7] = "γ"; //g
-  gChars[8] = "χ";
-  gChars[9] = "η";
-  gChars[10] = "ι";
-  gChars[11] = "κ"; //k
-  gChars[12] = "λ";
-  gChars[13] = "μ";
-  gChars[14] = "ν";
-  gChars[15] = "ω"; //o
-  gChars[16] = "π";
-  gChars[17] = "ψ";
-  gChars[18] = "ρ";
-  gChars[19] = "σ"; //s
-  gChars[20] = "τ";
-  gChars[21] = "ου";
-  gChars[22] = "β";
-  gChars[23] = "́"; //w
-  gChars[24] = "ξ";
-  gChars[25] = "υ";
-  gChars[26] = "ζ";
+function pickGreekCharacters() {
+    //----------------Greek 1-41 (part of 1-64) ----------------------
+    gChars[1] = "α"; //abc
+    gChars[2] = "ο";
+    gChars[3] = "ς";
+    gChars[4] = "δ";
+    gChars[5] = "ε";
+    gChars[6] = "φ";
+    gChars[7] = "γ"; //g
+    gChars[8] = "χ";
+    gChars[9] = "η";
+    gChars[10] = "ι";
+    gChars[11] = "κ"; //k
+    gChars[12] = "λ";
+    gChars[13] = "μ";
+    gChars[14] = "ν";
+    gChars[15] = "ω"; //o
+    gChars[16] = "π";
+    gChars[17] = "ψ";
+    gChars[18] = "ρ";
+    gChars[19] = "σ"; //s
+    gChars[20] = "τ";
+    gChars[21] = "ου";
+    gChars[22] = "β";
+    gChars[23] = "́"; //w
+    gChars[24] = "ξ";
+    gChars[25] = "υ";
+    gChars[26] = "ζ";
 
     gChars[27] = "θ";
     gChars[28] = "";
     gChars[29] = "ει";
     gChars[30] = "";
 
-// gChars[31] = ".";
-// gChars[32] = ",";
-// gChars[33] = "!";
-// gChars[34] = "?";
-// gChars[35] = "-";
-// gChars[36] = "'";
-// gChars[37] = "\\";
-// gChars[38] = "/";
+    // gChars[31] = ".";
+    // gChars[32] = ",";
+    // gChars[33] = "!";
+    // gChars[34] = "?";
+    // gChars[35] = "-";
+    // gChars[36] = "'";
+    // gChars[37] = "\\";
+    // gChars[38] = "/";
 
-  gChars[39] = "̈"; //lower
-  gChars[40] = "§"; //§
-  gChars[41] = "̂"; //upper
+    gChars[39] = "̈"; //lower
+    gChars[40] = "§"; //§
+    gChars[41] = "̂"; //upper
 
-//-----------------Greek 64... -----------------
-  gChars[65] = "Α"; //Upper Case = Lower case + 64
-  gChars[66] = "Ο";
-  gChars[67] = "ς";
-  gChars[68] = "Δ";
-  gChars[69] = "Ε";
-  gChars[70] = "Φ";
-  gChars[71] = "Γ"; //G
-  gChars[72] = "Χ";
-  gChars[73] = "Η";
-  gChars[74] = "Ι";
-  gChars[75] = "Κ"; //K
-  gChars[76] = "Λ";
-  gChars[77] = "Μ";
-  gChars[78] = "Ν";
-  gChars[79] = "Ω"; //O
-  gChars[80] = "Π";
-  gChars[81] = "Ψ";
-  gChars[82] = "Ρ";
-  gChars[83] = "Σ"; //S
-  gChars[84] = "Τ";
-  gChars[85] = "Ου";
-  gChars[86] = "Β";
-  gChars[87] = "́"; //W";
-  gChars[88] = "Ξ";
-  gChars[89] = "Υ";
-  gChars[90] = "Ζ";
+    //-----------------Greek 64... -----------------
+    gChars[65] = "Α"; //Upper Case = Lower case + 64
+    gChars[66] = "Ο";
+    gChars[67] = "ς";
+    gChars[68] = "Δ";
+    gChars[69] = "Ε";
+    gChars[70] = "Φ";
+    gChars[71] = "Γ"; //G
+    gChars[72] = "Χ";
+    gChars[73] = "Η";
+    gChars[74] = "Ι";
+    gChars[75] = "Κ"; //K
+    gChars[76] = "Λ";
+    gChars[77] = "Μ";
+    gChars[78] = "Ν";
+    gChars[79] = "Ω"; //O
+    gChars[80] = "Π";
+    gChars[81] = "Ψ";
+    gChars[82] = "Ρ";
+    gChars[83] = "Σ"; //S
+    gChars[84] = "Τ";
+    gChars[85] = "Ου";
+    gChars[86] = "Β";
+    gChars[87] = "́"; //W";
+    gChars[88] = "Ξ";
+    gChars[89] = "Υ";
+    gChars[90] = "Ζ";
 
-  gChars[91] = "Θ"; //Ü
-  gChars[92] = "";
-  gChars[93] = "Ει";
-  gChars[94] = "";
+    gChars[91] = "Θ"; //Ü
+    gChars[92] = "";
+    gChars[93] = "Ει";
+    gChars[94] = "";
 
-// gChars[95] = ".";
-// gChars[96] = ",";
-// gChars[97] = "!";
-// gChars[98] = "?";
-// gChars[99] = "-";
-// gChars[100] = "'";
-// gChars[101] = "\\";
-// gChars[102] = "/";
+    // gChars[95] = ".";
+    // gChars[96] = ",";
+    // gChars[97] = "!";
+    // gChars[98] = "?";
+    // gChars[99] = "-";
+    // gChars[100] = "'";
+    // gChars[101] = "\\";
+    // gChars[102] = "/";
 
-  gChars[103] = "̈"; //lower
-  gChars[104] = "§";
-  gChars[105] = "̂";  //upper
+    gChars[103] = "̈"; //lower
+    gChars[104] = "§";
+    gChars[105] = "̂";  //upper
 
 }
 
 //===================================
-onload = function(){
-
- pickLatinCharacters();
-
- chord = 0;
- //field = document.getElementById('text_field')
- field2 = document.getElementById('text_field2');
- info2 = document.getElementById('info_field2');
- field2.onkeydown = keyhitDown;
- field2.onkeyup = keyhitUp;
- field2.focus();
-
- //info2.value = gLanguage;
- usedLanguage(); // update to ticked laguage
-
- stopCount(); // reset counter display
-
+onload = function() {
+    pickLatinCharacters();
+    chord = 0;
+    //field = document.getElementById('text_field')
+    field2 = document.getElementById('text_field2');
+    info2 = document.getElementById('info_field2');
+    field2.onkeydown = keyhitDown;
+    field2.onkeyup = keyhitUp;
+    field2.focus();
+    //info2.value = gLanguage;
+    usedLanguage(); // update to ticked laguage
+    stopCount(); // reset counter display
 };
 //==========================
 function doGetCaretPosition (field2) {
@@ -835,7 +811,6 @@ function setCaretPosition(field2, pos){
 }
 //--------------------------
 function updatechord(key, go_up, go_down){
-
 }
 //--------------------------
 function checkShifts(){
@@ -843,7 +818,6 @@ function checkShifts(){
     if(symbOn){symbOn = false; info2.value = gLanguage;}
     if(altOn){altOn = false; info2.value = gLanguage;}
     if(ctrlOn){ctrlOn = false; info2.value = gLanguage;}
-
 }
 //---------------------------
 function getvalue(key){
@@ -861,24 +835,20 @@ function clearScreen(){
 // When a language is selected by ticking a radio button:
 
 function usedLanguage() {
-chosen = "";
-
-len = document.fLanguage.gLanguage.length;
-
-for (i = 0; i <len; i++) {
-    if (document.fLanguage.gLanguage[i].checked) {
-    chosen = document.fLanguage.gLanguage[i].value;
+    chosen = "";
+    len = document.fLanguage.gLanguage.length;
+    for (i = 0; i <len; i++) {
+        if (document.fLanguage.gLanguage[i].checked) {
+            chosen = document.fLanguage.gLanguage[i].value;
         }
     }
-
     if (chosen == "") {
-    return NULL;
-        }
-    else {
-
-    gLanguage = chosen; // Current language
-    basicLanguage = chosen; // Ticked language
-    pickLatinCharacters(); // always this (punctuation, 123 etc. is icluded here for other languages as well)
+        return NULL;
+    } else {
+        gLanguage = chosen; // Current language
+        basicLanguage = chosen; // Ticked language
+        pickLatinCharacters(); // always this
+        // punctuation, 123 etc. is icluded here for other languages as well
 
     if (basicLanguage == "Korean"){
     pickKoreanCharacters();
