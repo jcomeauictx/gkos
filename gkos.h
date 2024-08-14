@@ -6,12 +6,12 @@
 #define GKOS_H
 
 /* the 6 keys of a GKOS keyboard */
-#define A 0x01;
-#define B 0x02;
-#define C 0x04;
-#define D 0x08;
-#define E 0x10;
-#define F 0x20;
+#define A 0x01
+#define B 0x02
+#define C 0x04
+#define D 0x08
+#define E 0x10
+#define F 0x20
 
 bool gkos_init(void);
 bool gkos_handle_keys(char keymap);

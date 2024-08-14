@@ -8,8 +8,8 @@
 #define GKOS_CAPS  0x10
 #define GKOS_META  0x20
 
-#define GKOS_FN 0x05 // GKOS_SYMB + GKOS_CTRL
-#define GKOS_SYMB_SHIFT 0x03
+#define GKOS_FN (GKOS_SYMB | GKOS_CTRL)
+#define GKOS_SYMB_SHIFT (GKOS_SYMB | GKOS_SHIFT)
 
 typedef enum GKOS_MODE_t {
     GKOS_ABC   = 0,
@@ -27,7 +27,7 @@ struct GKOS_STATE_t {
 };
 typedef struct GKOS_STATE_t GKOS_STATE;
 // Max keycode value with 6 bits
-#define GKOS_MAX_KEY 0x3f
+#define GKOS_MAX_KEY (A | B | C | D | E | F)
 
 /* 
  * Toggle shift. Combinations for which the state of SHIFT should be toggled before sending keys.
@@ -144,10 +144,10 @@ const uint16_t GKOS_KEY[GKOS_MAX_KEY][7] = {
 };
 
 // TODO: add pointer mode table
-#define GKOS_KEY_SHIFT   0x12
-#define GKOS_KEY_SYMB    0x2d
-#define GKOS_KEY_123_ABC 0x3f
-#define GKOS_KEY_CTRL    0x2f
-#define GKOS_KEY_ALT     0x37
+#define GKOS_KEY_SHIFT   (B | E)
+#define GKOS_KEY_SYMB    (A | C | D | F)
+#define GKOS_KEY_123_ABC (A | B | C | D | E | F)  /* all keys simultaneously */
+#define GKOS_KEY_CTRL    (A | B | C | D | F)
+#define GKOS_KEY_ALT     (A | B | C | E | F)
 
 #endif /* GKOS_PRIVATE_H */
