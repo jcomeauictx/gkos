@@ -134,15 +134,15 @@ function pickKoreanCharacters() {
     gChars[30]="\u1112"; // of
 
     //---- Ref + 64 Tail consonants
-    // Code point of Hangul = tail + (vowel−1)*28 + (lead−1)*588 + 44032 
+    // Code point of Hangul = tail + (vowel−1)*28 + (lead−1)*588 + 44032
     // lead:  1 (U+1100/dec4352) - 19 (U+1112)
     // vovel: 1 (U+1161/dec4449) - 21 (U+1175)
     // tail:  1 (U+11A8/dec4520) - 27 (U+11C2)
     // Code point of Hangul =
-    //  (uTail-4519) + (uVowel−4449)*28 + (uLead−4352)*588 + 44032 
+    //  (uTail-4519) + (uVowel−4449)*28 + (uLead−4352)*588 + 44032
     // a.substring(2,5)
     // function d2h(d) {return d.toString(16);}
-    // function h2d(h) {return parseInt(h,16);} 
+    // function h2d(h) {return parseInt(h,16);}
     //    function d2h(d) { // always return hex with 4 characters
     //    var iString = "0000" + d.toString(16);
     //    var iLen = iString.length;
@@ -218,11 +218,11 @@ function pickLatinCharacters() {
 
     // grave U+0300  acute U+0301  circumflex U+0302 (--̂  )
     // umlaut U+0308 (--̈  )  tilde U+0303 (--̃  )
-    // breve/short U+0306 (--̆  )  hachek U+030C (--̌  )  
+    // breve/short U+0306 (--̆  )  hachek U+030C (--̌  )
     // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í  ó  ú  -  ñ/Ñ - ê/Ê
     // œ/Œ  -  ô/Ô  -  ç/Ç
     // Spanish: ¿ ¡ º(Masculine Ordinal u+00BA) ª(Feminine Ordinal u+00AA)
-    //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü 
+    //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü
     //          peseta sign U+20A7
     switch (gLanguage) {
         case "Icelandic":
@@ -370,7 +370,7 @@ function pickLatinCharacters() {
     // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í  ó  ú  -  ñ/Ñ - ê/Ê
     // œ/Œ  -  ô/Ô  -  ç/Ç
     // Spanish: ¿ ¡ º(Masculine Ordinal u+00BA) ª(Feminine Ordinal u+00AA)
-    //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü 
+    //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü
     //          peseta sign U+20A7
 
     if (gLanguage == "Icelandic"){
@@ -633,7 +633,7 @@ function pickRussianCharacters(){
     gChars[28] = "ю";
     gChars[29] = "э";
     gChars[30] = "я";
-  
+
 //  gChars[31] = ".";
 //  gChars[32] = ",";
 //  gChars[33] = "!";
@@ -642,12 +642,12 @@ function pickRussianCharacters(){
 //  gChars[36] = "'";
 //  gChars[37] = "\\";
 //  gChars[38] = "/";
-  
+
     gChars[39] = "ъ";// lower
-    gChars[40] = "ь";// § 
+    gChars[40] = "ь";// §
     gChars[41] = "̈";// upper
 
-    // -----------------Russian 65...  -----------------  
+    // -----------------Russian 65...  -----------------
     gChars[65] = "А";// Upper Case = Lower case + 64
     gChars[66] = "Б";
     gChars[67] = "Ц";
@@ -724,7 +724,7 @@ function pickGreekCharacters(){
     gChars[28] = "";
     gChars[29] = "ει";
     gChars[30] = "";
-  
+
 // gChars[31] = ".";
 // gChars[32] = ",";
 // gChars[33] = "!";
@@ -733,12 +733,12 @@ function pickGreekCharacters(){
 // gChars[36] = "'";
 // gChars[37] = "\\";
 // gChars[38] = "/";
-  
+
   gChars[39] = "̈"; //lower
-  gChars[40] = "§"; //§ 
+  gChars[40] = "§"; //§
   gChars[41] = "̂"; //upper
 
-//-----------------Greek 64... -----------------  
+//-----------------Greek 64... -----------------
   gChars[65] = "Α"; //Upper Case = Lower case + 64
   gChars[66] = "Ο";
   gChars[67] = "ς";
@@ -767,9 +767,9 @@ function pickGreekCharacters(){
   gChars[90] = "Ζ";
 
   gChars[91] = "Θ"; //Ü
-  gChars[92] = ""; 
+  gChars[92] = "";
   gChars[93] = "Ει";
-  gChars[94] = ""; 
+  gChars[94] = "";
 
 // gChars[95] = ".";
 // gChars[96] = ",";
@@ -779,7 +779,7 @@ function pickGreekCharacters(){
 // gChars[100] = "'";
 // gChars[101] = "\\";
 // gChars[102] = "/";
-  
+
   gChars[103] = "̈"; //lower
   gChars[104] = "§";
   gChars[105] = "̂";  //upper
@@ -915,11 +915,11 @@ for (i = 0; i <len; i++) {
 
 
    info2.value = gLanguage;
-   field2.focus(); 
+   field2.focus();
 
 }
 
- 
+
 
 
 //--------------------
@@ -932,7 +932,7 @@ function keyhitDown(e){
 	cCounter = c; // store timer value before clearing it
 
 	if(chordx == 0){chord1 = 0; chord2 = 0;} // starting a whole new combo or chordon
-  	//doTimer(); // Reset Timer for each key down event  
+  	//doTimer(); // Reset Timer for each key down event
 	
 
   switch (thisKey) {
@@ -963,7 +963,7 @@ function keyhitDown(e){
 
 // ===========Vowel detection (for Sanskrit only)============
   if (cCounter >= 10) // <== The exact delay required  can be adjusted here
-	  // This is the 10 ms timer count to separate vowels and consonants 
+	  // This is the 10 ms timer count to separate vowels and consonants
 	  // (e.g. a Typical value c = 8 gives 8 x 10 ms = 80 ms)
   {
          // Vowels have been detected due to delay. Study them further:
@@ -971,7 +971,7 @@ function keyhitDown(e){
 	chord1 = prevChord; // chord1 and chord2 in case of a Chordon
 
    if (gLanguage == "Sanskrit"){	
-	switch (prevChord) 
+	switch (prevChord)
 	{
 	case  8: chord = chord + 128; 	break; //  8      or J
 	case 16: chord = chord + 128; 	break; // 16      or K
@@ -984,7 +984,7 @@ function keyhitDown(e){
         default: chord = chord + 64;    // add 64, vowel detected by timer (3 + 3 keys used), left hand first
 	}                              // end of switch
      } // end of if
-  }      
+  }
 
 	return false; //true;  // Cancel the original keyhit event
 }
@@ -1034,7 +1034,7 @@ function keyhitUp(e)
 
 	//chord2 = 3; // TEST
 
-  	doTimer(); // Reset Timer for each key up event too  
+  	doTimer(); // Reset Timer for each key up event too
   	if(chordx == 0){stopCount();} // Stop and reset timer when all keys are released
 	//info2.value = chordx; // debug
 
@@ -1177,10 +1177,10 @@ switch (chord){
 		gJamoCounter = 2; // means counter will turn to zero
 	break;
 
-	case 7: // backspace 
+	case 7: // backspace
 	   	myString = myString.substring(0, myString.length-1);
            	field2.value = myString;
-		gDecJamoCounter(); 
+		gDecJamoCounter();
 		chord = 0; // this is to return without adding any char
 	break;
 
@@ -1205,25 +1205,25 @@ switch (chord){
 
 	case 18: character = '';  // Shift
 		if(shiftOn){shiftOn = false;}
-		else{shiftOn = true; info2.value = "Shift";} 
+		else{shiftOn = true; info2.value = "Shift";}
 		chord = 0;		
 	break;
 
 	case 45: character = '';  // Symb		
 		if(symbOn){symbOn = false;}
-		else{symbOn = true; info2.value = "SYMB";} 
+		else{symbOn = true; info2.value = "SYMB";}
 		chord = 0;		
 	break;
 
 	case 55: character = 'Alt';  // 		
 		if(altOn){altOn = false;}
-		else{altOn = true; info2.value = "Alt";} 
+		else{altOn = true; info2.value = "Alt";}
 		chord = 0;		
 	break;
 
 	case 47: character = 'Ctrl';  // 		
 		if(ctrlOn){ctrlOn = false;}
-		else{ctrlOn = true; info2.value = "Ctrl";} 
+		else{ctrlOn = true; info2.value = "Ctrl";}
 		chord = 0;		
 	break;
 
@@ -1288,7 +1288,7 @@ function goSanskrit(){
    gOffset = 0; // default
 
  switch (chord)
-	{                        //  04.02.01-08.16.32  
+	{                        //  04.02.01-08.16.32
 // ==================================================================
 //vowels, maatraas, others
 
@@ -1333,13 +1333,13 @@ function goSanskrit(){
 	case 155: character = 'ऍ';	break; //e
 	case 179: character = 'ऎ';	break; //ee
 
-	case  78: character = 'ो';	break; // 
+	case  78: character = 'ो';	break; //
 	case  86: character = 'ौ';	break; //
 	case 142: character = 'ओ';	break; //
 	case 150: character = 'औ';	break; //
 
-	case  94: character = 'ॉ';	break; //2 4 8  16 64 
-	case 118: character = 'ॊ';	break; //2 4 16 32 64 
+	case  94: character = 'ॉ';	break; //2 4 8  16 64
+	case 118: character = 'ॊ';	break; //2 4 16 32 64
 	case 158: character = 'ऑ';	break; //2 4 8  16 128
 	case 182: character = 'ऒ';	break; //
 
@@ -1377,16 +1377,16 @@ function goSanskrit(){
 //====================================
 //consonants :
 
-	//case  1: character = "\u1100" ;	break // gchar[1,1,1,1]  
-	case  1: character = 'क' ;	break; // gchar[1,1,1,1]  
-	case  9: character = 'ख' ;	break; // 
+	//case  1: character = "\u1100" ;	break // gchar[1,1,1,1]
+	case  1: character = 'क' ;	break; // gchar[1,1,1,1]
+	case  9: character = 'ख' ;	break; //
 	case 17: character = 'ग';	break;  //
 	case 33: character = 'घ' ;	break; //
 	case 57: character = 'ङ' ;	break; //
-                                  
+
 	case 25: character = 'क़' ;	break; //
 	case 49: character = 'ख़' ;	break; //
-	case 41: character = 'ग़' ;	break; //   
+	case 41: character = 'ग़' ;	break; //
 
 	case  2: character = 'च' ;	break; //
 	case 10: character = 'छ' ;	break; //
@@ -1401,8 +1401,8 @@ function goSanskrit(){
 	case 36: character = 'ढ' ;	break; //
 	case 60: character = 'ण' ;	break; //
 
-	case 28: character = 'ड़' ;	break; //   
-	case 52: character = 'ढ़' ;	break; //   
+	case 28: character = 'ड़' ;	break; //
+	case 52: character = 'ढ़' ;	break; //
 
 	case  3: character = 'त' ;	break; //
 	case 11: character = 'थ' ;	break; //
@@ -1424,12 +1424,12 @@ function goSanskrit(){
 	case 15: character = 'र' ;	break; //
 	case 23: character = 'ल' ;	break; //
 	case 39: character = 'व' ;	break; //
-                                                
+
 	case 31: character = 'य़' ;	break; //
 	case 55: character = 'ऱ' ;	break; //
 	case 47: character = 'ळ' ;	break; //
 	case 46: character = 'ऴ' ;	break; // Changed from 63 (=abc123 from now on) to 46
-                                     
+
 	case  5: character = 'श' ;	break; //
 	case 13: character = 'ष' ;	break; //
 	case 21: character = 'स' ;	break; //
@@ -1442,8 +1442,8 @@ function goSanskrit(){
 	case  8: character = '	' ;	break; //tab
 	case 32: myString = myString.substring(0, myString.length-1); character = '' ;break; // new line
 
-                                   
-	case 16: character = " "; break; // space 
+
+	case 16: character = " "; break; // space
 	case 56: character = String.fromCharCode(13); break; // .toLowerCase(); //Enter also '\n' '\r'
 
 	// TODO:
@@ -1451,11 +1451,11 @@ function goSanskrit(){
         break;  // enter standard numbers mode
 
 	case 61: character = "abc"; gLanguage = "English";  info2.value = gLanguage; chord = 0;
-        break; // enter English mode 
-                                      
+        break; // enter English mode
+
 	default: character = '';
    	}
-                                     
+
 	cursorPosAdd = character.length;
 
 	cursorPos = doGetCaretPosition (field2); // always get cursor position first
