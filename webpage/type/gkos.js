@@ -1029,36 +1029,35 @@ function keyhitDown(e){
 function keyhitUp(e)
 {
 
-  thisKey = e ? e.which : window.event.keyCode
+  thisKey = e ? e.code : window.event.code
 
   cCounterx = c; // store timer value before clearing it
 
   prevChordx = chordx;
 
   switch (thisKey) {
-// s = 83, d = 68, f = 70; j = 74, k = 75, l = 76  
-  case 70: key = 'A'; // qwertyui
+  case "KeyF": key = 'A'; // qwertyui
    	getvalue(key);
 	chordx = chordx - 1; gAdown = false;
    	break;
-  case 68: key = 'B';
+  case "KeyD": key = 'B';
    	getvalue(key);
 	chordx = chordx - 2; gBdown = false;
    	break;
-  case 83: key = 'C';
+  case "KeyS": key = 'C';
    	getvalue(key);
 	chordx = chordx - 4; gCdown = false;
    	break;
 
-  case 74: key = 'D';
+  case "KeyJ": key = 'D';
    	getvalue(key);
 	chordx = chordx - 8; gDdown = false;
    	break;
-  case 75: key = 'E';
+  case "KeyK": key = 'E';
    	getvalue(key);
 	chordx = chordx - 16; gEdown = false;
    	break;
-  case 76: key = 'F';
+  case "KeyL": key = 'F';
    	getvalue(key);
 	chordx = chordx - 32; gFdown = false;
    	break;
