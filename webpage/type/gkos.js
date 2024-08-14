@@ -973,6 +973,7 @@ function keyhitDown(e){
 
   switch (thisKey) {
         //chord = 0
+        // S (83) and F (70) swapped here!?
 	case 70: if(gAdown == false){chord = chord + 1; chordx = chordx + 1; doTimer();} // chordx = realtime value
 		gAdown = true; // to kill autorepeat
 		break;
