@@ -19,7 +19,7 @@ myself.
 
 The Linux version (currently the only version), takes over a standard
 USB HID keyboard (most likely a USB number pad) via
-[libhid](http://libhid.alioth.debian.org/), and uses 6 of its keys to
+[libhid](http://web.archive.org/web/20180321002442/http://libhid.alioth.debian.org/), and uses 6 of its keys to
 function as a GKOS keyboard, sending keypresses via
 [libsuinput](http://github.com/tuos/libsuinput/). It will be
 configurable (right now it's "configurable" by changing a couple of
