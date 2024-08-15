@@ -76,6 +76,8 @@ const char *GKOS_TS[] = {
 #define K_PGDN KEY_PAGEDOWN
 
 // Index with [keycode-1][mode+(shift or symb)] only one of SHIFT or SYMB should be on at a time
+// FIXME: don't these key definitions require including
+// linux/include/uapi/linux/input-event-codes.h? -- jc@unternet.net
 const uint16_t GKOS_KEY[GKOS_MAX_KEY][7] = {
     /*keycode  ABC,       ABC+SYMB,  ABC+SHIFT, 123,       123+SYMB,  123+SHIFT,  FN  */
     /*  1 */ { KEY_A,     KEY_1,     KEY_A,     KEY_1,     KEY_A,     KEY_1,      KEY_F1 },
