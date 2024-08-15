@@ -1,6 +1,15 @@
 //============ Copyright 2010 by Seppo Tiainen ============
 // Version: 30 April 2010
 //------------ Not all GKOS functions implemented in this demo ------------
+// GKOS chording values
+var _ = 0x00;
+var A = 0x01;
+var B = 0x02;
+var C = 0x04;
+var D = 0x08;
+var E = 0x10;
+var F = 0x20;
+var GKOS = {"KeyF": A, "KeyD": B, "KeyS": C, "KeyJ": D, "KeyK": E, "KeyL": F};
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
 var gChars = new Array(256);  // holds current language's characters
@@ -11,12 +20,6 @@ var prevChord = 0; // before press
 var prevChordx = 0; // before release
 var chord1 = 0; // in case of Chordon
 var chord2 = 0; // in case of Chordon
-var gAdown = false;
-var gBdown = false;
-var gCdown = false;
-var gDdown = false;
-var gEdown = false;
-var gFdown = false;
 var myString = "";
 var typed = "";
 var cursorPos = 0;
@@ -764,9 +767,6 @@ function setCaretPosition(field2, pos){
     }
 }
 //--------------------------
-function updatechord(key, go_up, go_down){
-}
-//--------------------------
 function checkShifts(){
     if(shiftOn){shiftOn = false; info2.value = gLanguage;}
     if(symbOn){symbOn = false; info2.value = gLanguage;}
@@ -774,11 +774,6 @@ function checkShifts(){
     if(ctrlOn){ctrlOn = false; info2.value = gLanguage;}
 }
 //---------------------------
-function getvalue(key){
-    //chord = 3
-    return; // chord
-}
-// --------------------------
 function clearScreen(){
     myString = "";
     field2.value = myString;
@@ -838,69 +833,28 @@ function keyhitDown(e){
     thisKey = e ? e.code : window.event.code;
     prevChord = chord;
     cCounter = c; // store timer value before clearing it
-    if(chordx == 0){chord1 = 0; chord2 = 0;} // starting a whole new combo or chordon
-    //doTimer(); // Reset Timer for each key down event
-    switch (thisKey) {
-        //chord = 0
-        // NOTE: SDF=CBA and JKL=DEF: First set of 3 is INTENTIONALLY REVERSED
-        // I believe it's to get used to the same layout as a hardware GKOS
-        // keyboard, held with thumbs and little fingers, left index finger
-        // over C and right index over F:
-        // /-----\
-        // -A   D-
-        // -B   E-
-        // -C   F-
-        // \-----/
-        case "KeyF":
-            if(gAdown == false) {
-                chord = chord + 1;
-                chordx = chordx + 1;
-                doTimer();
-            } // chordx = realtime value
-            gAdown = true; // to kill autorepeat
-            break;
-        case "KeyD":
-            if(gBdown == false) {
-                chord = chord + 2;
-                chordx = chordx + 2;
-                doTimer();
-            }
-            gBdown = true;
-            break;
-        case "KeyS":
-            if(gCdown == false) {
-                chord = chord + 4;
-                chordx = chordx + 4;
-                doTimer();
-            }
-            gCdown = true;
-            break;
-        case "KeyJ":
-            if(gDdown == false) {
-                chord = chord + 8;
-                chordx = chordx + 8;
-                doTimer();
-            }
-            gDdown = true;
-            break;
-        case "KeyK":
-            if(gEdown == false) {
-                chord = chord + 16;
-                chordx = chordx + 16;
-                doTimer();
-            }
-            gEdown = true;
-            break;
-        case "KeyL":
-            if(gFdown == false) {
-                chord = chord + 32;
-                chordx = chordx + 32;
-                doTimer();
-            }
-            gFdown = true;
-            break;
-        default: chord = chord;
-    } // end switch(thisKey)
+    if(chordx == 0) {
+        // starting a whole new combo or chordon
+        chord1 = 0;
+        chord2 = 0;
+    }
+    // NOTE: SDF=CBA and JKL=DEF: First set of 3 is INTENTIONALLY REVERSED
+    // I believe it's to get used to the same layout as a hardware GKOS
+    // keyboard, held with thumbs and little fingers, left index finger
+    // over C and right index over F:
+    // /-----\
+    // -A   D-
+    // -B   E-
+    // -C   F-
+    // \-----/
+    if (Object.keys(GKOS).includes(thisKey)) {
+        console.debug("processing keydown " + thisKey);
+        if (chordx & GKOS[thisKey] != 0) {
+            chordx |= GKOS[thisKey];
+            chord |= GKOS[thisKey];
+            doTimer();
+        } // all other keys ignored
+    }
     //info2.value = chordx; // debug
     // ===========Vowel detection (for Sanskrit only)============
     if (cCounter >= 10) { // <== The exact delay required  can be adjusted here
@@ -930,34 +884,10 @@ function keyhitUp(e) {
     thisKey = e ? e.code : window.event.code;
     cCounterx = c; // store timer value before clearing it
     prevChordx = chordx;
-    switch (thisKey) {
-        case "KeyF": key = 'A'; // qwertyui
-            getvalue(key);
-            chordx = chordx - 1; gAdown = false;
-            break;
-        case "KeyD": key = 'B';
-            getvalue(key);
-            chordx = chordx - 2; gBdown = false;
-            break;
-        case "KeyS": key = 'C';
-            getvalue(key);
-            chordx = chordx - 4; gCdown = false;
-            break;
-        case "KeyJ": key = 'D';
-            getvalue(key);
-            chordx = chordx - 8; gDdown = false;
-            break;
-        case "KeyK": key = 'E';
-            getvalue(key);
-            chordx = chordx - 16; gEdown = false;
-            break;
-        case "KeyL": key = 'F';
-            getvalue(key);
-            chordx = chordx - 32; gFdown = false;
-            break;
-        default: key = null;
-    } // end switch(thisKey)
-    if (chordx <= 0) {chordx = 0;} // just to make sure
+    if (Object.keys(GKOS).includes(thisKey)) {
+        console.debug("processing keyup " + thisKey);
+        chordx &= ~GKOS[thisKey];
+    } // all other keys ignored
     chord2 = 0; // default
     // a second chord after a delayed relase (set dealay here 10...20)
     if (cCounterx >= 15) {chord2 = prevChordx;}
@@ -967,7 +897,7 @@ function keyhitUp(e) {
     if(chordx == 0){stopCount();}
     //info2.value = chordx; // debug
     // only if SDF/JKL pressed & released:
-    if(key){
+    if (Object.keys(GKOS).includes(thisKey)) {
         // due to delayed press
 //      if(chord1 >= 0){
 //            chord = chord1;
