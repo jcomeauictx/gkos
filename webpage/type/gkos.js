@@ -123,12 +123,12 @@ function pickKoreanCharacters() {
     gChars[29]="\u1106"; // the
     gChars[30]="\u1112"; // of
     //---- Ref + 64 Tail consonants
-    // Code point of Hangul = tail + (vowel−1)*28 + (lead−1)*588 + 44032
+    // Code point of Hangul = tail + (vowel-1)*28 + (lead-1)*588 + 44032
     // lead:  1 (U+1100/dec4352) - 19 (U+1112)
     // vovel: 1 (U+1161/dec4449) - 21 (U+1175)
     // tail:  1 (U+11A8/dec4520) - 27 (U+11C2)
     // Code point of Hangul =
-    //  (uTail-4519) + (uVowel−4449)*28 + (uLead−4352)*588 + 44032
+    //  (uTail-4519) + (uVowel-4449)*28 + (uLead-4352)*588 + 44032
     // a.substring(2,5)
     // function d2h(d) {return d.toString(16);}
     // function h2d(h) {return parseInt(h,16);}
