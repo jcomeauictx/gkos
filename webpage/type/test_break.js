@@ -8,8 +8,9 @@ window.onload = function() {
             break;
             default: result = false;
         }
+        return result;
     };
-    console.log("check 'a': " + check('a') + " is true");
-    console.log("check 'b': " + check('b') + " is false");
+    console.log("check 'a': " + check("a") + " is true");
+    console.log("check 'b': " + check("b") + " is false");
 };
 // vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
