@@ -1,11 +1,9 @@
 //============ Copyright 2010 by Seppo Tiainen ============
 // Version: 30 April 2010
 //------------ Not all GKOS functions implemented in this demo ------------
-
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
 var gChars = new Array(256);  // holds current language's characters
-
 var chord = 0; //chord value for selecting characters
 var chordx = 0; //chord value in realtime
 var gRef = 0; // GKOS Reference number (1-41 only used here)
@@ -19,28 +17,23 @@ var gCdown = false;
 var gDdown = false;
 var gEdown = false;
 var gFdown = false;
-
 var myString = "";
 var typed = "";
 var cursorPos = 0;
 var cursorPosAdd = 1;
-
 var symbOn = false;
 var numbOn = false;
 var shiftOn = false;
 var altOn = false;
 var ctrlOn = false;
 var gOffset = 0;
-
 var gJamoCounter = 0;
-
 //========Timing==============
 var cCounter; // stored timer c value
 var cCounterx; // stored timer c value
 var c=0;
 var t;
 var timer_is_on = false;
-
 function timedCount() {
     document.getElementById('txt').value=c;
     c = Math.min(c + 1, 255);
@@ -59,7 +52,6 @@ function stopCount() {
     c = 0;
     document.getElementById('txt').value=c;
 }
-
 //================================
 function clearDisplay() {
     myString = "";
@@ -67,7 +59,6 @@ function clearDisplay() {
     field2.value = myString;
     field.focus();
 }
-
 //==================================
 function gIncJamoCounter() {
     //JamosToHangul
@@ -92,14 +83,12 @@ function gIncJamoCounter() {
     gJamoCounter %= 3;  // reset to zero if at 3
     //info2.value = gJamoCounter; // debug
 } // end gIncJamoCounter()
-
 function gDecJamoCounter() {
     //JamosToHangul
     gJamoCounter--;
     if (gJamoCounter == -1) gJamoCounter = 2;
     //info2.value = gJamoCounter; // debug
 }
-
 //==================================
 function pickKoreanCharacters() {
     gChars[0]="";  // [0] not used
@@ -129,12 +118,10 @@ function pickKoreanCharacters() {
     gChars[24]="\u110b";
     gChars[25]="\u1109";
     gChars[26]="\u110a";
-
     gChars[27]="\u1102"; // th
     gChars[28]="\u1105"; // that
     gChars[29]="\u1106"; // the
     gChars[30]="\u1112"; // of
-
     //---- Ref + 64 Tail consonants
     // Code point of Hangul = tail + (vowel−1)*28 + (lead−1)*588 + 44032
     // lead:  1 (U+1100/dec4352) - 19 (U+1112)
@@ -149,7 +136,6 @@ function pickKoreanCharacters() {
     //    var iString = "0000" + d.toString(16);
     //    var iLen = iString.length;
     //    return iString.substring(iLen - 4, iLen);}
-
     gChars[65]="\u1161";
     gChars[66]="\u1175";
     gChars[67]="\u1165";
@@ -176,13 +162,11 @@ function pickKoreanCharacters() {
     gChars[88]="\u11bc"; //??
     gChars[89]="\u11ba";
     gChars[90]="\u11bb";
-
     gChars[91]="\u11ab"; // th
     gChars[92]="\u11af"; // that
     gChars[93]="\u11b7"; // the
     gChars[94]="\u11c2"; // of
 }
-
 //==================================
 function pickLatinCharacters() {
     gChars[0]="";  // [0] not used
@@ -212,12 +196,10 @@ function pickLatinCharacters() {
     gChars[24]="x";
     gChars[25]="y";
     gChars[26]="z";
-
     gChars[27]="th"; //ü
     gChars[28]="that "; //å
     gChars[29]="the ";  //ä
     gChars[30]="of ";   //ö
-
     // grave U+0300  acute U+0301  circumflex U+0302 (--̂  )
     // umlaut U+0308 (--̈  )  tilde U+0303 (--̃  )
     // breve/short U+0306 (--̆  )  hachek U+030C (--̌  )
@@ -273,11 +255,9 @@ function pickLatinCharacters() {
     gChars[36]="'";
     gChars[37]="\\";
     gChars[38]="/";
-
     gChars[39]="and ";
     gChars[40]="with ";
     gChars[41]="to ";
-
     switch (gLanguage) {
         case "Icelandic":
             // combining diaeresis U+0308 ( ̈  ) - lower right, tab group
@@ -333,9 +313,7 @@ function pickLatinCharacters() {
     gChars[61]=""; //123abc
     gChars[62]=""; //ctrl
     gChars[63]=""; //alt
-
     gChars[64]=""; // not used
-
     //---- Ref + 64 Upper case
     gChars[65]="A";
     gChars[66]="B";
@@ -363,18 +341,15 @@ function pickLatinCharacters() {
     gChars[88]="X";
     gChars[89]="Y";
     gChars[90]="Z";
-
     gChars[91]="Th";
     gChars[92]="That ";
     gChars[93]="The ";
     gChars[94]="Of ";
-
     // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í  ó  ú  -  ñ/Ñ - ê/Ê
     // œ/Œ  -  ô/Ô  -  ç/Ç
     // Spanish: ¿ ¡ º(Masculine Ordinal u+00BA) ª(Feminine Ordinal u+00AA)
     //          Á É Í Ó Ú Ñ Ü á é í ó ú ñ ü
     //          peseta sign U+20A7
-
     switch (gLanguage) {
         case "Icelandic":
             gChars[91]="Þ"; //ü
@@ -422,11 +397,9 @@ function pickLatinCharacters() {
     gChars[100]="\"";
     gChars[101]="\u0300"; // combining grave accent U+0300
     gChars[102]="\u0301"; // combining acute accent U+0301
-
     gChars[103]="And ";
     gChars[104]="With ";
     gChars[105]="To ";
-
     switch (gLanguage) {
         case "Icelandic":
             gChars[103]="\u0308"; // combining diaresis
@@ -500,7 +473,6 @@ function pickLatinCharacters() {
     gChars[168]="§";
     gChars[169]="";
     //------etc.
-
     // Ref + 192 SYMB
     gChars[193]="1";
     gChars[194]="2";
@@ -540,13 +512,10 @@ function pickLatinCharacters() {
     gChars[228]="\"";
     gChars[229]="\u0300"; // combining grave accent U+0300
     gChars[230]="\u0301"; // combining acute accent U+0301
-
     gChars[231]="μ"; // Lower right, tab group
     gChars[232]="§"; // Lower left, ctrl group
     gChars[233]="̌"; // Upper right, tab group
-
     gChars[250]="°";  // Upper left, ctrl group (symbed Ins 58+192)
-
     switch (gLanguage) {
         case "Finnish":
         case "Danish":
@@ -581,7 +550,6 @@ function pickLatinCharacters() {
     //gChars[223]="";
     //....etc. like CAPS and shifted numbers
 } // end pickLatinCharacters()
-
 function pickRussianCharacters() {
     gChars[1] = "а";// abc
     gChars[2] = "б";
@@ -609,12 +577,10 @@ function pickRussianCharacters() {
     gChars[24] = "ч";
     gChars[25] = "ы";
     gChars[26] = "з";
-
     gChars[27] = "щ";
     gChars[28] = "ю";
     gChars[29] = "э";
     gChars[30] = "я";
-
 //  gChars[31] = ".";
 //  gChars[32] = ",";
 //  gChars[33] = "!";
@@ -623,11 +589,9 @@ function pickRussianCharacters() {
 //  gChars[36] = "'";
 //  gChars[37] = "\\";
 //  gChars[38] = "/";
-
     gChars[39] = "ъ";// lower
     gChars[40] = "ь";// §
     gChars[41] = "̈";// upper
-
     // -----------------Russian 65...  -----------------
     gChars[65] = "А";// Upper Case = Lower case + 64
     gChars[66] = "Б";
@@ -671,7 +635,6 @@ function pickRussianCharacters() {
     gChars[104] = "Ь";
     gChars[105] = "̈"; //upper
 }
-
 function pickGreekCharacters() {
     //----------------Greek 1-41 (part of 1-64) ----------------------
     gChars[1] = "α"; //abc
@@ -824,7 +787,6 @@ function clearScreen(){
 }
 //---------------------------
 // When a language is selected by ticking a radio button:
-
 function usedLanguage() {
     chosen = "";
     len = document.fLanguage.gLanguage.length;
@@ -841,25 +803,21 @@ function usedLanguage() {
         pickLatinCharacters(); // always this
         // punctuation, 123 etc. is icluded here for other languages as well
 
-    if (basicLanguage == "Korean"){
-    pickKoreanCharacters();
-    gJamoCounter = 0;
-    }
-
-    if (basicLanguage == "Russian"){
-    pickRussianCharacters();
-    }
-
-    if (basicLanguage == "Greek"){
-    pickGreekCharacters();
-    }
-
-
+        if (basicLanguage == "Korean"){
+            pickKoreanCharacters();
+            gJamoCounter = 0;
         }
 
+        if (basicLanguage == "Russian"){
+            pickRussianCharacters();
+        }
+
+        if (basicLanguage == "Greek"){
+            pickGreekCharacters();
+        }
+    } // end if (chosen == "")
     //Update the layout picture
     // src="../korean2.jpg" id="decal">
-
     if (basicLanguage == "English"){document.getElementById('decal').src='../english2.png';}
     if (basicLanguage == "Finnish"){document.getElementById('decal').src='../finnish2.png';}
     if (basicLanguage == "French"){document.getElementById('decal').src='../french2.png';}
@@ -874,7 +832,7 @@ function usedLanguage() {
     if (basicLanguage == "Spanish"){document.getElementById('decal').src='../spanish2.png';}
     info2.value = gLanguage;
     field2.focus();
-}
+} // end function usedLanguage()
 //--------------------
 function keyhitDown(e){
     thisKey = e ? e.which : window.event.keyCode;
@@ -886,6 +844,14 @@ function keyhitDown(e){
     switch (thisKey) {
         //chord = 0
         // NOTE: SDF=CBA and JKL=DEF: First set of 3 is INTENTIONALLY REVERSED
+        // I believe it's to get used to the same layout as a hardware GKOS
+        // keyboard, held with thumbs and little fingers, left index finger
+        // over C and right index over F:
+        // /-----\
+        // -A   D-
+        // -B   E-
+        // -C   F-
+        // \-----/
         case 70: if(gAdown == false){chord = chord + 1; chordx = chordx + 1; doTimer();} // chordx = realtime value
             gAdown = true; // to kill autorepeat
             break;
@@ -905,7 +871,6 @@ function keyhitDown(e){
             gFdown = true;
             break;
         default: chord = chord;
-
     } // end switch(thisKey)
     //info2.value = chordx; // debug
     // ===========Vowel detection (for Sanskrit only)============
@@ -913,9 +878,7 @@ function keyhitDown(e){
         // This is the 10 ms timer count to separate vowels and consonants
         // (e.g. a Typical value c = 8 gives 8 x 10 ms = 80 ms)
         // Vowels have been detected due to delay. Study them further:
-
         chord1 = prevChord; // chord1 and chord2 in case of a Chordon
-
         if (gLanguage == "Sanskrit") {
             switch (prevChord) {
                 case  8: chord = chord + 128;     break; //  8      or J
@@ -933,7 +896,6 @@ function keyhitDown(e){
     } // end if (cCounter >= 10)
     return false; //true;  // Cancel the original keyhit event
 } // end keyhitDown(e)
-
 //---------------------------
 function keyhitUp(e) {
     thisKey = e ? e.code : window.event.code;
@@ -966,7 +928,6 @@ function keyhitUp(e) {
             break;
         default: key = null;
     } // end switch(thisKey)
-
     if (chordx <= 0) {chordx = 0;} // just to make sure
     chord2 = 0; // default
     // a second chord after a delayed relase (set dealay here 10...20)
@@ -977,7 +938,6 @@ function keyhitUp(e) {
     if(chordx == 0){stopCount();}
     //info2.value = chordx; // debug
     // only if SDF/JKL pressed & released:
-
     if(key){
         // due to delayed press
 //      if(chord1 >= 0){
@@ -994,7 +954,6 @@ function keyhitUp(e) {
     field2.scrollTop = field2.scrollHeight;  // keep bottom line visible
     return true;
 } // end keyhitUp()
-
 //-------------------------
 function outputChar(){
     field = document.getElementById('text_field2');
@@ -1142,14 +1101,10 @@ function outputChar(){
         case 43:
             character = gChars[58+gOffset]; // Ins (char for SYMB only)
             break;
-        // ----
-
-
         case 56:
             character = " "; // Space
             gJamoCounter = 2; // means counter will turn to zero
             break;
-
         case 7:
             // backspace
             myString = myString.substring(0, myString.length-1);
@@ -1157,7 +1112,6 @@ function outputChar(){
             gDecJamoCounter();
             chord = 0; // this is to return without adding any char
             break;
-
         case 63:
             character = '';  // abc123
             if(numbOn) {
@@ -1178,7 +1132,6 @@ function outputChar(){
             chord = 0;
             gJamoCounter = 2; // means counter will turn to zero
             break;
-
         case 18: character = '';  // Shift
             if (shiftOn) {
                 shiftOn = false;
@@ -1187,7 +1140,6 @@ function outputChar(){
             }
             chord = 0;
             break;
-
         case 45: character = '';  // Symb
             if (symbOn) {
                 symbOn = false;
@@ -1196,7 +1148,6 @@ function outputChar(){
             }
             chord = 0;
             break;
-
         case 55: character = 'Alt';  //
             if (altOn) {
                 altOn = false;
@@ -1205,7 +1156,6 @@ function outputChar(){
             }
             chord = 0;
             break;
-
         case 47: character = 'Ctrl';  //
             if (ctrlOn) {
                 ctrlOn = false;
@@ -1214,19 +1164,15 @@ function outputChar(){
             }
             chord = 0;
             break;
-
         case 29:
             character = 'TO ';
             break;
-
         case 53:
             character = 'AND ';
             break;
-
         case 59:
             character = String.fromCharCode(13).toLowerCase(); //Enter
             break;
-
         case 15: // Left Arrow
             cursorPos = doGetCaretPosition (field2) - 1;
             setCaretPosition(field2, cursorPos);
@@ -1249,25 +1195,22 @@ function outputChar(){
             break;
         default: character = '-';
     } // end switch(chord)
-
     cursorPosAdd = character.length;
-
     cursorPos = doGetCaretPosition (field2); // always get cursor position first
     if (chord != 0) {
-           //myString = myString + character
-        myString = myString.substring(0, cursorPos) + character + myString.substring(cursorPos, myString.length);
-                field2.value = myString;
+        //myString = myString + character
+        myString = myString.substring(0, cursorPos) + character +
+            myString.substring(cursorPos, myString.length);
+        field2.value = myString;
         setCaretPosition(field2, cursorPos + cursorPosAdd);
-
-        if (gLanguage == "Korean"){gIncJamoCounter();}
-        checkShifts();
+        if (gLanguage == "Korean") {
+            gIncJamoCounter();
         }
+        checkShifts();
+    }
     chord = 0;
-
 } // end outputChar
-
 //------------------------
-
 function goSanskrit() {
     field = document.getElementById('text_field2');
     cursonPosAdd = 1; //default entry length
@@ -1275,180 +1218,133 @@ function goSanskrit() {
     switch (chord) {                        //  04.02.01-08.16.32
         // ==================================================================
         //vowels, maatraas, others
-        case  73: character = '्';    break; //a   64 gets added
-        case  81: character = 'ा';    break; //aa  64 gets added
-        case 137: character = 'अ';    break; //a  128 gets added
-        case 145: character = 'आ';    break; //aa 128 gets added
-
-        case   89: character = 'ऽ';    break; //.
-        case  113: character = 'ः';    break; //..
-        case 153: character = '।';    break; //
-        case 177: character = '॥';    break; //
-
-        case  74: character = 'ि';    break; //ii
-        case  82: character = 'ी';    break; //i
-        case 138: character = 'इ';    break; //
-        case 146: character = 'ई';    break; //
-
-        case  90: character = 'ॢ';    break; //lri
-        case 114: character = 'ॣ';    break; //lrii
-        case 154: character = 'ऌ';    break; //
-        case 178: character = 'ॡ';    break; //
-
-
-        case  76: character = 'ु';    break; //
-        case  84: character = 'ू';    break; //
-        case 140: character = 'उ';    break; //
-        case 148: character = 'ऊ';    break; //
-
-        case  92: character = 'ं';    break; //om
-        case 116: character = '़';    break; //ung
-        case 156: character = 'ॐ';    break; // ok  8+16+4 +128 or JK -> JLS
-        case 180: character = 'ँ';    break; // ok    16+32+4 +128
-
-        case  75: character = 'े';    break; //
-        case  83: character = 'ै';    break; //
-        case 139: character = 'ए';    break; //
-        case 147: character = 'ऐ';    break; //
-
-        case  91: character = 'ॅ';    break; //e
-        case 115: character = 'ॆ';    break; //ee
-        case 155: character = 'ऍ';    break; //e
-        case 179: character = 'ऎ';    break; //ee
-
-        case  78: character = 'ो';    break; //
-        case  86: character = 'ौ';    break; //
-        case 142: character = 'ओ';    break; //
-        case 150: character = 'औ';    break; //
-
-        case  94: character = 'ॉ';    break; //2 4 8  16 64
-        case 118: character = 'ॊ';    break; //2 4 16 32 64
-        case 158: character = 'ऑ';    break; //2 4 8  16 128
-        case 182: character = 'ऒ';    break; //
-
-        case  77: character = 'ृ';    break; //
-        case  85: character = 'ॄ';    break; //
-        case 141: character = 'ऋ';    break; //
-        case 149: character = 'ॠ';    break; //
-
-        case 157: character = 'zwj';    break; // ok 1 4 8+16 +128 or JKL -> JKLS
-
-        case 181: character = 'zwnj';    break; // ok 1 4 16+32 +128 or JKL -> JKLS
-
-
-
-
-
-        case 161: character = 'LF';    break; // 32+1 +128
-        case 162: character = 'LD';    break; // 32+2 +128
-        case 164: character = 'LS';    break; // 32+4 +128
-
-        case 169: character = 'JLF';    break; //
-        case 170: character = 'JLD';    break; // ok  8+32+2 +128 or JL -> JLD
-        case 172: character = 'JLS';    break; // ok  8+32+4 +128 or JL -> JLD
-
-        case 185: character = 'JKLF';    break; // ok 8+16+32+1 +128 or JKL -> JKLF
-        case 186: character = 'JKLD';    break; // ok 8+16+32+2 +128 or JKL -> JKLD
-
-        case 188: character = 'JKLS';    break; // ok 8+16+32+4 +128 or JKL -> JKLS
-
-
-
-
-
-
+        case  73: character = '्';   break; //a   64 gets added
+        case  81: character = 'ा';  break; //aa  64 gets added
+        case 137: character = 'अ';  break; //a  128 gets added
+        case 145: character = 'आ';  break; //aa 128 gets added
+        case   89: character = 'ऽ'; break; //.
+        case  113: character = 'ः'; break; //..
+        case 153: character = '।';  break; //
+        case 177: character = '॥';  break; //
+        case  74: character = 'ि';  break; //ii
+        case  82: character = 'ी';  break; //i
+        case 138: character = 'इ';  break; //
+        case 146: character = 'ई';  break; //
+        case  90: character = 'ॢ';   break; //lri
+        case 114: character = 'ॣ';   break; //lrii
+        case 154: character = 'ऌ';  break; //
+        case 178: character = 'ॡ';  break; //
+        case  76: character = 'ु';   break; //
+        case  84: character = 'ू';   break; //
+        case 140: character = 'उ';  break; //
+        case 148: character = 'ऊ';  break; //
+        case  92: character = 'ं';   break; //om
+        case 116: character = '़';   break; //ung
+        case 156: character = 'ॐ';  break; // ok  8+16+4 +128 or JK -> JLS
+        case 180: character = 'ँ';   break; // ok    16+32+4 +128
+        case  75: character = 'े';   break; //
+        case  83: character = 'ै';   break; //
+        case 139: character = 'ए';  break; //
+        case 147: character = 'ऐ';  break; //
+        case  91: character = 'ॅ';   break; //e
+        case 115: character = 'ॆ';   break; //ee
+        case 155: character = 'ऍ';  break; //e
+        case 179: character = 'ऎ';  break; //ee
+        case  78: character = 'ो';  break; //
+        case  86: character = 'ौ';  break; //
+        case 142: character = 'ओ';  break; //
+        case 150: character = 'औ';  break; //
+        case  94: character = 'ॉ';  break; //2 4 8  16 64
+        case 118: character = 'ॊ';  break; //2 4 16 32 64
+        case 158: character = 'ऑ';  break; //2 4 8  16 128
+        case 182: character = 'ऒ';  break; //
+        case  77: character = 'ृ';   break; //
+        case  85: character = 'ॄ';   break; //
+        case 141: character = 'ऋ';  break; //
+        case 149: character = 'ॠ';  break; //
+        case 157: character = 'zwj'; break; // 1 4 8+16 +128 or JKL -> JKLS
+        case 181: character = 'zwnj'; break; // 1 4 16+32+128 or JKL -> JKLS
+        case 161: character = 'LF'; break; // 32+1 +128
+        case 162: character = 'LD'; break; // 32+2 +128
+        case 164: character = 'LS'; break; // 32+4 +128
+        case 169: character = 'JLF'; break; //
+        case 170: character = 'JLD'; break; // ok  8+32+2 +128 or JL -> JLD
+        case 172: character = 'JLS'; break; // ok  8+32+4 +128 or JL -> JLD
+        case 185: character = 'JKLF'; break; // ok 8+16+32+1 +128 or JKL -> JKLF
+        case 186: character = 'JKLD'; break; // ok 8+16+32+2 +128 or JKL -> JKLD
+        case 188: character = 'JKLS'; break; // ok 8+16+32+4 +128 or JKL -> JKLS
         //====================================
         //consonants :
-
         //case  1: character = "\u1100" ;    break // gchar[1,1,1,1]
-        case  1: character = 'क' ;    break; // gchar[1,1,1,1]
-        case  9: character = 'ख' ;    break; //
-        case 17: character = 'ग';    break;  //
-        case 33: character = 'घ' ;    break; //
-        case 57: character = 'ङ' ;    break; //
-
-        case 25: character = 'क़' ;    break; //
-        case 49: character = 'ख़' ;    break; //
-        case 41: character = 'ग़' ;    break; //
-
-        case  2: character = 'च' ;    break; //
-        case 10: character = 'छ' ;    break; //
-        case 18: character = 'ज' ;    break; //
-        case 34: character = 'झ' ;    break; //
-        case 58: character = 'ञ' ;    break; //
-
-        case 26: character = 'ज़' ;    break; //
-        case  4: character = 'ट' ;    break; //
-        case 12: character = 'ठ' ;    break; //
-        case 20: character = 'ड' ;    break; //
-        case 36: character = 'ढ' ;    break; //
-        case 60: character = 'ण' ;    break; //
-
-        case 28: character = 'ड़' ;    break; //
-        case 52: character = 'ढ़' ;    break; //
-
-        case  3: character = 'त' ;    break; //
-        case 11: character = 'थ' ;    break; //
-        case 19: character = 'द' ;    break; //
-        case 35: character = 'ध' ;    break; //
-        case 59: character = 'न' ;    break; //
-        case 27: character = 'ऩ' ;    break; //
-        break;
-
-        case  6: character = 'प' ;    break; //
-        case 14: character = 'फ' ;    break; //
-        case 22: character = 'ब' ;    break; //
-        case 38: character = 'भ' ;    break; //
-        case 62: character = 'म' ;    break; //
-
-        case 30: character = 'फ़' ;    break; //
-
-        case  7: character = 'य' ;    break; //
-        case 15: character = 'र' ;    break; //
-        case 23: character = 'ल' ;    break; //
-        case 39: character = 'व' ;    break; //
-
-        case 31: character = 'य़' ;    break; //
-        case 55: character = 'ऱ' ;    break; //
-        case 47: character = 'ळ' ;    break; //
-        case 46: character = 'ऴ' ;    break; // Changed from 63 (=abc123 from now on) to 46
-
-        case  5: character = 'श' ;    break; //
-        case 13: character = 'ष' ;    break; //
-        case 21: character = 'स' ;    break; //
-        case 37: character = 'ह' ;    break; //
-
-        case 29: character = 'क्ष' ;    break; //
-        case 53: character = 'त्र' ;    break; //
-        case 45: character = 'ज्ञ' ;    break; //
-
-        case  8: character = '    ' ;    break; //tab
+        case  1: character = 'क' ;  break; // gchar[1,1,1,1]
+        case  9: character = 'ख' ;  break; //
+        case 17: character = 'ग';   break;  //
+        case 33: character = 'घ' ;  break; //
+        case 57: character = 'ङ' ;  break; //
+        case 25: character = 'क़' ;  break; //
+        case 49: character = 'ख़' ;  break; //
+        case 41: character = 'ग़' ;  break; //
+        case  2: character = 'च' ;  break; //
+        case 10: character = 'छ' ;  break; //
+        case 18: character = 'ज' ;  break; //
+        case 34: character = 'झ' ;  break; //
+        case 58: character = 'ञ' ;  break; //
+        case 26: character = 'ज़' ;  break; //
+        case  4: character = 'ट' ;  break; //
+        case 12: character = 'ठ' ;  break; //
+        case 20: character = 'ड' ;  break; //
+        case 36: character = 'ढ' ;  break; //
+        case 60: character = 'ण' ;  break; //
+        case 28: character = 'ड़' ;  break; //
+        case 52: character = 'ढ़' ;  break; //
+        case  3: character = 'त' ;  break; //
+        case 11: character = 'थ' ;  break; //
+        case 19: character = 'द' ;  break; //
+        case 35: character = 'ध' ;  break; //
+        case 59: character = 'न' ;  break; //
+        case 27: character = 'ऩ' ;  break; //
+        break; // XXX should this be here?!
+        case  6: character = 'प' ;  break; //
+        case 14: character = 'फ' ;  break; //
+        case 22: character = 'ब' ;  break; //
+        case 38: character = 'भ' ;  break; //
+        case 62: character = 'म' ;  break; //
+        case 30: character = 'फ़' ;  break; //
+        case  7: character = 'य' ;  break; //
+        case 15: character = 'र' ;  break; //
+        case 23: character = 'ल' ;  break; //
+        case 39: character = 'व' ;  break; //
+        case 31: character = 'य़' ;  break; //
+        case 55: character = 'ऱ' ;  break; //
+        case 47: character = 'ळ' ;  break; //
+        case 46: character = 'ऴ' ;  break; // Changed from 63 (=abc123 from now on) to 46
+        case  5: character = 'श' ;  break; //
+        case 13: character = 'ष' ;  break; //
+        case 21: character = 'स' ;  break; //
+        case 37: character = 'ह' ;  break; //
+        case 29: character = 'क्ष' ; break; //
+        case 53: character = 'त्र' ; break; //
+        case 45: character = 'ज्ञ' ; break; //
+        case  8: character = '    ' ;   break; //tab
         case 32: myString = myString.substring(0, myString.length-1); character = '' ;break; // new line
-
-
-        case 16: character = " "; break; // space
+        case 16: character = " ";   break; // space
         case 56: character = String.fromCharCode(13); break; // .toLowerCase(); //Enter also '\n' '\r'
-
         // TODO:
         case 63: character = "123"; numbOn = true;  info2.value = "123"; chord = 0 ;
             break;  // enter standard numbers mode
-
         case 61: character = "abc"; gLanguage = "English";  info2.value = gLanguage; chord = 0;
             break; // enter English mode
-
         default: character = '';
     } // end switch
-
     cursorPosAdd = character.length;
-
     cursorPos = doGetCaretPosition (field2); // always get cursor position first
     if (chord != 0){
-           //myString = myString + character
+        //myString = myString + character
         myString = myString.substring(0, cursorPos) + character + myString.substring(cursorPos, myString.length);
-                field2.value = myString;
+        field2.value = myString;
         setCaretPosition(field2, cursorPos + cursorPosAdd);
         //checkShifts()
-        }
+    }  // end if (chord != 0)
     chord = 0;
 } // end goSanskrit()
 // vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
