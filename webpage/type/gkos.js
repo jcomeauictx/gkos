@@ -835,8 +835,7 @@ function usedLanguage() {
 } // end function usedLanguage()
 //--------------------
 function keyhitDown(e){
-    thisKey = e ? e.which : window.event.keyCode;
-    //thisKey = e ? e.which : document.event.keyCode
+    thisKey = e ? e.code : window.event.code;
     prevChord = chord;
     cCounter = c; // store timer value before clearing it
     if(chordx == 0){chord1 = 0; chord2 = 0;} // starting a whole new combo or chordon
@@ -852,22 +851,52 @@ function keyhitDown(e){
         // -B   E-
         // -C   F-
         // \-----/
-        case 70: if(gAdown == false){chord = chord + 1; chordx = chordx + 1; doTimer();} // chordx = realtime value
+        case "KeyF":
+            if(gAdown == false) {
+                chord = chord + 1;
+                chordx = chordx + 1;
+                doTimer();
+            } // chordx = realtime value
             gAdown = true; // to kill autorepeat
             break;
-        case 68: if(gBdown == false){chord = chord + 2; chordx = chordx + 2; doTimer();}
+        case "KeyD":
+            if(gBdown == false) {
+                chord = chord + 2;
+                chordx = chordx + 2;
+                doTimer();
+            }
             gBdown = true;
             break;
-        case 83: if(gCdown == false){chord = chord + 4; chordx = chordx + 4; doTimer();}
+        case "KeyS":
+            if(gCdown == false) {
+                chord = chord + 4;
+                chordx = chordx + 4;
+                doTimer();
+            }
             gCdown = true;
             break;
-        case 74: if(gDdown == false){chord = chord + 8; chordx = chordx + 8; doTimer();}
+        case "KeyJ":
+            if(gDdown == false) {
+                chord = chord + 8;
+                chordx = chordx + 8;
+                doTimer();
+            }
             gDdown = true;
             break;
-        case 75: if(gEdown == false){chord = chord + 16; chordx = chordx + 16; doTimer();}
+        case "KeyK":
+            if(gEdown == false) {
+                chord = chord + 16;
+                chordx = chordx + 16;
+                doTimer();
+            }
             gEdown = true;
             break;
-        case 76: if(gFdown == false){chord = chord + 32; chordx = chordx + 32; doTimer();}
+        case "KeyL":
+            if(gFdown == false) {
+                chord = chord + 32;
+                chordx = chordx + 32;
+                doTimer();
+            }
             gFdown = true;
             break;
         default: chord = chord;
