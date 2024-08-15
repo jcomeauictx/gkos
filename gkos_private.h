@@ -144,10 +144,10 @@ const uint16_t GKOS_KEY[GKOS_MAX_KEY][7] = {
 };
 
 // TODO: add pointer mode table
-#define GKOS_KEY_SHIFT   (B | E)
-#define GKOS_KEY_SYMB    (A | C | D | F)
-#define GKOS_KEY_123_ABC (A | B | C | D | E | F)  /* all keys simultaneously */
-#define GKOS_KEY_CTRL    (A | B | C | D | F)
-#define GKOS_KEY_ALT     (A | B | C | E | F)
+#define GKOS_KEY_SHIFT   (_|B|_|_|E|_)
+#define GKOS_KEY_SYMB    (A|_|C|D|_|F)
+#define GKOS_KEY_123_ABC (A|B|C|D|E|F)  /* all keys simultaneously */
+#define GKOS_KEY_CTRL    (A|B|C|D|_|F)
+#define GKOS_KEY_ALT     (A|B|C|_|E|F)
 
 #endif /* GKOS_PRIVATE_H */

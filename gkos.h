@@ -6,6 +6,7 @@
 #define GKOS_H
 
 /* the 6 keys of a GKOS keyboard */
+#define _ 0x00  /* for representing keys NOT held down in a group */
 #define A 0x01
 #define B 0x02
 #define C 0x04
