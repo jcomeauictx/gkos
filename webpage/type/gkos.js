@@ -1303,7 +1303,6 @@ function goSanskrit() {
         case 35: character = '\u0927' ;  break; //
         case 59: character = '\u0928' ;  break; //
         case 27: character = '\u0929' ;  break; //
-        break; // XXX should this be here?!
         case  6: character = '\u092a' ;  break; //
         case 14: character = '\u092b' ;  break; //
         case 22: character = '\u092c' ;  break; //
