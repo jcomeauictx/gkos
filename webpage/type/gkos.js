@@ -831,6 +831,7 @@ function usedLanguage() {
 //--------------------
 function keyhitDown(e){
     thisKey = e ? e.code : window.event.code;
+    var keyMask = 0;
     prevChord = chord;
     cCounter = c; // store timer value before clearing it
     if(chordx == 0) {
@@ -848,12 +849,14 @@ function keyhitDown(e){
     // -C   F-
     // \-----/
     if (Object.keys(GKOS).includes(thisKey)) {
-        console.debug("processing keydown " + thisKey);
-        if (chordx & GKOS[thisKey] == 0) {
-            chordx |= GKOS[thisKey];
-            chord |= GKOS[thisKey];
+        keyMask = GKOS[thisKey];
+        console.debug("processing keydown " + thisKey + ", mask: " + keyMask);
+        if (chordx & keyMask == 0) {
+            chordx |= keyMask;
+            chord |= keyMask;
             doTimer();
         } // all other keys ignored
+        console.debug("chordx now: " + chordx + ", chord: " + chord);
     }
     //info2.value = chordx; // debug
     // ===========Vowel detection (for Sanskrit only)============
@@ -882,11 +885,13 @@ function keyhitDown(e){
 //---------------------------
 function keyhitUp(e) {
     thisKey = e ? e.code : window.event.code;
+    var keyMask = 0;
     cCounterx = c; // store timer value before clearing it
     prevChordx = chordx;
     if (Object.keys(GKOS).includes(thisKey)) {
-        console.debug("processing keyup " + thisKey);
-        chordx &= ~GKOS[thisKey];
+        keyMask = ~GKOS[thisKey];
+        console.debug("processing keyup " + thisKey + ", mask: " + keyMask);
+        chordx &= keyMask;
     } // all other keys ignored
     chord2 = 0; // default
     // a second chord after a delayed relase (set dealay here 10...20)
@@ -897,7 +902,7 @@ function keyhitUp(e) {
     if(chordx == 0){stopCount();}
     //info2.value = chordx; // debug
     // only if SDF/JKL pressed & released:
-    if (Object.keys(GKOS).includes(thisKey)) {
+    if (keyMask != 0) {
         // due to delayed press
 //      if(chord1 != 0){
 //            chord = chord1;
@@ -930,6 +935,7 @@ function outputChar(){
         if(gJamoCounter == 2) {gOffset = 64;} // yes
     }
     gRef = 0; // Default (only values 1 to 41 are updated below)
+    console.debug("outputChar() with chord " + chord);
     switch (chord) {
         case 1:
             character =  gChars[1+gOffset]; //gchar[1,1,1,1]
