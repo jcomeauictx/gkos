@@ -215,7 +215,7 @@ function pickKoreanCharacters() {
 }
 //==================================
 function pickLatinCharacters() {
-    gChars[0]="";  // [0] not used
+    gChars[0]="\0";  // [0] not used
     gChars[1]="a";
     gChars[2]="b";
     gChars[3]="c";
