@@ -963,6 +963,7 @@ function outputChar(){
     }
     gRef = 0; // Default (only values 1 to 41 are updated below)
     console.debug("outputChar() with chord " + chord);
+    var character = "";
     switch (chord) {
         case (A|B|_|D|_|F):
             character = gChars[58+gOffset]; // Ins (char for SYMB only)
