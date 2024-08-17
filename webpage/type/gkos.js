@@ -1058,7 +1058,7 @@ function outputChar(){
             gJamoCounter = 2; // This is Next Syllable key as well
             // fall through to default, for normal character mapping
         default:
-            gRef = mapping[chord];
+            gRef = mapping[chord] || 0;
             character = gChars[gOffset + gRef];
     } // end switch(chord)
     cursorPosAdd = character.length;
