@@ -11,47 +11,47 @@ var E = 0x10;
 var F = 0x20;
 var GKOS = {"KeyF": A, "KeyD": B, "KeyS": C, "KeyJ": D, "KeyK": E, "KeyL": F};
 var mapping = { // chords to character indices
-    [String(A)]: 1, // a
-    [String(B)]: 2, // b
-    [String(C)]: 3, // c
-    [String(D)]: 4, // d
-    [String(E)]: 5, // e
-    [String(F)]: 6, // f
-    [String(_|_|_|D|E|_)]: 7, // g
-    [String(A|_|_|D|E|_)]: 8, // h
-    [String(_|B|_|D|E|_)]: 9, // i
-    [String(_|_|C|D|E|_)]: 10, // j
-    [String(_|_|_|_|E|F)]: 11, // k
-    [String(A|_|_|_|E|F)]: 12, // l
-    [String(_|B|_|_|E|F)]: 13, // m
-    [String(_|_|C|_|E|F)]: 14, // n
-    [String(A|B|_|_|_|_)]: 15, // o
-    [String(A|B|_|D|_|_)]: 16, // p
-    [String(A|B|_|_|E|_)]: 17, // q
-    [String(A|B|_|_|_|F)]: 18, // r
-    [String(_|B|C|_|_|_)]: 19, // s
-    [String(_|B|C|D|_|_)]: 20, // t
-    [String(_|B|C|_|E|_)]: 21, // u
-    [String(_|B|C|_|_|F)]: 22, // v
-    [String(_|_|_|D|_|F)]: 23, // w
-    [String(A|_|_|D|_|F)]: 24, // x
-    [String(_|B|_|D|_|F)]: 25, // y
-    [String(_|_|C|D|_|F)]: 26, // z
-    [String(A|_|C|_|_|_)]: 27, // th
-    [String(A|_|C|D|_|_)]: 28, // "that "
-    [String(A|_|C|_|E|_)]: 29, // "the "
-    [String(A|_|C|_|_|F)]: 30, // "of "
-    [String(_|B|_|_|_|F)]: 31, // .
-    [String(_|_|C|_|E|_)]: 32, // ,
-    [String(_|_|C|D|_|_)]: 33, // !
-    [String(A|_|_|_|_|F)]: 34, // ?
-    [String(A|_|_|_|E|_)]: 35, // -
-    [String(_|B|_|D|_|_)]: 36, // '
-    [String(A|B|_|_|E|F)]: 37, // \
-    [String(_|B|C|D|E|_)]: 38, // /
-    [String(A|_|C|_|E|F)]: 39, // "and "
-    [String(_|B|C|D|_|F)]: 40, // "with "
-    [String(A|_|C|D|E|_)]: 41, // "to "
+    [A]: 1, // a
+    [B]: 2, // b
+    [C]: 3, // c
+    [D]: 4, // d
+    [E]: 5, // e
+    [F]: 6, // f
+    [_|_|_|D|E|_]: 7, // g
+    [A|_|_|D|E|_]: 8, // h
+    [_|B|_|D|E|_]: 9, // i
+    [_|_|C|D|E|_]: 10, // j
+    [_|_|_|_|E|F]: 11, // k
+    [A|_|_|_|E|F]: 12, // l
+    [_|B|_|_|E|F]: 13, // m
+    [_|_|C|_|E|F]: 14, // n
+    [A|B|_|_|_|_]: 15, // o
+    [A|B|_|D|_|_]: 16, // p
+    [A|B|_|_|E|_]: 17, // q
+    [A|B|_|_|_|F]: 18, // r
+    [_|B|C|_|_|_]: 19, // s
+    [_|B|C|D|_|_]: 20, // t
+    [_|B|C|_|E|_]: 21, // u
+    [_|B|C|_|_|F]: 22, // v
+    [_|_|_|D|_|F]: 23, // w
+    [A|_|_|D|_|F]: 24, // x
+    [_|B|_|D|_|F]: 25, // y
+    [_|_|C|D|_|F]: 26, // z
+    [A|_|C|_|_|_]: 27, // th
+    [A|_|C|D|_|_]: 28, // "that "
+    [A|_|C|_|E|_]: 29, // "the "
+    [A|_|C|_|_|F]: 30, // "of "
+    [_|B|_|_|_|F]: 31, // .
+    [_|_|C|_|E|_]: 32, // ,
+    [_|_|C|D|_|_]: 33, // !
+    [A|_|_|_|_|F]: 34, // ?
+    [A|_|_|_|E|_]: 35, // -
+    [_|B|_|D|_|_]: 36, // '
+    [A|B|_|_|E|F]: 37, // \
+    [_|B|C|D|E|_]: 38, // /
+    [A|_|C|_|E|F]: 39, // "and "
+    [_|B|C|D|_|F]: 40, // "with "
+    [A|_|C|D|E|_]: 41, // "to "
 };
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
@@ -1058,7 +1058,7 @@ function outputChar(){
             gJamoCounter = 2; // This is Next Syllable key as well
             // fall through to default, for normal character mapping
         default:
-            gRef = mapping[String(chord)];
+            gRef = mapping[chord];
             character = gChars[gOffset + gRef];
     } // end switch(chord)
     cursorPosAdd = character.length;
