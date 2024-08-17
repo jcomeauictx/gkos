@@ -942,13 +942,13 @@ function outputChar(){
         case (D|E):
             character = gChars[7+gOffset];
             gRef = 7; break;
-        case (A|_|_|D|E|F):
+        case (A|_|_|D|E|_):
             character = gChars[8+gOffset];
             gRef = 8; break;
-        case (_|B|_|D|E|F):
+        case (_|B|_|D|E|_):
             character = gChars[9+gOffset];
             gRef = 9; break;
-        case (_|_|C|D|E|F):
+        case (_|_|C|D|E|_):
             character = gChars[10+gOffset];
             gRef = 10; break;
         case (E|F):
@@ -957,7 +957,7 @@ function outputChar(){
         case (A|_|_|_|E|F):
             character = gChars[12+gOffset];
             gRef = 12; break;
-        case 50:
+        case (_|B|_|_|E|F):
             character = gChars[13+gOffset];
             gRef = 13; break;
         case 52:
