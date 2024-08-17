@@ -849,7 +849,7 @@ function keyhitDown(e){
     // \-----/
     if (Object.keys(GKOS).includes(thisKey)) {
         console.debug("processing keydown " + thisKey);
-        if (chordx & GKOS[thisKey] != 0) {
+        if (chordx & GKOS[thisKey] == 0) {
             chordx |= GKOS[thisKey];
             chord |= GKOS[thisKey];
             doTimer();
@@ -899,7 +899,7 @@ function keyhitUp(e) {
     // only if SDF/JKL pressed & released:
     if (Object.keys(GKOS).includes(thisKey)) {
         // due to delayed press
-//      if(chord1 >= 0){
+//      if(chord1 != 0){
 //            chord = chord1;
 //            outputChar();
 //      }
