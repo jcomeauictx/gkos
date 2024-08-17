@@ -1031,37 +1031,37 @@ function outputChar(){
         case (_|B|_|D|_|_):
             character = gChars[36+gOffset];
             gRef = 36; break;
-        case 51:
+        case (A|B|_|_|E|F):
             character = gChars[37+gOffset];
             gRef = 37; break;
-        case 30:
+        case (_|B|C|D|E|_):
             character = gChars[38+gOffset];
             gRef = 38; break;
         // Native range 2 (4 keys down):
-        case 53:
+        case (A|_|C|_|E|F):
             character = gChars[39+gOffset]; // low right
             gRef = 39; break;
-        case 46:
+        case (_|B|C|D|_|F):
             character = gChars[40+gOffset]; // low left
             gRef = 40; break;
-        case 29:
+        case (A|_|C|D|E|_):
             character = gChars[41+gOffset]; // upper right
             gRef = 41; break;
-        case 43:
+        case (A|B|_|D|_|F):
             character = gChars[58+gOffset]; // Ins (char for SYMB only)
             break;
-        case 56:
+        case (D|E|F):
             character = " "; // Space
             gJamoCounter = 2; // means counter will turn to zero
             break;
-        case 7:
+        case (A|B|C):
             // backspace
             myString = myString.substring(0, myString.length-1);
             field2.value = myString;
             gDecJamoCounter();
             chord = 0; // this is to return without adding any char
             break;
-        case 63:
+        case (A|B|C|D|E|F):
             character = '';  // abc123
             if(numbOn) {
                 numbOn = false; info2.value = gLanguage; gJamoCounter = 0;
@@ -1081,7 +1081,7 @@ function outputChar(){
             chord = 0;
             gJamoCounter = 2; // means counter will turn to zero
             break;
-        case 18: character = '';  // Shift
+        case (_|B|_|_|E|_): character = '';  // Shift
             if (shiftOn) {
                 shiftOn = false;
             } else {
@@ -1089,7 +1089,7 @@ function outputChar(){
             }
             chord = 0;
             break;
-        case 45: character = '';  // Symb
+        case (A|_|C|D|_|F): character = '';  // Symb
             if (symbOn) {
                 symbOn = false;
             } else {
@@ -1097,7 +1097,7 @@ function outputChar(){
             }
             chord = 0;
             break;
-        case 55: character = 'Alt';  //
+        case (A|B|C|_|E|F): character = 'Alt';  //
             if (altOn) {
                 altOn = false;
             } else {
@@ -1105,7 +1105,7 @@ function outputChar(){
             }
             chord = 0;
             break;
-        case 47: character = 'Ctrl';  //
+        case (A|B|C|D|_|F): character = 'Ctrl';  //
             if (ctrlOn) {
                 ctrlOn = false;
             } else {
@@ -1113,31 +1113,31 @@ function outputChar(){
             }
             chord = 0;
             break;
-        case 29:
+        case (A|_|C|D|E|_):
             character = 'TO ';
             break;
-        case 53:
+        case (A|_|C|_|E|F):
             character = 'AND ';
             break;
-        case 59:
+        case (A|B|_|D|E|F):
             character = String.fromCharCode(13).toLowerCase(); //Enter
             break;
-        case 15: // Left Arrow
+        case (A|B|C|D|_|_): // Left Arrow
             cursorPos = doGetCaretPosition (field2) - 1;
             setCaretPosition(field2, cursorPos);
             chord = 0; // this is to return without adding any char
             break;
-        case 57: // Right Arrow
+        case (A|_|_|D|E|F): // Right Arrow
             cursorPos = doGetCaretPosition (field2) + 1;
             setCaretPosition(field2, cursorPos);
             chord = 0; // this is to return without adding any char
             break;
-        case 39: // Home
+        case (A|B|C|_|_|F): // Home
             cursorPos = 0;
             setCaretPosition(field2, cursorPos);
             chord = 0; // this is to return without adding any char
             break;
-        case 60: // End
+        case (_|_|C|D|E|F): // End
             cursorPos = myString.length;
             setCaretPosition(field2, cursorPos);
             chord = 0; // this is to return without adding any char
