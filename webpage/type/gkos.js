@@ -851,12 +851,15 @@ function keyhitDown(e){
     if (Object.keys(GKOS).includes(thisKey)) {
         keyMask = GKOS[thisKey];
         console.debug("processing keydown " + thisKey + ", mask: " + keyMask);
-        if (chordx & keyMask == 0) {
+        if ((chordx & keyMask) == 0) {
             chordx |= keyMask;
             chord |= keyMask;
+            console.debug("chordx now: " + chordx + ", chord: " + chord);
             doTimer();
-        } // all other keys ignored
-        console.debug("chordx now: " + chordx + ", chord: " + chord);
+        } else {
+            console.log("chordx already " + chordx + ": nothing to do");
+        }
+        // all other keys ignored
     }
     //info2.value = chordx; // debug
     // ===========Vowel detection (for Sanskrit only)============
