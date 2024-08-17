@@ -849,16 +849,18 @@ function keyhitDown(e){
         chord1 = prevChord; // chord1 and chord2 in case of a Chordon
         if (gLanguage == "Sanskrit") {
             switch (prevChord) {
-                case  8: chord = chord + 128;     break; //  8      or J
-                case 16: chord = chord + 128;     break; // 16      or K
-                case 32: chord = chord + 128;     break; // 32      or L
-                case 24: chord = chord + 128;     break; // 8+16    or JK-
-                case 40: chord = chord + 128;     break; // 8+32    or J-L
-                case 48: chord = chord + 128;     break; // 16+32   or -KL
-                case 56: chord = chord + 128;     break; // 8+16+32 or JKL
+                case D:
+                case E:
+                case F:
+                case (D|E|_):
+                case (D|_|F):
+                case (_|E|F):
+                case (D|E|F):
+                    chord |= 128;
+                    break;
                 // The rest are left-hand-first chords:
-                default: chord = chord + 64; // add 64, vowel detected by timer
-                    // (3 + 3 keys used), left hand first
+                default: chord |= 64; // add 64, vowel detected by timer
+                // (3 + 3 keys used), left hand first
             } // end switch(prevChord)
         } // end if (gLanguage == "Sanskrit")
     } // end if (cCounter >= 10)
@@ -919,22 +921,22 @@ function outputChar(){
     gRef = 0; // Default (only values 1 to 41 are updated below)
     console.debug("outputChar() with chord " + chord);
     switch (chord) {
-        case 1:
+        case A:
             character =  gChars[1+gOffset]; //gchar[1,1,1,1]
             gRef = 1; break;
-        case 2:
+        case B:
             character =  gChars[2+gOffset];
             gRef = 2; break;
-        case 4:
+        case C:
             character =  gChars[3+gOffset];
             gRef = 3; break;
-        case 8:
+        case D:
             character =  gChars[4+gOffset];
             gRef = 4; break;
-        case 16:
+        case E:
             character = gChars[5+gOffset];
             gRef = 5; break;
-        case 32:
+        case F:
             character = gChars[6+gOffset];
             gRef = 6; break;
         case 24:
