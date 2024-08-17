@@ -960,75 +960,75 @@ function outputChar(){
         case (_|B|_|_|E|F):
             character = gChars[13+gOffset];
             gRef = 13; break;
-        case 52:
+        case (_|_|C|_|E|F):
             character = gChars[14+gOffset];
             gRef = 14; break;
-        case 3:
+        case (A|B):
             character =  gChars[15+gOffset];
             gRef = 15; break;
-        case 11:
+        case (A|B|_|D|_|_):
             character =  gChars[16+gOffset];
             gRef = 16; break;
-        case 19:
+        case (A|B|_|_|E|_):
             character =  gChars[17+gOffset];
             gRef = 17; break;
-        case 35:
+        case (A|B|_|_|_|F):
             character =  gChars[18+gOffset];
             gRef = 18; break;
-        case 6:
+        case (B|C):
             character =  gChars[19+gOffset];
             gRef = 19; break;
-        case 14:
+        case (_|B|C|D|_|_):
             character =  gChars[20+gOffset];
             gRef = 20; break;
-        case 22:
+        case (_|B|C|_|E|_):
             character =  gChars[21+gOffset];
             gRef = 21; break;
-        case 38:
+        case (_|B|C|_|_|F):
             character =  gChars[22+gOffset];
             gRef = 22; break;
-        case 40:
+        case (D|_|F):
             character = gChars[23+gOffset]; // W
             gJamoCounter = 2; //0; // This is Next Syllable key as well
             gRef = 23; break;
-        case 41:
+        case (A|_|_|D|_|F):
             character = gChars[24+gOffset];
             gRef = 24; break;
-        case 42:
+        case (_|B|_|D|_|F):
             character = gChars[25+gOffset];
             gRef = 25; break;
-        case 44:
+        case (_|_|C|D|_|F):
             character = gChars[26+gOffset];
             gRef = 26; break;
         // native range 1 (3 keys down)
-        case 5:
+        case (A|_|C):
             character =  gChars[27+gOffset];  // umlaut or TH
             gRef = 27; break;
-        case 13:
+        case (A|_|C|D|_|_):
             character = gChars[28+gOffset]; // Å or THAT_
             gRef = 28; break;
-        case 21:
+        case (A|_|C|_|E|_):
             character = gChars[29+gOffset];  // Ä or THE_
             gRef = 29; break;
-        case 37:
+        case (A|_|C|_|_|F):
             character = gChars[30+gOffset];  // Ö or OF_
             gRef = 30; break;    // ----
-        case 34:
+        case (_|B|_|_|_|F):
             character = gChars[31+gOffset];
             gRef = 31; break;
-        case 20:
+        case (_|_|C|_|E|_):
             character = gChars[32+gOffset];
             gRef = 32; break;
-        case 12:
+        case (_|_|C|D|_|_):
             character = gChars[33+gOffset];
             gRef = 33; break;
-        case 33:
+        case (A|_|_|_|_|F):
             character = gChars[34+gOffset];
             gRef = 34; break;
-        case 17:
+        case (A|_|_|_|E|_):
             character = gChars[35+gOffset];
             gRef = 35; break;
-        case 10:
+        case (_|B|_|D|_|_):
             character = gChars[36+gOffset];
             gRef = 36; break;
         case 51:
