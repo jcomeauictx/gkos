@@ -626,14 +626,7 @@ function pickRussianCharacters() {
     gChars[92] = "Ю";
     gChars[93] = "Э";
     gChars[94] = "Я";
-//  gChars[95] = ".";
-//  gChars[96] = ",";
-//  gChars[97] = "!";
-//  gChars[98] = "?";
-//  gChars[99] = "-";
-//  gChars[100] = "'";
-//  gChars[101] = "\\";
-//  gChars[102] = "/";
+    // shared punctuation here...
     gChars[103] = "Ъ";//lower
     gChars[104] = "Ь";
     gChars[105] = "̈"; //upper
@@ -670,14 +663,7 @@ function pickGreekCharacters() {
     gChars[28] = "";
     gChars[29] = "ει";
     gChars[30] = "";
-    // gChars[31] = ".";
-    // gChars[32] = ",";
-    // gChars[33] = "!";
-    // gChars[34] = "?";
-    // gChars[35] = "-";
-    // gChars[36] = "'";
-    // gChars[37] = "\\";
-    // gChars[38] = "/";
+    // shared punctuation here...
     gChars[39] = "̈"; //lower
     gChars[40] = "§"; //§
     gChars[41] = "̂"; //upper
@@ -712,14 +698,7 @@ function pickGreekCharacters() {
     gChars[92] = "";
     gChars[93] = "Ει";
     gChars[94] = "";
-    // gChars[95] = ".";
-    // gChars[96] = ",";
-    // gChars[97] = "!";
-    // gChars[98] = "?";
-    // gChars[99] = "-";
-    // gChars[100] = "'";
-    // gChars[101] = "\\";
-    // gChars[102] = "/";
+    // shared punctuation again...
     gChars[103] = "̈"; //lower
     gChars[104] = "§";
     gChars[105] = "̂";  //upper
