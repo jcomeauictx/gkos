@@ -11,47 +11,47 @@ var E = 0x10;
 var F = 0x20;
 var GKOS = {"KeyF": A, "KeyD": B, "KeyS": C, "KeyJ": D, "KeyK": E, "KeyL": F};
 var mapping = { // chords to character indices
-    A: 1, // a
-    B: 2, // b
-    C: 3, // c
-    D: 4, // d
-    E: 5, // e
-    F: 6, // f
-    (_|_|_|D|E|_): 7, // g
-    (A|_|_|D|E|_): 8, // h
-    (_|B|_|D|E|_): 9, // i
-    (_|_|C|D|E|_): 10, // j
-    (_|_|_|_|E|F): 11, // k
-    (A|_|_|_|E|F): 12, // l
-    (_|B|_|_|E|F): 13, // m
-    (_|_|C|_|E|F): 14, // n
-    (A|B|_|_|_|_): 15, // o
-    (A|B|_|D|_|_): 16, // p
-    (A|B|_|_|E|_): 17, // q
-    (A|B|_|_|_|F): 18, // r
-    (_|B|C|_|_|_): 19, // s
-    (_|B|C|D|_|_): 20, // t
-    (_|B|C|_|E|_): 21, // u
-    (_|B|C|_|_|F): 22, // v
-    (_|_|_|D|_|F): 23, // w
-    (A|_|_|D|_|F): 24, // x
-    (_|B|_|D|_|F): 25, // y
-    (_|_|C|D|_|F): 26, // z
-    (A|_|C|_|_|_): 27, // th
-    (A|_|C|D|_|_): 28, // "that "
-    (A|_|C|_|E|_): 29, // "the "
-    (A|_|C|_|_|F): 30, // "of "
-    (_|B|_|_|_|F): 31, // .
-    (_|_|C|_|E|_): 32, // ,
-    (_|_|C|D|_|_): 33, // !
-    (A|_|_|_|_|F): 34, // ?
-    (A|_|_|_|E|_): 35, // -
-    (_|B|_|D|_|_): 36, // '
-    (A|B|_|_|E|F): 37, // \
-    (_|B|C|D|E|_): 38, // /
-    (A|_|C|_|E|F): 39, // "and "
-    (_|B|C|D|_|F): 40, // "with "
-    (A|_|C|D|E|_): 41, // "to "
+    [String(A)]: 1, // a
+    [String(B)]: 2, // b
+    [String(C)]: 3, // c
+    [String(D)]: 4, // d
+    [String(E)]: 5, // e
+    [String(F)]: 6, // f
+    [String(_|_|_|D|E|_)]: 7, // g
+    [String(A|_|_|D|E|_)]: 8, // h
+    [String(_|B|_|D|E|_)]: 9, // i
+    [String(_|_|C|D|E|_)]: 10, // j
+    [String(_|_|_|_|E|F)]: 11, // k
+    [String(A|_|_|_|E|F)]: 12, // l
+    [String(_|B|_|_|E|F)]: 13, // m
+    [String(_|_|C|_|E|F)]: 14, // n
+    [String(A|B|_|_|_|_)]: 15, // o
+    [String(A|B|_|D|_|_)]: 16, // p
+    [String(A|B|_|_|E|_)]: 17, // q
+    [String(A|B|_|_|_|F)]: 18, // r
+    [String(_|B|C|_|_|_)]: 19, // s
+    [String(_|B|C|D|_|_)]: 20, // t
+    [String(_|B|C|_|E|_)]: 21, // u
+    [String(_|B|C|_|_|F)]: 22, // v
+    [String(_|_|_|D|_|F)]: 23, // w
+    [String(A|_|_|D|_|F)]: 24, // x
+    [String(_|B|_|D|_|F)]: 25, // y
+    [String(_|_|C|D|_|F)]: 26, // z
+    [String(A|_|C|_|_|_)]: 27, // th
+    [String(A|_|C|D|_|_)]: 28, // "that "
+    [String(A|_|C|_|E|_)]: 29, // "the "
+    [String(A|_|C|_|_|F)]: 30, // "of "
+    [String(_|B|_|_|_|F)]: 31, // .
+    [String(_|_|C|_|E|_)]: 32, // ,
+    [String(_|_|C|D|_|_)]: 33, // !
+    [String(A|_|_|_|_|F)]: 34, // ?
+    [String(A|_|_|_|E|_)]: 35, // -
+    [String(_|B|_|D|_|_)]: 36, // '
+    [String(A|B|_|_|E|F)]: 37, // \
+    [String(_|B|C|D|E|_)]: 38, // /
+    [String(A|_|C|_|E|F)]: 39, // "and "
+    [String(_|B|C|D|_|F)]: 40, // "with "
+    [String(A|_|C|D|E|_)]: 41, // "to "
 };
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
@@ -964,132 +964,6 @@ function outputChar(){
     gRef = 0; // Default (only values 1 to 41 are updated below)
     console.debug("outputChar() with chord " + chord);
     switch (chord) {
-        case A:
-            character =  gChars[1+gOffset]; //gchar[1,1,1,1]
-            gRef = 1; break;
-        case B:
-            character =  gChars[2+gOffset];
-            gRef = 2; break;
-        case C:
-            character =  gChars[3+gOffset];
-            gRef = 3; break;
-        case D:
-            character =  gChars[4+gOffset];
-            gRef = 4; break;
-        case E:
-            character = gChars[5+gOffset];
-            gRef = 5; break;
-        case F:
-            character = gChars[6+gOffset];
-            gRef = 6; break;
-        case (D|E):
-            character = gChars[7+gOffset];
-            gRef = 7; break;
-        case (A|_|_|D|E|_):
-            character = gChars[8+gOffset];
-            gRef = 8; break;
-        case (_|B|_|D|E|_):
-            character = gChars[9+gOffset];
-            gRef = 9; break;
-        case (_|_|C|D|E|_):
-            character = gChars[10+gOffset];
-            gRef = 10; break;
-        case (E|F):
-            character = gChars[11+gOffset];
-            gRef = 11; break;
-        case (A|_|_|_|E|F):
-            character = gChars[12+gOffset];
-            gRef = 12; break;
-        case (_|B|_|_|E|F):
-            character = gChars[13+gOffset];
-            gRef = 13; break;
-        case (_|_|C|_|E|F):
-            character = gChars[14+gOffset];
-            gRef = 14; break;
-        case (A|B):
-            character =  gChars[15+gOffset];
-            gRef = 15; break;
-        case (A|B|_|D|_|_):
-            character =  gChars[16+gOffset];
-            gRef = 16; break;
-        case (A|B|_|_|E|_):
-            character =  gChars[17+gOffset];
-            gRef = 17; break;
-        case (A|B|_|_|_|F):
-            character =  gChars[18+gOffset];
-            gRef = 18; break;
-        case (B|C):
-            character =  gChars[19+gOffset];
-            gRef = 19; break;
-        case (_|B|C|D|_|_):
-            character =  gChars[20+gOffset];
-            gRef = 20; break;
-        case (_|B|C|_|E|_):
-            character =  gChars[21+gOffset];
-            gRef = 21; break;
-        case (_|B|C|_|_|F):
-            character =  gChars[22+gOffset];
-            gRef = 22; break;
-        case (D|_|F):
-            character = gChars[23+gOffset]; // W
-            gJamoCounter = 2; //0; // This is Next Syllable key as well
-            gRef = 23; break;
-        case (A|_|_|D|_|F):
-            character = gChars[24+gOffset];
-            gRef = 24; break;
-        case (_|B|_|D|_|F):
-            character = gChars[25+gOffset];
-            gRef = 25; break;
-        case (_|_|C|D|_|F):
-            character = gChars[26+gOffset];
-            gRef = 26; break;
-        // native range 1 (3 keys down)
-        case (A|_|C):
-            character =  gChars[27+gOffset];  // umlaut or TH
-            gRef = 27; break;
-        case (A|_|C|D|_|_):
-            character = gChars[28+gOffset]; // Å or THAT_
-            gRef = 28; break;
-        case (A|_|C|_|E|_):
-            character = gChars[29+gOffset];  // Ä or THE_
-            gRef = 29; break;
-        case (A|_|C|_|_|F):
-            character = gChars[30+gOffset];  // Ö or OF_
-            gRef = 30; break;    // ----
-        case (_|B|_|_|_|F):
-            character = gChars[31+gOffset];
-            gRef = 31; break;
-        case (_|_|C|_|E|_):
-            character = gChars[32+gOffset];
-            gRef = 32; break;
-        case (_|_|C|D|_|_):
-            character = gChars[33+gOffset];
-            gRef = 33; break;
-        case (A|_|_|_|_|F):
-            character = gChars[34+gOffset];
-            gRef = 34; break;
-        case (A|_|_|_|E|_):
-            character = gChars[35+gOffset];
-            gRef = 35; break;
-        case (_|B|_|D|_|_):
-            character = gChars[36+gOffset];
-            gRef = 36; break;
-        case (A|B|_|_|E|F):
-            character = gChars[37+gOffset];
-            gRef = 37; break;
-        case (_|B|C|D|E|_):
-            character = gChars[38+gOffset];
-            gRef = 38; break;
-        // Native range 2 (4 keys down):
-        case (A|_|C|_|E|F):
-            character = gChars[39+gOffset]; // low right
-            gRef = 39; break;
-        case (_|B|C|D|_|F):
-            character = gChars[40+gOffset]; // low left
-            gRef = 40; break;
-        case (A|_|C|D|E|_):
-            character = gChars[41+gOffset]; // upper right
-            gRef = 41; break;
         case (A|B|_|D|_|F):
             character = gChars[58+gOffset]; // Ins (char for SYMB only)
             break;
@@ -1156,12 +1030,6 @@ function outputChar(){
             }
             chord = 0;
             break;
-        case (A|_|C|D|E|_):
-            character = 'TO ';
-            break;
-        case (A|_|C|_|E|F):
-            character = 'AND ';
-            break;
         case (A|B|_|D|E|F):
             character = String.fromCharCode(13).toLowerCase(); //Enter
             break;
@@ -1185,7 +1053,12 @@ function outputChar(){
             setCaretPosition(field2, cursorPos);
             chord = 0; // this is to return without adding any char
             break;
-        default: character = '-';
+        case (_|_|_|D|_|F):
+            gJamoCounter = 2; // This is Next Syllable key as well
+            // fall through to default, for normal character mapping
+        default:
+            gRef = mapping[String(chord)];
+            character = gChars[gOffset + gRef];
     } // end switch(chord)
     cursorPosAdd = character.length;
     cursorPos = doGetCaretPosition (field2); // always get cursor position first
