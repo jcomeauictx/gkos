@@ -939,22 +939,22 @@ function outputChar(){
         case F:
             character = gChars[6+gOffset];
             gRef = 6; break;
-        case 24:
+        case (D|E):
             character = gChars[7+gOffset];
             gRef = 7; break;
-        case 25:
+        case (A|_|_|D|E|F):
             character = gChars[8+gOffset];
             gRef = 8; break;
-        case 26:
+        case (_|B|_|D|E|F):
             character = gChars[9+gOffset];
             gRef = 9; break;
-        case 28:
+        case (_|_|C|D|E|F):
             character = gChars[10+gOffset];
             gRef = 10; break;
-        case 48:
+        case (E|F):
             character = gChars[11+gOffset];
             gRef = 11; break;
-        case 49:
+        case (A|_|_|_|E|F):
             character = gChars[12+gOffset];
             gRef = 12; break;
         case 50:
