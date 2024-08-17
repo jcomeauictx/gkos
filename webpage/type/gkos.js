@@ -214,6 +214,12 @@ function pickKoreanCharacters() {
     gChars[94]="\u11c2"; // of
 }
 //==================================
+var chars = (
+    "\0abcdefghijklmnopqrstuvwxyz\1\1\1\1." +
+    ",!?-\\/\1\1\1\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
+    "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\1\1\1\1:" +
+    ";|~_\"\2\2\1\1\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+);
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
     gChars[1]="a";
@@ -338,7 +344,7 @@ function pickLatinCharacters() {
             gChars[41]="í"; // upper right, tab group
     } // end switch
     gChars[42]=""; //up
-    gChars[42]=""; //down
+    gChars[43]=""; //down
     gChars[44]=""; //pgup
     gChars[45]=""; //pgdn
     gChars[46]=""; //bs
