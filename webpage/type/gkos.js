@@ -222,7 +222,7 @@ var chars = (
     "\x001234560789#@½&+%=^*$€£([<{)]>}." +
     ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" +
     "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
-    ';|~_"\u0300\u0301μ§\0°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
+    ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
 );
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
@@ -570,7 +570,7 @@ function pickLatinCharacters() {
     gChars[230]="\u0301"; // combining acute accent U+0301
     gChars[231]="μ"; // Lower right, tab group
     gChars[232]="§"; // Lower left, ctrl group
-    gChars[233]="̌"; // Upper right, tab group
+    gChars[233]="\u030c"; // Upper right, tab group
     gChars[250]="°";  // Upper left, ctrl group (symbed Ins 58+192)
     switch (gLanguage) {
         case "Finnish":
