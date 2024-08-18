@@ -214,7 +214,7 @@ function pickKoreanCharacters() {
     gChars[94]="\u11c2"; // of
 }
 //==================================
-var chars = (
+var baseChars = (
     "\0abcdefghijklmnopqrstuvwxyz\1\1\1\1." +
     ",!?-\\/\1\1\1\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
     "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\1\1\1\1:" +
@@ -224,6 +224,24 @@ var chars = (
     "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
 );
+var patch = {
+    "icelandic": {
+        27: "þ",
+        28: "å",
+        29: "æ",
+        30: "ö",
+        39: "\u0308 ",  // should trailing space be there?
+        40: "ð",
+        41: "\u0301"
+        91: "Þ",
+        92: "Å",
+        93: "Æ",
+        94: "Ö"
+    }
+};
+var chars = {
+    "english": Object.assign({}, baseChars)
+};
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
     gChars[1]="a";
