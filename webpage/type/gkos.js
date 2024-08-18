@@ -225,6 +225,24 @@ var baseChars = (
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
 );
 var patch = {
+    "english": {
+        27: "th",
+        28: "that ",
+        29: "the ",
+        30: "of ",
+        91: "Th",
+        92: "That ",
+        93: "The ",
+        94: "Of",
+        39: "and ",
+        40: "with ",
+        41: "to ",
+        101: "\u0300",
+        102: "\u0301",
+        103: "And ",
+        104: "With ",
+        105: "To ",
+    },
     "icelandic": {
         27: "þ",
         28: "å",
@@ -240,7 +258,7 @@ var patch = {
     }
 };
 var chars = {
-    "english": Object.assign({}, baseChars)
+    "english": Object.assign({}, baseChars, patch.english)
 };
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
