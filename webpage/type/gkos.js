@@ -139,7 +139,7 @@ var baseChars = {
     // \v for multi-character entries such as "that ", "the ", ...
     lower:
         "\0abcdefghijklmnopqrstuvwxyz\v\v\v\v." +
-        ",!?-\\/\v\v\v\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0",
+        ",!?-'\\/\v\v\v\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0",
     upper:
         "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\v\v\v\v:" +
         ';|~_"\u0300\u0301\v\v\v\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
