@@ -216,32 +216,32 @@ function pickKoreanCharacters() {
 //==================================
 var baseChars = Object.fromEntries(Array.from(
     // in the following, \0 is placeholder for "",
-    // \1 for multi-character entries such as "that ", "the ", ...
-    "\0abcdefghijklmnopqrstuvwxyz\1\1\1\1." +
-    ",!?-\\/\1\1\1\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
-    "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\1\1\1\1:" +
-    ';|~_"\u0300\u0301\1\1\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0' +
+    // \v for multi-character entries such as "that ", "the ", ...
+    "\0abcdefghijklmnopqrstuvwxyz\v\v\v\v." +
+    ",!?-\\/\v\v\v\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
+    "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\v\v\v\v:" +
+    ';|~_"\u0300\u0301\v\v\v\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0' +
     "\x001234560789#@½&+%=^*$€£([<{)]>}." +
     ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" +
     "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
-).map(function(value, key) {return [key, value == "\0" ? "" : value};
+).map(function(value, key) {return [key, value == "\0" ? "" : value];}));
 var patch = {
     "english": {
         27: "th",
         28: "that ",
         29: "the ",
         30: "of ",
+        39: "and ",
+        40: "with ",
+        41: "to ",
         91: "Th",
         92: "That ",
         93: "The ",
         94: "Of",
-        39: "and ",
-        40: "with ",
-        41: "to ",
         103: "And ",
         104: "With ",
-        105: "To ",
+        105: "To "
     },
     "icelandic": {
         27: "þ",
@@ -264,7 +264,8 @@ var patch = {
     }
 };
 var chars = {
-    "english": Object.assign({}, baseChars, patch.english)
+    "english": Object.assign({}, baseChars, patch.english),
+    "icelandic": Object.assign({}, baseChars, patch.icelandic)
 };
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
