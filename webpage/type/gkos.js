@@ -227,7 +227,26 @@ var baseChars = Object.fromEntries(Array.from(
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
 ).map(function(value, key) {return [key, value == "\0" ? "" : value];}));
 var patch = {
-    "danish": {},
+    "danish": {
+        27: "ü",
+        28: "å",
+        29: "æ",
+        30: "ø",
+        // copied from Finnish, these weren't overwritten for Danish?!
+        39: "\u0308",
+        40: "§",
+        41: "\u030c",
+        91: "Ü",
+        92: "Å",
+        93: "Æ",
+        94: "Ø",
+        103: "\u0308",
+        104: "ẞ",
+        105: "\u030c",
+        231: "μ",
+        232: "ß",
+        233: "\u0302"
+    },
     "english": {
         27: "th",
         28: "that ",
@@ -287,7 +306,7 @@ var patch = {
     "spanish": {}
 };
 var chars = {
-    "danish": null,
+    "danish": Object.assign({}, baseChars, patch.danish),
     "english": Object.assign({}, baseChars, patch.english),
     "finnish": Object.assign({}, baseChars, patch.finnish),
     "french": null,
