@@ -33,7 +33,10 @@ def okay(codepoint):
     '''
     determine if codepoint within a range tolerated by urxvt or similar xterm
     '''
-    return (codepoint < 0x900) or (0x1e00 < codepoint < 0x2e80)
-
+    return (
+        (codepoint < 0x300) or
+        (0x363 < codepoint < 0x900) or
+        (0x1e00 < codepoint < 0x2e80)
+    )
 if __name__ == '__main__':
     fixup(*sys.argv[1:])
