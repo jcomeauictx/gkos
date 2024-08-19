@@ -171,7 +171,7 @@ var patch = {
     english: {
         27: "th", 28: "that ", 29: "the ", 30: "of ",
         39: "and ", 40: "with ", 41: "to ",
-        91: "Th", 92: "That ", 93: "The ", 94: "Of",
+        91: "Th", 92: "That ", 93: "The ", 94: "Of ",
         103: "And ", 104: "With ", 105: "To "
     },
     finnish: {
@@ -225,6 +225,7 @@ var patch = {
         21: "\u110c", 22: "\u110d", 23: "", 24: "\u110b",
         25: "\u1109", 26: "\u110a", 27: "\u1102", 28: "\u1105",
         29: "\u1106", 30: "\u1112",
+        39: "and ", 40: "with ", 41: "to ",
         // Ref + 64 Tail consonants
         // lead:  1 (U+1100/dec4352) - 19 (U+1112)
         // vowel: 1 (U+1161/dec4449) - 21 (U+1175)
@@ -238,7 +239,8 @@ var patch = {
         81: "\u11b8", 82: "\u11b9", 83: "\u1167", 84: "\u11be",
         85: "\u11bd", 86: "\u11de", 87: "", 88: "\u11bc",
         89: "\u11ba", 90: "\u11bb", 91: "\u11ab", 92: "\u11af",
-        93: "\u11b7", 94: "\u11c2"
+        93: "\u11b7", 94: "\u11c2",
+        103: "And ", 104: "With ", 105: "To "
     },
     russian: {
         1: "а", 2: "б", 3: "ц", 4: "д", 5: "е", 6: "ф", 7: "г", 8: "х",
@@ -272,7 +274,8 @@ var chars = {
     icelandic: Object.assign({}, base.latin, patch.icelandic),
     korean: Object.assign({}, base.latin, patch.korean),
     russian: Object.assign({}, base.latin, patch.russian),
-    sanskrit: null, // not handled by same engine
+    // sanskrit handled by different engine, the following is unused
+    sanskrit: Object.assign({}, base.latin, patch.english),
     spanish: Object.assign({}, base.latin, patch.spanish)
 };
 //===================================
