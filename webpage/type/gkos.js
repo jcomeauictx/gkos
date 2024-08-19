@@ -1033,8 +1033,8 @@ function keyhitDown(e){
     // -B   E-
     // -C   F-
     // \-----/
-    if (Object.keys(GKOS).includes(thisKey)) {
-        keyMask = GKOS[thisKey];
+    keyMask = GKOS[thisKey];
+    if (keyMask) {
         console.debug("processing keydown " + thisKey + ", mask: " + keyMask);
         if ((chordx & keyMask) == 0) {
             chordx |= keyMask;
@@ -1078,7 +1078,7 @@ function keyhitUp(e) {
     var keyMask = 0;
     cCounterx = c; // store timer value before clearing it
     prevChordx = chordx;
-    if (Object.keys(GKOS).includes(thisKey)) {
+    if (GKOS[thisKey]) {
         keyMask = ~GKOS[thisKey];
         console.debug("processing keyup " + thisKey + ", mask: " + keyMask);
         chordx &= keyMask;
