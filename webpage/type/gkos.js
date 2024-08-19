@@ -287,7 +287,7 @@ onload = function() {
     usedLanguage(); // update to ticked laguage
     stopCount(); // reset counter display
     if (new URLSearchParams(location.search).get("action") == "dump") {
-        field2.value = JSON.stringify(chars);
+        field2.value = JSON.stringify(chars, null, 2);
     }
 };
 //==========================
