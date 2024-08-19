@@ -148,13 +148,15 @@ var baseChars = {
         ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
     symbolsUpper:
         "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
-        ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
+        ';|~_"\u0300\u0301μ§\u030c\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0°\0\0\0\0\0'
 };
 var base = {
     latin: Object.fromEntries(Array.from(
             baseChars.lower + baseChars.upper +
             baseChars.symbolsLower + baseChars.symbolsUpper
-        ).map(function(value, key) {return [key, value == "\0" ? "" : value];})
+        ).map(function(value, key) {
+            return [key, value == "\0" ? "" : value];
+        })
     )
 };
 var patch = {
