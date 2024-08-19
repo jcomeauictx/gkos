@@ -307,7 +307,25 @@ var patch = {
         232: "§",
         233: "\u030c"
     },
-    "german": {},
+    "german": {
+        27: "ü",
+        28: "å",
+        29: "ä",
+        30: "ö",
+        39: "\u0308",
+        40: "ß",
+        41: "\u030c",
+        91: "Ü",
+        92: "Å",
+        93: "Ä",
+        94: "Ö",
+        103: "\u0308",
+        104: "ẞ",
+        105: "\u030c",
+        231: "μ",
+        232: "§",
+        233: "\u0302"
+    },
     "icelandic": {
         27: "þ",
         28: "å",
@@ -334,7 +352,7 @@ var chars = {
     "english": Object.assign({}, baseChars, patch.english),
     "finnish": Object.assign({}, baseChars, patch.finnish),
     "french": Object.assign({}, baseChars, patch.french),
-    "german": null,
+    "german": Object.assign({}, baseChars, patch.german),
     "icelandic": Object.assign({}, baseChars, patch.icelandic),
     "spanish": null
 };
@@ -708,7 +726,7 @@ function pickLatinCharacters() {
         case "German":
             gChars[231]="μ"; // lower right, tab group
             gChars[232]="§"; //§ lower left ctrl group
-            gChars[233]="̂"; // combining circumflex
+            gChars[233]="\u0302"; // combining circumflex
             break;
         case "Spanish":
             gChars[231]="\u0302 "; // comb. circumflex lower right, tab group
