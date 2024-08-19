@@ -127,13 +127,11 @@ function gIncJamoCounter() {
         } // end switch
     } // end if
     gJamoCounter %= 3;  // reset to zero if at 3
-    //info2.value = gJamoCounter; // debug
 } // end gIncJamoCounter()
 function gDecJamoCounter() {
     //JamosToHangul
     gJamoCounter--;
     if (gJamoCounter == -1) gJamoCounter = 2;
-    //info2.value = gJamoCounter; // debug
 }
 //==================================
 var baseChars = {
@@ -279,15 +277,18 @@ var chars = {
 onload = function() {
     gChars = chars.english;
     chord = 0;
-    //field = document.getElementById('text_field')
+    // field2 is where the typed text shows
     field2 = document.getElementById('text_field2');
+    // info2 shows current state of keyboard (shift, symb etc.) or language
     info2 = document.getElementById('info_field2');
     field2.onkeydown = keyhitDown;
     field2.onkeyup = keyhitUp;
     field2.focus();
-    //info2.value = gLanguage;
     usedLanguage(); // update to ticked laguage
     stopCount(); // reset counter display
+    if (new URLSearchParams(location.search).get("action") == "dump") {
+        field2.value = JSON.stringify(chars);
+    }
 };
 //==========================
 function doGetCaretPosition (field2) {
@@ -392,7 +393,6 @@ function keyhitDown(e){
         }
         // all other keys ignored
     }
-    //info2.value = chordx; // debug
     // ===========Vowel detection (for Sanskrit only)============
     if (cCounter >= 10) { // <== The exact delay required  can be adjusted here
         // This is the 10 ms timer count to separate vowels and consonants
@@ -436,7 +436,6 @@ function keyhitUp(e) {
     doTimer(); // Reset Timer for each key up event too
     // Stop and reset timer when all keys are released
     if(chordx == 0){stopCount();}
-    //info2.value = chordx; // debug
     // only if SDF/JKL pressed & released:
     if (keyMask != 0) {
         // due to delayed press
