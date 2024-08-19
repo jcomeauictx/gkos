@@ -854,7 +854,7 @@ onload = function(){
      if (languages[i].value == language) {
       languages[i].click();
       usedLanguage();
-      chars[language.toLowerCase()] = gChars.slice();
+      chars[language.toLowerCase()] = Object.assign({}, gChars);
      }
     }
   });
