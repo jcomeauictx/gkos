@@ -227,6 +227,7 @@ var baseChars = Object.fromEntries(Array.from(
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
 ).map(function(value, key) {return [key, value == "\0" ? "" : value];}));
 var patch = {
+    "danish": {},
     "english": {
         27: "th",
         28: "that ",
@@ -243,12 +244,33 @@ var patch = {
         104: "With ",
         105: "To "
     },
+    "finnish": {
+        27: "ü",
+        28: "å",
+        29: "ä",
+        30: "ö",
+        39: "\u0308",
+        40: "§",
+        41: "\u030c",
+        91: "Ü",
+        92: "Å",
+        93: "Ä",
+        94: "Ö",
+        103: "\u0308",
+        104: "ẞ",
+        105: "\u030c",
+        231: "μ",
+        232: "ß",
+        233: "\u0302"
+    },
+    "french": {},
+    "german": {},
     "icelandic": {
         27: "þ",
         28: "å",
         29: "æ",
         30: "ö",
-        39: "\u0308 ",  // should trailing space be there?
+        39: "\u0308",
         40: "ð",
         41: "\u0301",
         91: "Þ",
@@ -261,11 +283,17 @@ var patch = {
         231: "μ",
         232: "§",
         233: "\u030c"
-    }
+    },
+    "spanish": {}
 };
 var chars = {
+    "danish": null,
     "english": Object.assign({}, baseChars, patch.english),
-    "icelandic": Object.assign({}, baseChars, patch.icelandic)
+    "finnish": Object.assign({}, baseChars, patch.finnish),
+    "french": null,
+    "german": null,
+    "icelandic": Object.assign({}, baseChars, patch.icelandic),
+    "spanish": null
 };
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
@@ -620,7 +648,7 @@ function pickLatinCharacters() {
         case "Danish":
             gChars[231]="μ"; // lower right, tab group
             gChars[232]="ß"; //§ lower left ctrl group
-            gChars[233]="̂"; // combining circumflex
+            gChars[233]="\u0302"; // combining circumflex
             break;
         case "Icelandic":
             gChars[231]="μ"; // lower right, tab group
