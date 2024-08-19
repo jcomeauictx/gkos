@@ -842,6 +842,25 @@ onload = function(){
  field2.focus()
 
  //info2.value = gLanguage;
+ if (location.search == "?action=dump") {
+  var chars = {};
+  var languages = document.fLanguage.gLanguage;
+  ["Danish", "English", "Finnish", "French",
+   "German", "Greek", "Icelandic", "Korean",
+   "Russian", "Sanskrit", "Spanish"].forEach(function(language) {
+    console.debug("dump selecting language " + language);
+    for (i = 0; i < languages.length; i++) {
+     console.debug("languages[" + i + "]: " + languages[i].value);
+     if (languages[i].value == language) {
+      languages[i].click();
+      usedLanguage();
+      chars[language.toLowerCase()] = gChars.slice();
+     }
+    }
+  });
+  field2.value = JSON.stringify(chars);
+  languages[0].click();
+ }
  usedLanguage(); // update to ticked laguage
 
  stopCount(); // reset counter display
