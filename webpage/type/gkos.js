@@ -214,18 +214,29 @@ function pickKoreanCharacters() {
     gChars[94]="\u11c2"; // of
 }
 //==================================
-var baseChars = Object.fromEntries(Array.from(
+var baseChars = {
     // in the following, \0 is placeholder for "",
     // \v for multi-character entries such as "that ", "the ", ...
-    "\0abcdefghijklmnopqrstuvwxyz\v\v\v\v." +
-    ",!?-\\/\v\v\v\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
-    "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\v\v\v\v:" +
-    ';|~_"\u0300\u0301\v\v\v\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0' +
-    "\x001234560789#@½&+%=^*$€£([<{)]>}." +
-    ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" +
-    "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
-    ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
-).map(function(value, key) {return [key, value == "\0" ? "" : value];}));
+    lower:
+        "\0abcdefghijklmnopqrstuvwxyz\v\v\v\v." +
+        ",!?-\\/\v\v\v\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0",
+    upper:
+        "\0ABCDEFGHIJKLMNOPQRSTUVWXYZ\v\v\v\v:" +
+        ';|~_"\u0300\u0301\v\v\v\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
+    symbolsLower:
+        "\x001234560789#@½&+%=^*$€£([<{)]>}." +
+        ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+    symbolsUpper:
+        "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
+        ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
+};
+var base = {
+    latin: Object.fromEntries(Array.from(
+            baseChars.lower + baseChars.upper +
+            baseChars.symbolsLower + baseChars.symbolsUpper
+        ).map(function(value, key) {return [key, value == "\0" ? "" : value];})
+    )
+};
 var patch = {
     "danish": {
         27: "ü",
@@ -369,13 +380,13 @@ var patch = {
     }
 };
 var chars = {
-    "danish": Object.assign({}, baseChars, patch.danish),
-    "english": Object.assign({}, baseChars, patch.english),
-    "finnish": Object.assign({}, baseChars, patch.finnish),
-    "french": Object.assign({}, baseChars, patch.french),
-    "german": Object.assign({}, baseChars, patch.german),
-    "icelandic": Object.assign({}, baseChars, patch.icelandic),
-    "spanish": Object.assign({}, baseChars, patch.spanish)
+    "danish": Object.assign({}, base.latin, patch.danish),
+    "english": Object.assign({}, base.latin, patch.english),
+    "finnish": Object.assign({}, base.latin, patch.finnish),
+    "french": Object.assign({}, base.latin, patch.french),
+    "german": Object.assign({}, base.latin, patch.german),
+    "icelandic": Object.assign({}, base.latin, patch.icelandic),
+    "spanish": Object.assign({}, base.latin, patch.spanish)
 };
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
