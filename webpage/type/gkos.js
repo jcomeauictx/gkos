@@ -345,7 +345,28 @@ var patch = {
         232: "§",
         233: "\u030c"
     },
-    "spanish": {}
+    "spanish": {
+        27: "ú",
+        28: "á",
+        29: "é",
+        30: "ó",
+        39: "ñ",
+        40: "\u00fc",
+        41: "í",
+        91: "Ú",
+        92: "Á",
+        93: "É",
+        94: "Ó",
+        97: "\u00a1",
+        98: "\u00bf",
+        103: "Ñ",
+        104: "\u00dc",
+        105: "Í",
+        231: "\u0302",
+        232: "\u0308",
+        233: "\u00aa",
+        250: "\u00ba"
+    }
 };
 var chars = {
     "danish": Object.assign({}, baseChars, patch.danish),
@@ -354,7 +375,7 @@ var chars = {
     "french": Object.assign({}, baseChars, patch.french),
     "german": Object.assign({}, baseChars, patch.german),
     "icelandic": Object.assign({}, baseChars, patch.icelandic),
-    "spanish": null
+    "spanish": Object.assign({}, baseChars, patch.spanish)
 };
 function pickLatinCharacters() {
     gChars[0]="\0";  // [0] not used
