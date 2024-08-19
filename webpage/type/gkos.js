@@ -214,7 +214,8 @@ function pickKoreanCharacters() {
     gChars[94]="\u11c2"; // of
 }
 //==================================
-var baseChars = ( // in the following, \0 is placeholder for "",
+var baseChars = Object.fromEntries(Array.from(
+    // in the following, \0 is placeholder for "",
     // \1 for multi-character entries such as "that ", "the ", ...
     "\0abcdefghijklmnopqrstuvwxyz\1\1\1\1." +
     ",!?-\\/\1\1\1\0\0\0\0\0\0\0\0\0 \0\0\0\0\t\0\0\0\0\0\0\0\0" +
@@ -224,7 +225,7 @@ var baseChars = ( // in the following, \0 is placeholder for "",
     ",!?-'\\/μ§\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0" +
     "\x001234560789#@½&+%=^*$€£([<{)]>}:" +
     ';|~_"\u0300\u0301μ§\u030c°\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
-);
+).map(function(value, key) {return [key, value == "\0" ? "" : value};
 var patch = {
     "english": {
         27: "th",
@@ -253,7 +254,13 @@ var patch = {
         91: "Þ",
         92: "Å",
         93: "Æ",
-        94: "Ö"
+        94: "Ö",
+        103: "\u0308",
+        104: "Ð",
+        105: "\u030c",
+        231: "μ",
+        232: "§",
+        233: "\u030c"
     }
 };
 var chars = {
