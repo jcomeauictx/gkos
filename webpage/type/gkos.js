@@ -420,9 +420,9 @@ function pickLatinCharacters() {
     gChars[28]="that "; //å
     gChars[29]="the ";  //ä
     gChars[30]="of ";   //ö
-    // grave U+0300  acute U+0301  circumflex U+0302 (--̂  )
-    // umlaut U+0308 (--̈  )  tilde U+0303 (--̃  )
-    // breve/short U+0306 (--̆  )  hachek U+030C (--̌  )
+    // grave U+0300  acute U+0301  circumflex U+0302
+    // umlaut U+0308 tilde U+0303
+    // breve/short U+0306  hachek U+030C
     // à/À  è/È  ì   ò  ù/Ù  -  á  é/É  í  ó  ú  -  ñ/Ñ - ê/Ê
     // œ/Œ  -  ô/Ô  -  ç/Ç
     // Spanish: ¿ ¡ º(Masculine Ordinal u+00BA) ª(Feminine Ordinal u+00AA)
@@ -480,7 +480,7 @@ function pickLatinCharacters() {
     gChars[41]="to ";
     switch (gLanguage) {
         case "Icelandic":
-            // combining diaeresis U+0308 ( ̈  ) - lower right, tab group
+            // combining diaeresis U+0308 - lower right, tab group
             gChars[39]="\u0308 ";
             //gChars[40]="å"; //§ lower left ctrl group
             gChars[40]="ð";
@@ -488,16 +488,16 @@ function pickLatinCharacters() {
             gChars[41]="\u0301";
             break;
         case "Finnish":
-            // combining diaeresis U+0308 ( ̈  ) - lower right, tab group
+            // combining diaeresis U+0308 - lower right, tab group
             gChars[39]="\u0308";
             gChars[40]="§"; //§ lower left ctrl group
-            // combining caron U+030C ( ̌  )- upper right, tab group
+            // combining caron U+030C - upper right, tab group
             gChars[41]="\u030c";
             break;
         case "French":
             gChars[39]="\u0308";// combining diaeresis
             gChars[40]="ç"; // cedilla lower left ctrl group
-            gChars[41]="\u0302"; // combining circumflex U+0302 (̂  )
+            gChars[41]="\u0302"; // combining circumflex U+0302
             gChars[37]="\u0300"; // grave U+0300  acute U+0301
             gChars[38]="\u0301";
             break;
@@ -508,7 +508,7 @@ function pickLatinCharacters() {
             break;
         case "Spanish":
             gChars[39]="ñ"; //  lower right, tab group
-            gChars[40]="\u00fc"; // ̈  lower left ctrl group
+            gChars[40]="\u00fc"; // \u0308  lower left ctrl group
             gChars[41]="í"; // upper right, tab group
     } // end switch
     gChars[42]=""; //up
@@ -646,7 +646,7 @@ function pickLatinCharacters() {
             gChars[97]="\u00a1"; //reverse !
             gChars[98]="\u00bf"; //reverse ?
             gChars[103]="Ñ"; //  lower right, tab group
-            gChars[104]="\u00dc"; // ̈  lower left ctrl group Ü
+            gChars[104]="\u00dc"; // \u0308  lower left ctrl group Ü
             gChars[105]="Í"; // upper right, tab group
             break;
     } // end switch
@@ -801,17 +801,9 @@ function pickRussianCharacters() {
     gChars[28] = "ю";
     gChars[29] = "э";
     gChars[30] = "я";
-//  gChars[31] = ".";
-//  gChars[32] = ",";
-//  gChars[33] = "!";
-//  gChars[34] = "?";
-//  gChars[35] = "-";
-//  gChars[36] = "'";
-//  gChars[37] = "\\";
-//  gChars[38] = "/";
     gChars[39] = "ъ";// lower
     gChars[40] = "ь";// §
-    gChars[41] = "̈";// upper
+    gChars[41] = "\u0308";// upper
     // -----------------Russian 65...  -----------------
     gChars[65] = "А";// Upper Case = Lower case + 64
     gChars[66] = "Б";
@@ -846,7 +838,7 @@ function pickRussianCharacters() {
     // shared punctuation here...
     gChars[103] = "Ъ";//lower
     gChars[104] = "Ь";
-    gChars[105] = "̈"; //upper
+    gChars[105] = "\u0308"; //upper
 }
 function pickGreekCharacters() {
     //----------------Greek 1-41 (part of 1-64) ----------------------
@@ -872,7 +864,7 @@ function pickGreekCharacters() {
     gChars[20] = "τ";
     gChars[21] = "ου";
     gChars[22] = "β";
-    gChars[23] = "́"; //w
+    gChars[23] = "\u0301"; //w
     gChars[24] = "ξ";
     gChars[25] = "υ";
     gChars[26] = "ζ";
@@ -881,9 +873,9 @@ function pickGreekCharacters() {
     gChars[29] = "ει";
     gChars[30] = "";
     // shared punctuation here...
-    gChars[39] = "̈"; //lower
+    gChars[39] = "\u0308"; //lower
     gChars[40] = "§"; //§
-    gChars[41] = "̂"; //upper
+    gChars[41] = "\u0302"; //upper
     //-----------------Greek 64... -----------------
     gChars[65] = "Α"; //Upper Case = Lower case + 64
     gChars[66] = "Ο";
@@ -907,7 +899,7 @@ function pickGreekCharacters() {
     gChars[84] = "Τ";
     gChars[85] = "Ου";
     gChars[86] = "Β";
-    gChars[87] = "́"; //W";
+    gChars[87] = "\u0301"; //W";
     gChars[88] = "Ξ";
     gChars[89] = "Υ";
     gChars[90] = "Ζ";
@@ -916,9 +908,9 @@ function pickGreekCharacters() {
     gChars[93] = "Ει";
     gChars[94] = "";
     // shared punctuation again...
-    gChars[103] = "̈"; //lower
+    gChars[103] = "\u0308"; //lower
     gChars[104] = "§";
-    gChars[105] = "̂";  //upper
+    gChars[105] = "\u0302";  //upper
 }
 //===================================
 onload = function() {
