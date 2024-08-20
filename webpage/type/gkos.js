@@ -65,8 +65,13 @@ var urlParameters = new URLSearchParams(location.search);
 // page elements, initialize properly during document.onload
 var field2 = null, info2 = null, hiddenCount = null, languageMap = null;
 // default to simplyTimedKey{Up,Down}
-var timing = urlParameters.get("timing") || "simple";
-console.debug("timing: " + timing);
+let defaultTiming = "simple";
+let timing = urlParameters.get("timing") || defaultTiming;
+var timingOptions = {
+    "simple": [simplyTimedKeyDown, simplyTimedKeyUp],
+    "none": [untimedKeyDown, untimedKeyUp],
+    "timed": [timedKeyDown, timedKeyUp]
+};
 // the following 6 "chord" variables are used by simplyTimedKey{Down,Up}
 // `chord` is a global, changing it to a parameter of outputChar would
 // be difficult so leaving it as is.
@@ -514,11 +519,14 @@ function timedKeyDown(event) {
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
 }
-[keyDown, keyUp] = {
-    "simple": [simplyTimedKeyDown, simplyTimedKeyUp],
-    "none": [untimedKeyDown, untimedKeyUp],
-    "timed": [timedKeyDown, timedKeyUp]
-}[timing];
+try {
+    [keyDown, keyUp] = timingOptions[timing];
+} catch (error) {
+    alert("'" + timing + "' is not one of ['none', 'simple', 'timed'];" +
+          " defaulting to '" + defaultTiming + "'");
+    timing = defaultTiming;
+    [keyDown, keyUp] = timingOptions[timing];
+}
 //-------------------------
 function outputChar() {
     if (gLanguage == "Sanskrit" && numbOn == false) {
