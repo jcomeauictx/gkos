@@ -58,6 +58,7 @@ var mapping = { // chords to character indices
 };
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
+var keyDown = null, keyUp = null; // these functions are set later in the code
 var gChars = null;  // holds current language's characters
 var chord = 0; //chord value for selecting characters
 var chordx = 0; //chord value in realtime
@@ -289,8 +290,8 @@ onload = function() {
     field2 = document.getElementById('text_field2');
     // info2 shows current state of keyboard (shift, symb etc.) or language
     info2 = document.getElementById('info_field2');
-    field2.onkeydown = keyhitDown;
-    field2.onkeyup = keyhitUp;
+    field2.onkeydown = keyDown;
+    field2.onkeyup = keyUp;
     field2.focus();
     usedLanguage(); // update to ticked laguage
     stopCount(); // reset counter display
@@ -369,7 +370,10 @@ function usedLanguage() {
     field2.focus();
 } // end function usedLanguage()
 //--------------------
-function keyhitDown(e){
+// see pages 19-21 of gkos_spec_v314.pdf for discussion on untimed and timed
+// key processing. the way it's done in the original javascript don't match
+// either.
+function simplyTimedKeyDown(e){
     thisKey = e ? e.code : window.event.code;
     var keyMask = 0;
     prevChord = chord;
@@ -424,10 +428,10 @@ function keyhitDown(e){
             } // end switch(prevChord)
         } // end if (gLanguage == "Sanskrit")
     } // end if (cCounter >= 10)
-    return false; //true;  // Cancel the original keyhit event
-} // end keyhitDown(e)
+    return false; // Cancel the original keydown event
+} // end simplyTimedKeyDown(e)
 //---------------------------
-function keyhitUp(e) {
+function simplyTimedKeyUp(e) {
     thisKey = e ? e.code : window.event.code;
     var keyMask = 0;
     cCounterx = c; // store timer value before clearing it
@@ -460,7 +464,10 @@ function keyhitUp(e) {
     } // end outer `if`
     field2.scrollTop = field2.scrollHeight;  // keep bottom line visible
     return true;
-} // end keyhitUp()
+} // end simplyTimedKeyUp()
+// for now, use key processing from original JavaScript
+keyDown = simplyTimedKeyDown;
+keyUp = simplyTimedKeyUp;
 //-------------------------
 function outputChar(){
     field = document.getElementById('text_field2');
