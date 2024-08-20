@@ -482,6 +482,8 @@ function outputChar(){
     var character = "";
     switch (chord) {
         case (A|B|_|D|_|F):
+            // Ins(ert) or, in SYMB mode, "°" or (Spanish only) "º"
+            // these are at offset 250, which is 58 + 64 + 128
             character = gChars[58+gOffset]; // Ins (char for SYMB only)
             break;
         case (D|E|F):
