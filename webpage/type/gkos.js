@@ -65,14 +65,19 @@ var urlParameters = new URLSearchParams(location.search);
 // default to simplyTimedKey{Up,Down}
 var timing = urlParameters.get("timing") || "simple";
 console.debug("timing: " + timing);
-var readyToRead = false; // used by untimedKey{Down,Up}
 // the following 6 "chord" variables are used by simplyTimedKey{Down,Up}
+// `chord` is a global, changing it to a parameter of outputChar would
+// be difficult so leaving it as is.
 var chord = 0; //chord value for selecting characters
 var chordx = 0; //chord value in realtime
 var prevChord = 0; // before press
 var prevChordx = 0; // before release
 var chord1 = 0; // in case of Chordon
 var chord2 = 0; // in case of Chordon
+// untimedChord and readyToRead used by untimedKey{Down,Up}
+// they also use the global `chord` as noted above.
+var untimedChord = 0;
+var readyToRead = false;
 var myString = "";
 var typed = "";
 var cursorPos = 0;
@@ -478,16 +483,16 @@ function simplyTimedKeyUp(e) {
  * instead is to build the chord with each keydown event */
 function untimedKeyDown(event) {
     var thisKey = event ? event.code : window.event.code;
-    chordx |= GKOS[thisKey];
+    untimedChord |= GKOS[thisKey];
     readyToRead = true;
     return false; // disable default and bubbling
 }
 function untimedKeyUp(event) {
     if (readyToRead) {
         readyToRead = false;
-        chord = chordx;
+        chord = untimedChord;
         outputChar();
-        chordx = 0;
+        untimedChord = 0;
     }
     return false; // disable default and bubbling
 }
@@ -503,7 +508,7 @@ function timedKeyUp(event) {
     "timed": [timedKeyDown, timedKeyUp]
 }[timing];
 //-------------------------
-function outputChar(){
+function outputChar() {
     field = document.getElementById('text_field2');
     if (gLanguage == "Sanskrit" && numbOn == false) {
         goSanskrit();
