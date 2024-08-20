@@ -60,9 +60,15 @@ var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
 var keyDown = null, keyUp = null; // these functions are set later in the code
 var gChars = null;  // holds current language's characters
+var gRef = 0; // GKOS Reference number (1-41 only used here)
+var urlParameters = new URLSearchParams(location.search);
+// default to simplyTimedKey{Up,Down}
+var timing = urlParameters.get("timing") || "simple";
+console.debug("timing: " + timing);
+var readyToRead = false; // used by untimedKey{Down,Up}
+// the following 6 "chord" variables are used by simplyTimedKey{Down,Up}
 var chord = 0; //chord value for selecting characters
 var chordx = 0; //chord value in realtime
-var gRef = 0; // GKOS Reference number (1-41 only used here)
 var prevChord = 0; // before press
 var prevChordx = 0; // before release
 var chord1 = 0; // in case of Chordon
@@ -295,7 +301,7 @@ onload = function() {
     field2.focus();
     usedLanguage(); // update to ticked laguage
     stopCount(); // reset counter display
-    if (new URLSearchParams(location.search).get("action") == "dump") {
+    if (urlParameters.get("action") == "dump") {
         field2.value = JSON.stringify(chars, null, 2);
     }
 };
@@ -374,7 +380,7 @@ function usedLanguage() {
 // key processing. the way it's done in the original javascript don't match
 // either.
 function simplyTimedKeyDown(e){
-    thisKey = e ? e.code : window.event.code;
+    var thisKey = e ? e.code : window.event.code;
     var keyMask = 0;
     prevChord = chord;
     cCounter = c; // store timer value before clearing it
@@ -465,9 +471,37 @@ function simplyTimedKeyUp(e) {
     field2.scrollTop = field2.scrollHeight;  // keep bottom line visible
     return true;
 } // end simplyTimedKeyUp()
-// for now, use key processing from original JavaScript
-keyDown = simplyTimedKeyDown;
-keyUp = simplyTimedKeyUp;
+// begin untimed keychord processing
+/* the description on page 20 of gkos_spec_v314.pdf says to read chord
+ * value "immediately before the key went up", which is of course
+ * impossible, as the event has already occurred. so what we will do
+ * instead is to build the chord with each keydown event */
+function untimedKeyDown(event) {
+    var thisKey = event ? event.code : window.event.code;
+    chordx |= GKOS[thisKey];
+    readyToRead = true;
+    return false; // disable default and bubbling
+}
+function untimedKeyUp(event) {
+    if (readyToRead) {
+        readyToRead = false;
+        chord = chordx;
+        outputChar();
+        chordx = 0;
+    }
+    return false; // disable default and bubbling
+}
+function timedKeyDown(event) {
+    console.error("timedKeyDown not yet implemented");
+}
+function timedKeyUp(event) {
+    console.error("timedKeyUp not yet implemented");
+}
+[keyDown, KeyUp] = {
+    "simple": [simplyTimedKeyDown, simplyTimedKeyUp],
+    "none": [untimedKeyDown, untimedKeyUp],
+    "timed": [timedKeyDown, timedKeyUp]
+}[timing];
 //-------------------------
 function outputChar(){
     field = document.getElementById('text_field2');
