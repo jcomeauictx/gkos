@@ -62,6 +62,8 @@ var keyDown = null, keyUp = null; // these functions are set later in the code
 var gChars = null;  // holds current language's characters
 var gRef = 0; // GKOS Reference number (1-41 only used here)
 var urlParameters = new URLSearchParams(location.search);
+// page elements, initialize properly during document.onload
+var field2 = null, info2 = null, hiddenCount = null, languageMap = null;
 // default to simplyTimedKey{Up,Down}
 var timing = urlParameters.get("timing") || "simple";
 console.debug("timing: " + timing);
@@ -78,6 +80,12 @@ var chord2 = 0; // in case of Chordon
 // they also use the global `chord` as noted above.
 var untimedChord = 0;
 var readyToRead = false;
+// properly timed chording uses several variables: gkos_spec_v314.pdf p.20
+var chordPeriod = {default: 16, current: 16}; // Tc, 160ms
+var guardTime = {default: 8, current: 8}; // Tg, 80ms
+// initialize key timers to null, set to 0 on keydown
+var keyTimer = {A: null, B: null, C: null, D: null, E: null, F: null};
+// the following are from the original gkos.com webpage
 var myString = "";
 var typed = "";
 var cursorPos = 0;
@@ -94,31 +102,30 @@ var cCounter; // stored timer c value
 var cCounterx; // stored timer c value
 var c=0;
 var t;
-var timer_is_on = false;
+var timerIsOn = false;
 function timedCount() {
-    document.getElementById('txt').value=c;
+    hiddenCount.value = c;
     c = Math.min(c + 1, 255);
     t=setTimeout("timedCount()",10); // count tens of milliseconds
 }
 function doTimer() {
     c = 0;
-    if (!timer_is_on) {
-        timer_is_on = true;
+    if (!timerIsOn) {
+        timerIsOn = true;
         timedCount();
     }
 }
 function stopCount() {
     clearTimeout(t);
-    timer_is_on = false;
+    timerIsOn = false;
     c = 0;
-    document.getElementById('txt').value=c;
+    hiddenCount.value = c;
 }
 //================================
 function clearDisplay() {
     myString = "";
-    field.value = "";
     field2.value = myString;
-    field.focus();
+    field2.focus();
 }
 //==================================
 function gIncJamoCounter() {
@@ -298,9 +305,11 @@ onload = function() {
     gChars = chars.english;
     chord = 0;
     // field2 is where the typed text shows
-    field2 = document.getElementById('text_field2');
+    field2 = document.getElementById("text_field2");
     // info2 shows current state of keyboard (shift, symb etc.) or language
-    info2 = document.getElementById('info_field2');
+    info2 = document.getElementById("info_field2");
+    hiddenCount = document.getElementById("txt");
+    languageMap = document.getElementById("decal");
     field2.onkeydown = keyDown;
     field2.onkeyup = keyUp;
     field2.focus();
@@ -370,10 +379,10 @@ function usedLanguage() {
         gChars = chars[gLanguage.toLowerCase()];
         if (gLanguage == "Korean"){
             gJamoCounter = 0;
-            document.getElementById("decal").src = "../hangeul_roman.png";
+            languageMap.src = "../hangeul_roman.png";
         } else {
             //Update the layout picture
-            document.getElementById("decal").src = "../" +
+            languageMap.src = "../" +
                 gLanguage.toLowerCase() + "2.png";
         }
     } // end if (chosen == "")
@@ -498,6 +507,9 @@ function untimedKeyUp(event) {
 }
 function timedKeyDown(event) {
     console.error("timedKeyDown not yet implemented");
+    var thisKey = e ? e.code : window.event.code;
+    var keyMask = 0;
+    keyTimer[keyMask] = 0; // change from null to zero to indicate keydown
 }
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
@@ -509,7 +521,6 @@ function timedKeyUp(event) {
 }[timing];
 //-------------------------
 function outputChar() {
-    field = document.getElementById('text_field2');
     if (gLanguage == "Sanskrit" && numbOn == false) {
         goSanskrit();
         field2.scrollTop = field2.scrollHeight;  // keep bottom line visible
@@ -643,7 +654,6 @@ function outputChar() {
 } // end outputChar
 //------------------------
 function goSanskrit() {
-    field = document.getElementById('text_field2');
     cursonPosAdd = 1; //default entry length
     gOffset = 0; // default
     switch (chord) {                        //  04.02.01-08.16.32
