@@ -162,7 +162,7 @@ var base = {
 var patch = {
     danish: {
         27: "ü", 28: "å", 29: "æ", 30: "ø",
-        // copied from Finnish, these weren't overwritten for Danish?!
+        // copied from Finnish, these weren't overwritten for Danish
         39: "\u0308", 40: "§", 41: "\u030c",
         91: "Ü", 92: "Å", 93: "Æ", 94: "Ø",
         103: "\u0308", 104: "ẞ", 105: "\u030c",
