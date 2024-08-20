@@ -58,7 +58,7 @@ var mapping = { // chords to character indices
 };
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
-var gChars = new Array(256);  // holds current language's characters
+var gChars = null;  // holds current language's characters
 var chord = 0; //chord value for selecting characters
 var chordx = 0; //chord value in realtime
 var gRef = 0; // GKOS Reference number (1-41 only used here)
@@ -504,15 +504,13 @@ function outputChar(){
                 if (altOn) {
                     if(gLanguage !== basicLanguage) {
                         gLanguage = basicLanguage;
-                        gChars = chars[basicLanguage.toLowerCase()];
-                        info2.value = gLanguage;
-                        altOn = false; numbOn = false;
                     } else {
                         gLanguage = "English";
-                        gChars = chars.english;
-                        info2.value = gLanguage;
-                        altOn = false; numbOn = false;
                     }
+                    gChars = chars[gLanguage.toLowerCase()];
+                    info2.value = gLanguage;
+                    altOn = false;
+                    numbOn = false;
                 }
             } // end of else
             chord = 0;
