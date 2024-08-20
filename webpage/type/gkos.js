@@ -9,6 +9,9 @@ var C = 0x04;
 var D = 0x08;
 var E = 0x10;
 var F = 0x20;
+// X (64) and Y (128) are not keys, but chord offsets, especially for Sanskrit
+var X = 0x40;
+var Y = 0x80;
 var GKOS = {"KeyF": A, "KeyD": B, "KeyS": C, "KeyJ": D, "KeyK": E, "KeyL": F};
 var mapping = { // chords to character indices
     [A]: 1, // a
@@ -413,10 +416,10 @@ function keyhitDown(e){
                 case (D|_|F):
                 case (_|E|F):
                 case (D|E|F):
-                    chord |= 128;
+                    chord |= Y;
                     break;
                 // The rest are left-hand-first chords:
-                default: chord |= 64; // add 64, vowel detected by timer
+                default: chord |= X; // add 64, vowel detected by timer
                 // (3 + 3 keys used), left hand first
             } // end switch(prevChord)
         } // end if (gLanguage == "Sanskrit")
@@ -468,11 +471,11 @@ function outputChar(){
     }
     cursonPosAdd = 1; //default entry length
     gOffset = 0; // default
-    if(shiftOn){gOffset = 64;}
-    if(numbOn){gOffset = 128;}
-    if(symbOn){gOffset = 192;}
+    if(shiftOn){gOffset = X;}
+    if(numbOn){gOffset = Y;}
+    if(symbOn){gOffset = (X|Y);}
     if (gLanguage == "Korean") { //  use a tail consonant?
-        if(gJamoCounter == 2) {gOffset = 64;} // yes
+        if(gJamoCounter == 2) {gOffset = X;} // yes
     }
     gRef = 0; // Default (only values 1 to 41 are updated below)
     console.debug("outputChar() with chord " + chord);
