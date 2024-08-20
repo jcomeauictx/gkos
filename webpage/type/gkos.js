@@ -59,7 +59,6 @@ var mapping = { // chords to character indices
 var gLanguage = "English"; // Current language selection
 var basicLanguage = "English"; // Basic (ticked) Language selection
 var keyDown = null, keyUp = null; // these functions are set later in the code
-var timingOptions = null; // object built after function definitions
 var gChars = null;  // holds current language's characters
 var gRef = 0; // GKOS Reference number (1-41 only used here)
 var urlParameters = new URLSearchParams(location.search);
@@ -498,12 +497,11 @@ function timedKeyDown(event) {
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
 }
-var timingOptions = {
+[keyDown, keyUp] = {
     "simple": [simplyTimedKeyDown, simplyTimedKeyUp],
     "none": [untimedKeyDown, untimedKeyUp],
     "timed": [timedKeyDown, timedKeyUp]
-};
-[keyDown, keyUp] = timingOptions[timing];
+}[timing];
 //-------------------------
 function outputChar(){
     field = document.getElementById('text_field2');
