@@ -542,8 +542,12 @@ function timedKeyUp(event) {
         console.debug("chordPeriod before timedKeyUp: " + chordPeriod.current);
         chordPeriod.current = Object.entries(keyTimer).reduce(
             function(accumulator, currentValue) {
+                console.debug("accumulator before: " + accumulator);
                 const [key, value] = currentValue;
+                console.debug("key: " + key + ", value: " + value);
                 if (value > guardTime.current) accumulator |= key;
+                console.debug("accumulator after: " + accumulator);
+                return accumulator;
             }, 0);
         console.debug("chordPeriod after timedKeyUp: " + chordPeriod.current);
         keyTimer[keyMask] = null; // stops timer for this key
