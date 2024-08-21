@@ -534,6 +534,44 @@ function timedKeyDown(event) {
     }
 }
 function timedKeyUp(event) {
+    /* from page 20 of gkos_spec_v314.pdf:
+
+    Get the lowest value of all Key Timers exceeding Tg and give
+    Tc that new value; (jc@unternet.net: to what maximum? Tc default of 160,
+    or the 255ms max count?)
+
+    Get the chord value (1...63) of those keys that have Key
+    Timer value greater than 0.5 x Tc; // => Present Chord
+
+    If the chord value obtained is zero (none of the Key Timers
+    exceeds Tg), just get the chord value of all non-zero
+    Key Timers. Do not repeat this check within Tg.
+    // fast hit; => the Present Chord (jc@unternet.net: how to prevent
+    repeating this check?)
+
+    Get the chord value of those keys that have Key Timer
+    value greater than 1.75 x Tc; // => Previous Chord (jc@unternet.net:
+    1.75 * 160 = 280, greater than the 255ms max count; how does this
+    work, then?)
+
+    Clear all Key Timers;
+
+    Set Tc = 160 ms (= 16 counts, default);
+
+    Output the Previous Chord (if any) and the Present Chord;
+
+    Update Guard Time value:
+    Tg = 0,2 x Tc (keep within a range of 60...200 ms);
+    // Optionally Tg can be kept constant: Tg = 80 ms (jc@unternet.net: if
+    Tg should be 0.2 * Tc, why does it start at 0.5 * Tc? and how could it
+    ever reach 200ms, which implies a Tc of 1000, almost 4 times max count?)
+
+    If this is a transition to All Keys Up condition, indicate it
+    (for outputting the <AKU> signal). (jc@unternet.net: what is the All Keys
+    Up signal? what does it do?)
+
+    Return;
+    */
     console.error("timedKeyUp not yet implemented");
     const thisKey = (event || window.event).code;
     const keyMask = GKOS[thisKey];
@@ -541,9 +579,6 @@ function timedKeyUp(event) {
     if (keyMask) {
         // Get the lowest value of all Key Timers exceeding Tg and give
         // Tc that new value
-        // (jc@unternet.net: assuming 2.55s max; if this is exceeded, it
-        // means no key was held past the guard time and the period reverts
-        // to default)
         console.debug("chordPeriod before timedKeyUp: " + chordPeriod.current);
         chordPeriod.current = Object.entries(keyTimer).reduce(
             function(accumulator, currentValue) {
