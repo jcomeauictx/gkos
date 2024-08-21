@@ -507,12 +507,15 @@ function simplyTimedKeyUp(e) {
  * instead is to build the chord with each keydown event */
 function untimedKeyDown(event) {
     var thisKey = event ? event.code : window.event.code;
-    untimedChord |= GKOS[thisKey];
-    readyToRead = true;
+    if (GKOS[thisKey]) {
+        untimedChord |= GKOS[thisKey];
+        readyToRead = true;
+    }
     return false; // disable default and bubbling
 }
 function untimedKeyUp(event) {
-    if (readyToRead) {
+    var thisKey = event ? event.code : window.event.code;
+    if (GKOS[thisKey] && readyToRead) {
         readyToRead = false;
         chord = untimedChord;
         outputChar();
@@ -522,14 +525,30 @@ function untimedKeyUp(event) {
 }
 function timedKeyDown(event) {
     console.error("timedKeyDown not yet implemented");
-    var thisKey = e ? e.code : window.event.code;
-    var keyMask = 0;
-    keyTimer[keyMask] = 0; // change from null to 0 to indicate keydown
+    const thisKey = (event || window.event).code;
+    const keyMask = GKOS[thisKey];
+    if (keyMask) {
+        keyTimer[keyMask] = 0; // change from null to 0 to start timer
+    }
 }
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
-    // Get the lowest value of all Key Timers exceeding Tg and give
-    // Tc that new value
+    const thisKey = event ? event.code : window.event.code;
+    const keyMask = GKOS[thisKey];
+    let timedChord = 0;
+    if (keyMask) {
+        // Get the lowest value of all Key Timers exceeding Tg and give
+        // Tc that new value
+        console.debug("chordPeriod before timedKeyUp: " + chordPeriod.current);
+        chordPeriod.current = Object.entries(keyTimer).reduce(
+            function(accumulator, currentValue) {
+                let key, value;
+                [key, value] = currentValue;
+                if (value > guardTime.current) accumulator |= key;
+            }, 0);
+        console.debug("chordPeriod after timedKeyUp: " + chordPeriod.current);
+        keyTimer[keyMask] = null; // stops timer for this key
+    }
 }
 function timeKeys(milliseconds) {
     Object.keys(keyTimer).forEach(function(key) {
