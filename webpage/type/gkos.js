@@ -72,6 +72,8 @@ var timingOptions = {
     "none": [untimedKeyDown, untimedKeyUp],
     "timed": [timedKeyDown, timedKeyUp]
 };
+const simplyTimedMaxCounter = 255; // milliseconds
+const timedMaxCounter = simplyTimedMaxCounter * 10; // finer granularity
 // the following 6 "chord" variables are used by simplyTimedKey{Down,Up}
 // `chord` is a global, changing it to a parameter of outputChar would
 // be difficult so leaving it as is.
@@ -119,7 +121,7 @@ var t;
 var timerIsOn = false;
 function timedCount() {
     hiddenCount.value = c;
-    c = Math.min(c + 1, 255);
+    c = Math.min(c + 1, simplyTimedMaxCounter);
     t=setTimeout("timedCount()",10); // count tens of milliseconds
 }
 function doTimer() {
@@ -539,6 +541,9 @@ function timedKeyUp(event) {
     if (keyMask) {
         // Get the lowest value of all Key Timers exceeding Tg and give
         // Tc that new value
+        // (jc@unternet.net: assuming 2.55s max; if this is exceeded, it
+        // means no key was held past the guard time and the period reverts
+        // to default)
         console.debug("chordPeriod before timedKeyUp: " + chordPeriod.current);
         chordPeriod.current = Object.entries(keyTimer).reduce(
             function(accumulator, currentValue) {
@@ -552,7 +557,10 @@ function timedKeyUp(event) {
                 console.debug("accumulator after: " + accumulator);
                 console.debug("timedChord after: " + timedChord);
                 return accumulator;
-            }, chordPeriod.default);
+            }, timedMaxCounter + 1);
+        if (chordPeriod.current == timedMaxCounter + 1) {
+            chordPeriod.current = chordPeriod.default;
+        }
         console.debug("chordPeriod after timedKeyUp: " + chordPeriod.current);
         keyTimer[keyMask] = null; // stops timer for this key
     }
@@ -561,7 +569,7 @@ function timeKeys(milliseconds) {
     Object.keys(keyTimer).forEach(function(key) {
         const timer = keyTimer[key];
         if (timer !== null) {
-            keyTimer[key] = Math.min(timer + milliseconds, 2550);
+            keyTimer[key] = Math.min(timer + milliseconds, timedMaxCounter);
         }
     });
 }
