@@ -604,11 +604,16 @@ function timedKeyUp(event) {
     }
 }
 function timeKeys(milliseconds) {
+    // cumulativeTime only incremented when at least one key down
+    let allKeysUp = true;
     Object.keys(keyTimer).forEach(function(key) {
         const timer = keyTimer[key];
         if (timer !== null) {
             keyTimer[key] = Math.min(timer + milliseconds, timedMaxCounter);
+            allKeysUp = false;
         }
+        if (!allKeysUp) cumulativeTime += milliseconds;
+        else cumulativeTime = 0;
     });
 }
 try {
