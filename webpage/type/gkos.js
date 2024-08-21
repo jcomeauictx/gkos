@@ -90,6 +90,9 @@ var readyToRead = false;
 // properly timed chording uses several variables: gkos_spec_v314.pdf p.20
 var chordPeriod = {default: 160, current: 160}; // Tc, 160ms
 var guardTime = {default: 80, current: 80}; // Tg, 80ms
+/* keep track of total time, or at least time since last AKU (All Keys Up)
+ * condition, to be able to "not repeat [fast hit] check within Tg" (ibid) */
+let cumulativeTime = 0;
 // initialize key timers to nulls, set to 0 on keydown
 var keyTimer = {
     [A]: null, [B]: null, [C]: null,
