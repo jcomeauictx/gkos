@@ -65,8 +65,8 @@ var urlParameters = new URLSearchParams(location.search);
 // page elements, initialize properly during document.onload
 var field2 = null, info2 = null, hiddenCount = null, languageMap = null;
 // default to simplyTimedKey{Up,Down}
-let defaultTiming = "simple";
-let timing = urlParameters.get("timing") || defaultTiming;
+const defaultTiming = "simple";
+var timing = urlParameters.get("timing") || defaultTiming;
 var timingOptions = {
     "simple": [simplyTimedKeyDown, simplyTimedKeyUp],
     "none": [untimedKeyDown, untimedKeyUp],
@@ -86,10 +86,30 @@ var chord2 = 0; // in case of Chordon
 var untimedChord = 0;
 var readyToRead = false;
 // properly timed chording uses several variables: gkos_spec_v314.pdf p.20
-var chordPeriod = {default: 16, current: 16}; // Tc, 160ms
-var guardTime = {default: 8, current: 8}; // Tg, 80ms
-// initialize key timers to null, set to 0 on keydown
-var keyTimer = {A: null, B: null, C: null, D: null, E: null, F: null};
+var chordPeriod = {default: 160, current: 160}; // Tc, 160ms
+var guardTime = {default: 80, current: 80}; // Tg, 80ms
+class Zero extends Number { // for initializing counters; they always stay zero
+    constructor(value) {
+        super(0);
+    }
+    toString() {
+        return "0";
+    }
+    valueOf() {
+        return 0;
+    }
+}
+// initialize key timers to Zeroes, set to true 0 on keydown
+var keyTimer = {
+    [A]: new Zero(), [B]: new Zero(), [C]: new Zero(),
+    [D]: new Zero(), [E]: new Zero(), [F]: new Zero()
+};
+// use different timer interval than original code, and leave it running
+// all the time. since it's half the period Seppo suggested, it should be
+// forgiving of when the keydowns and keyups fall close to the timer
+// updates.
+var timerPeriod = 5; // ms
+var keyClock = null; // set to intervalID when window.onload runs
 // the following are from the original gkos.com webpage
 var myString = "";
 var typed = "";
@@ -323,6 +343,7 @@ onload = function() {
     if (urlParameters.get("action") == "dump") {
         field2.value = JSON.stringify(chars, null, 2);
     }
+    keyClock = setInterval(timeKeys, timerPeriod, timerPeriod);
 };
 //==========================
 function doGetCaretPosition (field2) {
@@ -514,10 +535,17 @@ function timedKeyDown(event) {
     console.error("timedKeyDown not yet implemented");
     var thisKey = e ? e.code : window.event.code;
     var keyMask = 0;
-    keyTimer[keyMask] = 0; // change from null to zero to indicate keydown
+    keyTimer[keyMask] = 0; // change from Zero to 0 to indicate keydown
 }
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
+    // Get the lowest value of all Key Timers exceeding Tg and give
+    // Tc that new value
+}
+function timeKeys(milliseconds) {
+    Object.keys(keyTimer).forEach(function(key) {
+        keyTimer[key] = Math.min(keyTimer[key] + milliseconds, 255);
+    });
 }
 try {
     [keyDown, keyUp] = timingOptions[timing];
