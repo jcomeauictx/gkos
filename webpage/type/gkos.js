@@ -64,7 +64,7 @@ var gRef = 0; // GKOS Reference number (1-41 only used here)
 var urlParameters = new URLSearchParams(location.search);
 // page elements, initialize properly during document.onload
 var field2 = null, info2 = null, hiddenCount = null, languageMap = null;
-// default to simplyTimedKey{Up,Down}
+// default to simplyTimedKey{Up,Down}, the original gkos.com code
 const defaultTiming = "simple";
 var timing = urlParameters.get("timing") || defaultTiming;
 var timingOptions = {
@@ -99,7 +99,7 @@ var keyTimer = {
 // updates.
 var timerPeriod = 5; // ms
 var keyClock = null; // set to intervalID when window.onload runs
-// the following are from the original gkos.com webpage
+// the following are from the original gkos.com webpage code
 var myString = "";
 var typed = "";
 var cursorPos = 0;
@@ -408,8 +408,8 @@ function usedLanguage() {
 // see pages 19-21 of gkos_spec_v314.pdf for discussion on untimed and timed
 // key processing. the way it's done in the original javascript don't match
 // either.
-function simplyTimedKeyDown(e){
-    var thisKey = e ? e.code : window.event.code;
+function simplyTimedKeyDown(event){
+    var thisKey = (event || window.event).code;
     var keyMask = 0;
     prevChord = chord;
     cCounter = c; // store timer value before clearing it
@@ -464,10 +464,10 @@ function simplyTimedKeyDown(e){
         } // end if (gLanguage == "Sanskrit")
     } // end if (cCounter >= 10)
     return false; // Cancel the original keydown event
-} // end simplyTimedKeyDown(e)
+} // end simplyTimedKeyDown(event)
 //---------------------------
-function simplyTimedKeyUp(e) {
-    thisKey = e ? e.code : window.event.code;
+function simplyTimedKeyUp(event) {
+    thisKey = (event || window.event).code;
     var keyMask = 0;
     cCounterx = c; // store timer value before clearing it
     prevChordx = chordx;
@@ -506,7 +506,7 @@ function simplyTimedKeyUp(e) {
  * impossible, as the event has already occurred. so what we will do
  * instead is to build the chord with each keydown event */
 function untimedKeyDown(event) {
-    var thisKey = event ? event.code : window.event.code;
+    var thisKey = (event || window.event).code;
     if (GKOS[thisKey]) {
         untimedChord |= GKOS[thisKey];
         readyToRead = true;
@@ -514,7 +514,7 @@ function untimedKeyDown(event) {
     return false; // disable default and bubbling
 }
 function untimedKeyUp(event) {
-    var thisKey = event ? event.code : window.event.code;
+    var thisKey = (event || window.event).code;
     if (GKOS[thisKey] && readyToRead) {
         readyToRead = false;
         chord = untimedChord;
@@ -533,17 +533,16 @@ function timedKeyDown(event) {
 }
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
-    const thisKey = event ? event.code : window.event.code;
+    const thisKey = (event || window.event).code;
     const keyMask = GKOS[thisKey];
-    let timedChord = 0;
+    const timedChord = 0;
     if (keyMask) {
         // Get the lowest value of all Key Timers exceeding Tg and give
         // Tc that new value
         console.debug("chordPeriod before timedKeyUp: " + chordPeriod.current);
         chordPeriod.current = Object.entries(keyTimer).reduce(
             function(accumulator, currentValue) {
-                let key, value;
-                [key, value] = currentValue;
+                const [key, value] = currentValue;
                 if (value > guardTime.current) accumulator |= key;
             }, 0);
         console.debug("chordPeriod after timedKeyUp: " + chordPeriod.current);
