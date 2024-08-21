@@ -88,21 +88,10 @@ var readyToRead = false;
 // properly timed chording uses several variables: gkos_spec_v314.pdf p.20
 var chordPeriod = {default: 160, current: 160}; // Tc, 160ms
 var guardTime = {default: 80, current: 80}; // Tg, 80ms
-class Zero extends Number { // for initializing counters; they always stay zero
-    constructor(value) {
-        super(0);
-    }
-    toString() {
-        return "0";
-    }
-    valueOf() {
-        return 0;
-    }
-}
-// initialize key timers to Zeroes, set to true 0 on keydown
+// initialize key timers to nulls, set to 0 on keydown
 var keyTimer = {
-    [A]: new Zero(), [B]: new Zero(), [C]: new Zero(),
-    [D]: new Zero(), [E]: new Zero(), [F]: new Zero()
+    [A]: null, [B]: null, [C]: null,
+    [D]: null, [E]: null, [F]: null
 };
 // use different timer interval than original code, and leave it running
 // all the time. since it's half the period Seppo suggested, it should be
@@ -535,7 +524,7 @@ function timedKeyDown(event) {
     console.error("timedKeyDown not yet implemented");
     var thisKey = e ? e.code : window.event.code;
     var keyMask = 0;
-    keyTimer[keyMask] = 0; // change from Zero to 0 to indicate keydown
+    keyTimer[keyMask] = 0; // change from null to 0 to indicate keydown
 }
 function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
@@ -544,7 +533,10 @@ function timedKeyUp(event) {
 }
 function timeKeys(milliseconds) {
     Object.keys(keyTimer).forEach(function(key) {
-        keyTimer[key] = Math.min(keyTimer[key] + milliseconds, 255);
+        const timer = keyTimer[key];
+        if (timer !== null) {
+            keyTimer[key] = Math.min(timer + milliseconds, 2550);
+        }
     });
 }
 try {
