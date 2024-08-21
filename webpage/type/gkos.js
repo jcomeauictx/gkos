@@ -535,7 +535,7 @@ function timedKeyUp(event) {
     console.error("timedKeyUp not yet implemented");
     const thisKey = (event || window.event).code;
     const keyMask = GKOS[thisKey];
-    const timedChord = 0;
+    let timedChord = 0;
     if (keyMask) {
         // Get the lowest value of all Key Timers exceeding Tg and give
         // Tc that new value
@@ -545,10 +545,14 @@ function timedKeyUp(event) {
                 console.debug("accumulator before: " + accumulator);
                 const [key, value] = currentValue;
                 console.debug("key: " + key + ", value: " + value);
-                if (value > guardTime.current) accumulator |= key;
+                if (value > guardTime.current) {
+                    timedChord |= key;
+                    accumulator = Math.min(accumulator, value);
+                }
                 console.debug("accumulator after: " + accumulator);
+                console.debug("timedChord after: " + timedChord);
                 return accumulator;
-            }, 0);
+            }, chordPeriod.default);
         console.debug("chordPeriod after timedKeyUp: " + chordPeriod.current);
         keyTimer[keyMask] = null; // stops timer for this key
     }
