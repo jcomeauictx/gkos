@@ -763,132 +763,130 @@ function goSanskrit() {
     gOffset = 0; // default
     switch (chord) {                        //  04.02.01-08.16.32
         // ==================================================================
-        //vowels, maatraas, others
-        case  73: character = '\u094d';   break; //a   64 gets added
-        case  81: character = '\u093e';  break; //aa  64 gets added
-        case 137: character = '\u0905';  break; //a  128 gets added
-        case 145: character = '\u0906';  break; //aa 128 gets added
-        case   89: character = '\u093d'; break; //.
-        case  113: character = '\u0903'; break; //..
-        case 153: character = '\u0964';  break; //
-        case 177: character = '\u0965';  break; //
-        case  74: character = '\u093f';  break; //ii
-        case  82: character = '\u0940';  break; //i
-        case 138: character = '\u0907';  break; //
-        case 146: character = '\u0908';  break; //
-        case  90: character = '\u0962';   break; //lri
+        //consonants :
+        case (A): character = '\u0915' ;  break; // gchar[1,1,1,1]
+        case (B): character = '\u091a' ;  break; //
+        case (A|B) : character = '\u0924' ;  break; //
+        case (C): character = '\u091f' ;  break; //
+        case (A|_|C) : character = '\u0936' ;  break; //
+        case (B|C): character = '\u092a' ;  break; //
+        case  7: character = '\u092f' ;  break; //
+        case  8: character = '    ' ;   break; //tab
+        case  9: character = '\u0916' ;  break; //
+        case 10: character = '\u091b' ;  break; //
+        case 11: character = '\u0925' ;  break; //
+        case 12: character = '\u0920' ;  break; //
+        case 13: character = '\u0937' ;  break; //
+        case 14: character = '\u092b' ;  break; //
+        case 15: character = '\u0930' ;  break; //
+        case 16: character = " ";   break; // space
+        case 17: character = '\u0917';   break;  //
+        case 18: character = '\u091c' ;  break; //
+        case 19: character = '\u0926' ;  break; //
+        case 20: character = '\u0921' ;  break; //
+        case 21: character = '\u0938' ;  break; //
+        case 22: character = '\u092c' ;  break; //
+        case 23: character = '\u0932' ;  break; //
+        case 25: character = '\u0958' ;  break; //
+        case 26: character = '\u095b' ;  break; //
+        case 27: character = '\u0929' ;  break; //
+        case 28: character = '\u095c' ;  break; //
+        case 29: character = '\u0915\u094d\u0937' ; break; //
+        case 30: character = '\u095e' ;  break; //
+        case 31: character = '\u095f' ;  break; //
+        case 32: myString = myString.substring(0, myString.length-1); character = '' ;break; // original comment said "new line" but this is "backspace"?
+        case 33: character = '\u0918' ;  break; //
+        case 34: character = '\u091d' ;  break; //
+        case 35: character = '\u0927' ;  break; //
+        case 36: character = '\u0922' ;  break; //
+        case 38: character = '\u092d' ;  break; //
+        case 39: character = '\u0935' ;  break; //
+        case 41: character = '\u095a' ;  break; //
+        case 45: character = '\u091c\u094d\u091e' ; break; //
+        case 47: character = '\u0933' ;  break; //
+        case 46: character = '\u0934' ;  break; //
+        case 49: character = '\u0959' ;  break; //
+        case 52: character = '\u095d' ;  break; //
+        case 53: character = '\u0924\u094d\u0930' ; break; //
+        case 55: character = '\u0931' ;  break; //
+        case 56: character = String.fromCharCode(13); break;
+        case 57: character = '\u0919' ;  break; //
+        case 58: character = '\u091e' ;  break; //
+        case 59: character = '\u0928' ;  break; //
+        case 60: character = '\u0923' ;  break; //
+        case 37: character = '\u0939' ;  break; //
+        // TODO:
+        case 61: character = "abc"; gLanguage = "English";  info2.value = gLanguage; chord = 0;
+            break; // enter English mode
+        case 62: character = '\u092e' ;  break; //
+        case 63: character = "123"; numbOn = true;  info2.value = "123"; chord = 0 ;
+            break;  // enter standard numbers mode
+        //vowels, maatraas, others are all > 64
+        case 73: character = '\u094d';   break; //a   64 gets added
+        case 74: character = '\u093f';  break; //ii
+        case 75: character = '\u0947';   break; //
+        case 76: character = '\u0941';   break; //
+        case 77: character = '\u0943';   break; //
+        case 78: character = '\u094b';  break; //
+        case 81: character = '\u093e';  break; //aa  64 gets added
+        case 82: character = '\u0940';  break; //i
+        case 83: character = '\u0948';   break; //
+        case 84: character = '\u0942';   break; //
+        case 85: character = '\u0944';   break; //
+        case 86: character = '\u094c';  break; //
+        case 89: character = '\u093d'; break; //.
+        case 90: character = '\u0962';   break; //lri
+        case 91: character = '\u0945';   break; //e
+        case 92: character = '\u0902';   break; //om
+        case 94: character = '\u0949';  break; //2 4 8  16 64
+        case 113: character = '\u0903'; break; //..
         case 114: character = '\u0963';   break; //lrii
-        case 154: character = '\u090c';  break; //
-        case 178: character = '\u0961';  break; //
-        case  76: character = '\u0941';   break; //
-        case  84: character = '\u0942';   break; //
-        case 140: character = '\u0909';  break; //
-        case 148: character = '\u090a';  break; //
-        case  92: character = '\u0902';   break; //om
-        case 116: character = '\u093c';   break; //ung
-        case 156: character = '\u0950';  break; // ok  8+16+4 +128 or JK -> JLS
-        case 180: character = '\u0901';   break; // ok    16+32+4 +128
-        case  75: character = '\u0947';   break; //
-        case  83: character = '\u0948';   break; //
-        case 139: character = '\u090f';  break; //
-        case 147: character = '\u0910';  break; //
-        case  91: character = '\u0945';   break; //e
         case 115: character = '\u0946';   break; //ee
-        case 155: character = '\u090d';  break; //e
-        case 179: character = '\u090e';  break; //ee
-        case  78: character = '\u094b';  break; //
-        case  86: character = '\u094c';  break; //
-        case 142: character = '\u0913';  break; //
-        case 150: character = '\u0914';  break; //
-        case  94: character = '\u0949';  break; //2 4 8  16 64
+        case 116: character = '\u093c';   break; //ung
         case 118: character = '\u094a';  break; //2 4 16 32 64
-        case 158: character = '\u0911';  break; //2 4 8  16 128
-        case 182: character = '\u0912';  break; //
-        case  77: character = '\u0943';   break; //
-        case  85: character = '\u0944';   break; //
+        case 137: character = '\u0905';  break; //a  128 gets added
+        case 138: character = '\u0907';  break; //
+        case 139: character = '\u090f';  break; //
+        case 140: character = '\u0909';  break; //
         case 141: character = '\u090b';  break; //
+        case 142: character = '\u0913';  break; //
+        case 145: character = '\u0906';  break; //aa 128 gets added
+        case 146: character = '\u0908';  break; //
+        case 147: character = '\u0910';  break; //
+        case 148: character = '\u090a';  break; //
         case 149: character = '\u0960';  break; //
+        case 153: character = '\u0964';  break; //
+        case 154: character = '\u090c';  break; //
+        case 155: character = '\u090d';  break; //e
+        case 156: character = '\u0950';  break; // ok  8+16+4 +128 or JK -> JLS
         case 157: character = 'zwj'; break; // 1 4 8+16 +128 or JKL -> JKLS
-        case 181: character = 'zwnj'; break; // 1 4 16+32+128 or JKL -> JKLS
+        case 150: character = '\u0914';  break; //
+        case 158: character = '\u0911';  break; //2 4 8  16 128
         case 161: character = 'LF'; break; // 32+1 +128
         case 162: character = 'LD'; break; // 32+2 +128
         case 164: character = 'LS'; break; // 32+4 +128
         case 169: character = 'JLF'; break; //
         case 170: character = 'JLD'; break; // ok  8+32+2 +128 or JL -> JLD
         case 172: character = 'JLS'; break; // ok  8+32+4 +128 or JL -> JLD
+        case 177: character = '\u0965';  break; //
+        case 178: character = '\u0961';  break; //
+        case 179: character = '\u090e';  break; //ee
+        case 180: character = '\u0901';   break; // ok    16+32+4 +128
+        case 181: character = 'zwnj'; break; // 1 4 16+32+128 or JKL -> JKLS
+        case 182: character = '\u0912';  break; //
         case 185: character = 'JKLF'; break; // ok 8+16+32+1 +128 or JKL -> JKLF
         case 186: character = 'JKLD'; break; // ok 8+16+32+2 +128 or JKL -> JKLD
         case 188: character = 'JKLS'; break; // ok 8+16+32+4 +128 or JKL -> JKLS
         //====================================
-        //consonants :
-        //case  1: character = "\u1100" ;    break // gchar[1,1,1,1]
-        case  1: character = '\u0915' ;  break; // gchar[1,1,1,1]
-        case  9: character = '\u0916' ;  break; //
-        case 17: character = '\u0917';   break;  //
-        case 33: character = '\u0918' ;  break; //
-        case 57: character = '\u0919' ;  break; //
-        case 25: character = '\u0958' ;  break; //
-        case 49: character = '\u0959' ;  break; //
-        case 41: character = '\u095a' ;  break; //
-        case  2: character = '\u091a' ;  break; //
-        case 10: character = '\u091b' ;  break; //
-        case 18: character = '\u091c' ;  break; //
-        case 34: character = '\u091d' ;  break; //
-        case 58: character = '\u091e' ;  break; //
-        case 26: character = '\u095b' ;  break; //
-        case  4: character = '\u091f' ;  break; //
-        case 12: character = '\u0920' ;  break; //
-        case 20: character = '\u0921' ;  break; //
-        case 36: character = '\u0922' ;  break; //
-        case 60: character = '\u0923' ;  break; //
-        case 28: character = '\u095c' ;  break; //
-        case 52: character = '\u095d' ;  break; //
-        case  3: character = '\u0924' ;  break; //
-        case 11: character = '\u0925' ;  break; //
-        case 19: character = '\u0926' ;  break; //
-        case 35: character = '\u0927' ;  break; //
-        case 59: character = '\u0928' ;  break; //
-        case 27: character = '\u0929' ;  break; //
-        case  6: character = '\u092a' ;  break; //
-        case 14: character = '\u092b' ;  break; //
-        case 22: character = '\u092c' ;  break; //
-        case 38: character = '\u092d' ;  break; //
-        case 62: character = '\u092e' ;  break; //
-        case 30: character = '\u095e' ;  break; //
-        case  7: character = '\u092f' ;  break; //
-        case 15: character = '\u0930' ;  break; //
-        case 23: character = '\u0932' ;  break; //
-        case 39: character = '\u0935' ;  break; //
-        case 31: character = '\u095f' ;  break; //
-        case 55: character = '\u0931' ;  break; //
-        case 47: character = '\u0933' ;  break; //
-        case 46: character = '\u0934' ;  break; // Changed from 63 (=abc123 from now on) to 46
-        case  5: character = '\u0936' ;  break; //
-        case 13: character = '\u0937' ;  break; //
-        case 21: character = '\u0938' ;  break; //
-        case 37: character = '\u0939' ;  break; //
-        case 29: character = '\u0915\u094d\u0937' ; break; //
-        case 53: character = '\u0924\u094d\u0930' ; break; //
-        case 45: character = '\u091c\u094d\u091e' ; break; //
-        case  8: character = '    ' ;   break; //tab
-        case 32: myString = myString.substring(0, myString.length-1); character = '' ;break; // new line
-        case 16: character = " ";   break; // space
-        case 56: character = String.fromCharCode(13); break; // .toLowerCase(); //Enter also '\n' '\r'
-        // TODO:
-        case 63: character = "123"; numbOn = true;  info2.value = "123"; chord = 0 ;
-            break;  // enter standard numbers mode
-        case 61: character = "abc"; gLanguage = "English";  info2.value = gLanguage; chord = 0;
-            break; // enter English mode
         default: character = '';
     } // end switch
     cursorPosAdd = character.length;
-    cursorPos = doGetCaretPosition (field2); // always get cursor position first
+    cursorPos = doGetCaretPosition (field2); // get cursor position first
     if (chord != 0){
-        //myString = myString + character
-        myString = myString.substring(0, cursorPos) + character + myString.substring(cursorPos, myString.length);
+        myString = (myString.substring(0, cursorPos) + character +
+                    myString.substring(cursorPos, myString.length));
         field2.value = myString;
         setCaretPosition(field2, cursorPos + cursorPosAdd);
-        //checkShifts()
     }  // end if (chord != 0)
     chord = 0;
 } // end goSanskrit()
