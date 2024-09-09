@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 LIBS = -lsuinput -ludev $(pkgconf --libs libhid-libusb)
-CFLAGS = -Wall -g -I .
+CFLAGS = -Wall -g -I . -I ../libhid/include -I ../libhid/hidparser
 
 all: gkos
 

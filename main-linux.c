@@ -1,4 +1,5 @@
-#include <hidapi/hidapi.h>
+#include "hid.h"
+/*#include <hidapi/hidapi.h>*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
