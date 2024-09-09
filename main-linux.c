@@ -10,7 +10,7 @@
 
 #include "gkos.h"
 
-#define HID_RET_SUCCESS 0  // since not defined in hidapi/hidapi.h
+/*#define HID_RET_SUCCESS 0  // since not defined in hidapi/hidapi.h*/
 // uinput device (see gkos.c for my explanation of why a global var)
 static int uinput_fd;
 
