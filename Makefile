@@ -1,7 +1,13 @@
 SHELL := /bin/bash
-LIBS = -lsuinput -ludev $(pkgconf --libs libhid-libusb)
-CFLAGS = -Wall -g -I . -I ../libhid/include -I ../libhid/hidparser
-CXXFLAGS = -L ../droid-VNC-server/jni/vnc
+PKG_CONFIG_PATH := ../libhid/pkgconfig
+LIBHID := $(shell PKG_CONFIG_PATH=$(PKG_CONFIG_PATH) pkgconf --libs libhid)
+LIBS := -lsuinput -ludev $(LIBHID)
+CFLAGS := -Wall -g -I . -I ../libhid/include -I ../libhid/hidparser
+CXXFLAGS := -L ../droid-VNC-server/jni/vnc
+ifneq ($(SHOWENV),)
+ export
+else
+endif
 
 all: gkos
 
@@ -10,3 +16,11 @@ gkos: main-linux.c gkos.c gkos.h
 
 clean:
 	rm -f *.o gkos
+env:
+ifeq ($(SHOWENV),)
+	make SHOWENV=1 $@
+else
+	env
+endif
+libs:  # just for testing why linker fails
+	pkgconf --libs libhid
