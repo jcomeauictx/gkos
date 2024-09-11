@@ -6,20 +6,17 @@ LDFLAGS := -lsuinput -ludev $(LIBHID)
 LDFLAGS += -L ../droid-VNC-server/jni/vnc -L $(HOME)/usr/lib -L $(HOME)/lib
 ifneq ($(SHOWENV),)
  export
-else
 endif
-
 all: gkos
-
 gkos: main-linux.c gkos.c gkos.h
 	gcc $(CFLAGS) gkos.c main-linux.c -o gkos $(LDFLAGS)
 clean:
-	rm -f *.o gkos
+	rm -f *.o
+distclean: clean
+	rm -f gkos
 env:
 ifeq ($(SHOWENV),)
 	make SHOWENV=1 $@
 else
 	env
 endif
-libs:  # just for testing why linker fails
-	pkgconf --libs libhid
